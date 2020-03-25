@@ -1,0 +1,112 @@
+extra fields in repodata-record for Navigator app
+
+        "app_cli_opts": {
+            "$id": "#/properties/app_cli_opts",
+            "type": "array",
+            "title": "The App_cli_opts Schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": [],
+            "items": {
+                "$id": "#/properties/app_cli_opts/items",
+                "type": "object",
+                "title": "The Items Schema",
+                "description": "An explanation about the purpose of this instance.",
+                "default": {},
+                "examples": [
+                    {
+                        "summary": "Server port ...",
+                        "args": "--port %s",
+                        "default": "8080",
+                        "name": "port"
+                    }
+                ],
+                "required": [
+                    "args",
+                    "default",
+                    "name",
+                    "summary"
+                ],
+                "properties": {
+                    "args": {
+                        "$id": "#/properties/app_cli_opts/items/properties/args",
+                        "type": "string",
+                        "title": "The Args Schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "--port %s"
+                        ]
+                    },
+                    "default": {
+                        "$id": "#/properties/app_cli_opts/items/properties/default",
+                        "type": "string",
+                        "title": "The Default Schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "8080"
+                        ]
+                    },
+                    "name": {
+                        "$id": "#/properties/app_cli_opts/items/properties/name",
+                        "type": "string",
+                        "title": "The Name Schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "port"
+                        ]
+                    },
+                    "summary": {
+                        "$id": "#/properties/app_cli_opts/items/properties/summary",
+                        "type": "string",
+                        "title": "The Summary Schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": "",
+                        "examples": [
+                            "Server port ..."
+                        ]
+                    }
+                }
+            }
+        },
+        "app_entry": {
+            "$id": "#/properties/app_entry",
+            "type": "string",
+            "title": "The App_entry Schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "jupyter-notebook"
+            ]
+        },
+        "app_type": {
+            "$id": "#/properties/app_type",
+            "type": "string",
+            "title": "The App_type Schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "web"
+            ]
+        },
+        "icon": {
+            "$id": "#/properties/icon",
+            "type": "string",
+            "title": "The Icon Schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "e5a62955bb90d3266c483d85e094d3c6.png"
+            ]
+        },
+        "type": {
+            "$id": "#/properties/type",
+            "type": "string",
+            "title": "The Type Schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                "app"
+            ]
+        },
