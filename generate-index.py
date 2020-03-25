@@ -93,7 +93,7 @@ _TEMPLATE = """\
 """
 
 files = (
-    "record-1.schema.json",
+    "repodata-record-1.schema.json",
     "repodata-1.schema.json",
 )
 

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://schemas.conda.io/record-1.schema.json",
+  "$id": "https://schemas.conda.io/repodata-record-1.schema.json",
   "type": "object",
   "title": "Conda Package Metadata Record Schema",
   "description": "The schema for each package file's block of metadata in repodata.",
@@ -25,7 +25,7 @@
       "type": "integer",
       "title": "The API version or schema version of the record.",
       "description": "Conda versions through Conda 4.8 are able to understand record_version <= 1.",
-      "default": 1
+      "const": 1
     },
     "origin_channel_name": {
       "$id": "#/properties/origin_channel_name",

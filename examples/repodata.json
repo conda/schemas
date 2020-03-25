@@ -1,5 +1,5 @@
 {
-  "$schema": "../repodata-1.schema.json",
+  "$schema": "https://schemas.conda.io/repodata-1.schema.json",
   "repodata_version": 1,
   "info": {
     "subdir": "linux-32"

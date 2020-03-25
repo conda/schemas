@@ -27,7 +27,7 @@
       "type": "object",
       "properties": {
         "subdir": {
-          "$ref": "record-1.schema.json#/definitions/subdir"
+          "$ref": "repodata-record-1.schema.json#/definitions/subdir"
         }
       },
       "required": ["subdir"]
@@ -37,7 +37,7 @@
       "type": "object",
       "patternProperties": {
         "^.+\\.tar\\.bz2$": {
-          "$ref": "record-1.schema.json"
+          "$ref": "repodata-record-1.schema.json"
         }
       },
       "additionalProperties": false
@@ -47,7 +47,7 @@
       "type": "object",
       "patternProperties": {
         "^.+\\.conda$": {
-          "$ref": "record-1.schema.json"
+          "$ref": "repodata-record-1.schema.json"
         }
       },
       "additionalProperties": false
