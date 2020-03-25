@@ -1,6 +1,8 @@
 # Conda Schemas
 
-JSON schema for Conda file structures
+JSON schema for Conda file structures.
+
+This repository is published to https://schemas.conda.io.
 
 * `repodata.json` [https://schemas.conda.io/repodata-1.schema.json]
 * `channeldata.json` [TODO]
