@@ -1,95 +1,105 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema",
-    "$id":"https://raw.githubusercontent.com/kalefranz/conda-schema/master/repodata-schema.json",
-    "type": "object",
-    "title": "repodata.json",
-    "description": "",
-    "required": [
-        "repodata_version"
-    ],
-    "properties": {
-        "repodata_version": {
-            "$id": "#/properties/repodata_version",
-            "type": "integer",
-            "title": "The API version or schema version of the repodata file.",
-            "description": "",
-            "default": 1
-        },
-        "info": {
-            "$id": "#/properties/info",
-            "type": "object"
-        },
-        "packages": {
-            "$id": "#/properties/packages",
-            "type": "object",
-            "patternProperties": {
-                "^.+\\.tar\\.bz2$": {
-                    "$ref": "record-schema.json"
-                }
-            },
-            "additionalProperties": false
-        },
-        "packages.conda": {
-            "$id": "#/properties/packages.conda",
-            "type": "object",
-            "patternProperties": {
-                "^.+\\.conda$": {
-                    "$ref": "record-schema.json"
-                }
-            },
-            "additionalProperties": false
-        },
-        "removed": {
-            "$id": "#/properties/removed",
-            "type": "array",
-            "items":{
-                "$id":"#/properties/removed/items",
-                "type":"string",
-                "pattern": "^.+(\\.tar\\.bz2)|(\\.conda)$",
-                "description":"Packages that had previously been in this repodata file but have now been removed.",
-                "examples":[
-                  "blinker-1.4-py37_0.tar.bz2",
-                  "blinker-1.4-py37_0.conda"
-                ]
-            }
-        },
-        "signatures": {
-            "$id": "#/properties/signatures",
-            "type": "object",
-            "patternProperties": {
-                "^.+(\\.tar\\.bz2)|(\\.conda)$": {
-                    "$ref": "#/definitions/signature"
-                }
-            },
-            "additionalProperties": false
-        }
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://raw.githubusercontent.com/kalefranz/conda-schema/master/repodata-schema.json",
+  "type": "object",
+  "title": "repodata.json",
+  "description": "",
+  "required": [
+    "$schema",
+    "repodata_version"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://raw.githubusercontent.com/kalefranz/conda-schema/master/repodata-schema.json",
+      "format": "uri"
     },
-    "definitions": {
-        "signature": {
-            "$id": "#/definitions/signature",
-            "type": "object",
-            "properties": {
-                "metadata_sha256": {
-                    "type": "string"
-                },
-                "metadata_size": {
-                    "type": "integer",
-                    "minimum": 0
-                },
-                "sig": {
-                    "type": "string"
-                },
-                "key": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "metadata_sha256",
-                "metadata_size",
-                "sig",
-                "key"
-            ]
+    "repodata_version": {
+      "$id": "#/properties/repodata_version",
+      "type": "integer",
+      "title": "The API version or schema version of the repodata file.",
+      "description": "",
+      "default": 1
+    },
+    "info": {
+      "$id": "#/properties/info",
+      "type": "object",
+      "properties": {
+        "subdir": {
+          "$ref": "record-schema.json#/definitions/subdir"
         }
+      }
+    },
+    "packages": {
+      "$id": "#/properties/packages",
+      "type": "object",
+      "patternProperties": {
+        "^.+\\.tar\\.bz2$": {
+          "$ref": "record-schema.json"
+        }
+      },
+      "additionalProperties": false
+    },
+    "packages.conda": {
+      "$id": "#/properties/packages.conda",
+      "type": "object",
+      "patternProperties": {
+        "^.+\\.conda$": {
+          "$ref": "record-schema.json"
+        }
+      },
+      "additionalProperties": false
+    },
+    "removed": {
+      "$id": "#/properties/removed",
+      "type": "array",
+      "items": {
+        "$id": "#/properties/removed/items",
+        "type": "string",
+        "pattern": "^.+(\\.tar\\.bz2)|(\\.conda)$",
+        "description": "Packages that had previously been in this repodata file but have now been removed.",
+        "examples": [
+          "blinker-1.4-py37_0.tar.bz2",
+          "blinker-1.4-py37_0.conda"
+        ]
+      }
+    },
+    "signatures": {
+      "$id": "#/properties/signatures",
+      "type": "object",
+      "patternProperties": {
+        "^.+(\\.tar\\.bz2)|(\\.conda)$": {
+          "$ref": "#/definitions/signature"
+        }
+      },
+      "additionalProperties": false
     }
+  },
+  "definitions": {
+    "signature": {
+      "$id": "#/definitions/signature",
+      "type": "object",
+      "properties": {
+        "metadata_sha256": {
+          "type": "string"
+        },
+        "metadata_size": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sig": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "metadata_sha256",
+        "metadata_size",
+        "sig",
+        "key"
+      ]
+    }
+  }
 }
-
