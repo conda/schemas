@@ -282,7 +282,7 @@
     "license_family":{
       "$id":"#/properties/license_family",
       "type":"string",
-      "title":"The License_family Schema",
+      "title":"The package's license family.",
       "description":"A validated field that conforms to the license families listed at https://github.com/conda/conda-build/blob/3.19.1/conda_build/license_family.py#L8-L24.",
       "enum": [
         "AGPL",
@@ -326,7 +326,7 @@
       "$id":"#/properties/vulns_active",
       "type":"array",
       "title":"The Vulns_active Schema",
-      "description":"An explanation about the purpose of this instance.",
+      "description":"Current vulnerabilities that have been identified for the package.",
       "items":{
         "$id":"#/properties/vulns_active/items",
         "type":"string",
@@ -343,7 +343,7 @@
       "$id":"#/properties/vulns_mitigated",
       "type":"array",
       "title":"The Vulns_mitigated Schema",
-      "description":"An explanation about the purpose of this instance.",
+      "description":"Vulnerabilities that have been identified for the package but have actively been mitigated in this package build through a code patch.",
       "items":{
         "$id":"#/properties/vulns_mitigated/items",
         "type":"string",

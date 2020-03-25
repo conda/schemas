@@ -24,7 +24,7 @@
             "type": "object",
             "patternProperties": {
                 "^.+\\.tar\\.bz2$": {
-                    "$ref": "https://raw.githubusercontent.com/kalefranz/conda-schema/master/record-schema.json"
+                    "$ref": "record-schema.json"
                 }
             },
             "additionalProperties": false
@@ -34,7 +34,7 @@
             "type": "object",
             "patternProperties": {
                 "^.+\\.conda$": {
-                    "$ref": "https://raw.githubusercontent.com/kalefranz/conda-schema/master/record-schema.json"
+                    "$ref": "record-schema.json"
                 }
             },
             "additionalProperties": false
@@ -73,7 +73,8 @@
                     "type": "string"
                 },
                 "metadata_size": {
-                    "type": "integer"
+                    "type": "integer",
+                    "minimum": 0
                 },
                 "sig": {
                     "type": "string"
