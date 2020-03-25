@@ -93,8 +93,8 @@ _TEMPLATE = """\
 """
 
 files = (
-    "repodata-record-1.schema.json",
     "repodata-1.schema.json",
+    "repodata-record-1.schema.json",
 )
 
 rendered = Template(_TEMPLATE).render(files=files)
