@@ -1,6 +1,9 @@
 {
-  "$schema": "https://raw.githubusercontent.com/kalefranz/conda-schema/master/repodata-schema.json",
+  "$schema": "../repodata-1-schema.json",
   "repodata_version": 1,
+  "info": {
+    "subdir": "linux-32"
+  },
   "packages": {
     "itsdangerous-2.3.4-23.tar.bz2": {
       "record_version": 1,

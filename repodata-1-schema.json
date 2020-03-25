@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://raw.githubusercontent.com/kalefranz/conda-schema/master/repodata-schema.json",
+  "$id": "https://raw.githubusercontent.com/kalefranz/conda-schema/master/repodata-1-schema.json",
   "type": "object",
   "title": "repodata.json",
   "description": "",
@@ -12,7 +12,7 @@
   "properties": {
     "$schema": {
       "type": "string",
-      "const": "https://raw.githubusercontent.com/kalefranz/conda-schema/master/repodata-schema.json",
+      "const": "https://raw.githubusercontent.com/kalefranz/conda-schema/master/repodata-1-schema.json",
       "format": "uri"
     },
     "repodata_version": {
@@ -20,14 +20,14 @@
       "type": "integer",
       "title": "The API version or schema version of the repodata file.",
       "description": "",
-      "default": 1
+      "const": 1
     },
     "info": {
       "$id": "#/properties/info",
       "type": "object",
       "properties": {
         "subdir": {
-          "$ref": "record-schema.json#/definitions/subdir"
+          "$ref": "record-1-schema.json#/definitions/subdir"
         }
       },
       "required": ["subdir"]
@@ -37,7 +37,7 @@
       "type": "object",
       "patternProperties": {
         "^.+\\.tar\\.bz2$": {
-          "$ref": "record-schema.json"
+          "$ref": "record-1-schema.json"
         }
       },
       "additionalProperties": false
@@ -47,7 +47,7 @@
       "type": "object",
       "patternProperties": {
         "^.+\\.conda$": {
-          "$ref": "record-schema.json"
+          "$ref": "record-1-schema.json"
         }
       },
       "additionalProperties": false

@@ -1,0 +1,6 @@
+{
+  "$schema": "https://raw.githubusercontent.com/kalefranz/conda-schema/master/repodata-schema.json",
+  "info": {
+    "subdir": "noarch"
+  }
+}
