@@ -1,6 +1,6 @@
 {
   "$schema":"http://json-schema.org/draft-07/schema",
-  "$id":"http://example.com/example.json",
+  "$id":"https://raw.githubusercontent.com/kalefranz/conda-schema/master/package-metadata-block.json",
   "type":"object",
   "title":"The Package Metadata Schema",
   "description":"The schema for each package file's block of metadata in repodata.",
