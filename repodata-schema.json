@@ -6,7 +6,8 @@
   "description": "",
   "required": [
     "$schema",
-    "repodata_version"
+    "repodata_version",
+    "info"
   ],
   "properties": {
     "$schema": {
@@ -28,7 +29,8 @@
         "subdir": {
           "$ref": "record-schema.json#/definitions/subdir"
         }
-      }
+      },
+      "required": ["subdir"]
     },
     "packages": {
       "$id": "#/properties/packages",
