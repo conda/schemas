@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
-    "$id": "http://example.com/example.json",
+    "$id":"https://raw.githubusercontent.com/kalefranz/conda-schema/master/repodata-schema.json",
     "type": "object",
     "title": "repodata.json",
     "description": "",
