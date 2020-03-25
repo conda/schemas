@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://raw.githubusercontent.com/kalefranz/conda-schema/master/repodata-1-schema.json",
+  "$id": "https://schemas.conda.io/repodata-1.schema.json",
   "type": "object",
   "title": "repodata.json",
   "description": "",
@@ -12,7 +12,7 @@
   "properties": {
     "$schema": {
       "type": "string",
-      "const": "https://raw.githubusercontent.com/kalefranz/conda-schema/master/repodata-1-schema.json",
+      "const": "https://schemas.conda.io/repodata-1.schema.json",
       "format": "uri"
     },
     "repodata_version": {
@@ -27,7 +27,7 @@
       "type": "object",
       "properties": {
         "subdir": {
-          "$ref": "record-1-schema.json#/definitions/subdir"
+          "$ref": "record-1.schema.json#/definitions/subdir"
         }
       },
       "required": ["subdir"]
@@ -37,7 +37,7 @@
       "type": "object",
       "patternProperties": {
         "^.+\\.tar\\.bz2$": {
-          "$ref": "record-1-schema.json"
+          "$ref": "record-1.schema.json"
         }
       },
       "additionalProperties": false
@@ -47,7 +47,7 @@
       "type": "object",
       "patternProperties": {
         "^.+\\.conda$": {
-          "$ref": "record-1-schema.json"
+          "$ref": "record-1.schema.json"
         }
       },
       "additionalProperties": false
