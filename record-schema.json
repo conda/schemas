@@ -2,7 +2,7 @@
   "$schema":"http://json-schema.org/draft-07/schema",
   "$id":"https://raw.githubusercontent.com/kalefranz/conda-schema/master/package-metadata-block.json",
   "type":"object",
-  "title":"The Package Metadata Schema",
+  "title":"Conda Package Metadata Record Schema",
   "description":"The schema for each package file's block of metadata in repodata.",
   "required":[
     "record_version",
@@ -155,6 +155,7 @@
       "$id":"#/properties/md5",
       "type":"string",
       "title":"The md5 hash of the package file.",
+      "pattern": "^[0-9a-f]{32}$",
       "examples":[
         "9ceda9e08e97868b6ff7c0961a40544f"
       ]
@@ -163,6 +164,7 @@
       "$id":"#/properties/size",
       "type":"integer",
       "title":"The size of the package file in bytes.",
+      "minimum": 0,
       "examples":[
         15874157
       ]
@@ -171,7 +173,7 @@
       "$id":"#/properties/sha256",
       "type":"string",
       "title":"The sha256 hash of the package file.",
-      "default":"",
+      "pattern": "^[0-9a-f]{64}$",
       "examples":[
         "2efb3826d65af3f3857a35f04a0ba5c6288b9b3e4e47c9e2118fbdcc190406b9"
       ]
@@ -189,9 +191,6 @@
       "type":"array",
       "title":"The package's dependencies.",
       "description":"A list of MatchSpecs required when installing the package.",
-      "default":[
-
-      ],
       "items":{
         "$id":"#/properties/depends/items",
         "type":"string",
@@ -214,15 +213,11 @@
       "type":"array",
       "title":"The package's constraints on other packages in the environment.",
       "description":"If the package is to be installed into an environment, the other packages in the environment must conform to these constratins. A constraint can be thought of as a 'reverse dependency'.",
-      "default":[
-
-      ],
       "items":{
         "$id":"#/properties/constrains/items",
         "type":"string",
         "title":"matchspec",
         "description":"Valid Conda MatchSpec.",
-        "default":"",
         "examples":[
           "proj4 <6",
           "proj <6"
@@ -235,9 +230,6 @@
       "type":"array",
       "title":"The features provided by the package.",
       "description":"An explanation about the purpose of this instance.",
-      "default":[
-
-      ],
       "items":{
         "type":"string"
       }
@@ -247,9 +239,6 @@
       "type":"array",
       "title":"The features 'tracked' by the package.",
       "description":"https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#track-features",
-      "default":[
-
-      ],
       "items":{
         "type":"string"
       }
@@ -283,8 +272,8 @@
     "license":{
       "$id":"#/properties/license",
       "type":"string",
-      "title":"The License Schema",
-      "description":"An explanation about the purpose of this instance.",
+      "title":"The package's license.",
+      "description":"A free-form text field describing the packages license.",
       "default":"",
       "examples":[
         "MIT"
@@ -294,28 +283,41 @@
       "$id":"#/properties/license_family",
       "type":"string",
       "title":"The License_family Schema",
-      "description":"An explanation about the purpose of this instance.",
-      "default":"",
-      "examples":[
-        "MIT"
+      "description":"A validated field that conforms to the license families listed at https://github.com/conda/conda-build/blob/3.19.1/conda_build/license_family.py#L8-L24.",
+      "enum": [
+        "AGPL",
+        "LGPL",
+        "GPL3",
+        "GPL2",
+        "GPL",
+        "BSD",
+        "MIT",
+        "APACHE",
+        "PSF",
+        "CC",
+        "MOZILLA",
+        "PUBLIC-DOMAIN",
+        "PROPRIETARY",
+        "OTHER",
+        "NONE"
       ]
     },
     "spdx_license":{
       "$id":"#/properties/spdx_license",
       "type":"string",
-      "title":"The Spdx_license Schema",
-      "description":"An explanation about the purpose of this instance.",
+      "title":"The SPDX license description of the package.",
+      "description":"https://spdx.org/licenses/",
       "default":"",
       "examples":[
+        "BSD-3-Clause",
         "MIT OR Apache-2.0"
       ]
     },
     "spdx_version":{
       "$id":"#/properties/spdx_version",
       "type":"string",
-      "title":"The Spdx_version Schema",
-      "description":"An explanation about the purpose of this instance.",
-      "default":"",
+      "title":"SPDX specification version.",
+      "description":"Note this the specification version, not the SPDX license list version.",
       "examples":[
         "2.1"
       ]
@@ -325,12 +327,10 @@
       "type":"array",
       "title":"The Vulns_active Schema",
       "description":"An explanation about the purpose of this instance.",
-      "default":[
-
-      ],
       "items":{
         "$id":"#/properties/vulns_active/items",
         "type":"string",
+        "pattern": "^CVE-[0-9]{4}-[0-9]{4,6}$",
         "title":"The Items Schema",
         "description":"An explanation about the purpose of this instance.",
         "default":"",
@@ -344,9 +344,6 @@
       "type":"array",
       "title":"The Vulns_mitigated Schema",
       "description":"An explanation about the purpose of this instance.",
-      "default":[
-
-      ],
       "items":{
         "$id":"#/properties/vulns_mitigated/items",
         "type":"string",
