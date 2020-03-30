@@ -170,6 +170,12 @@
         1539182577753
       ]
     },
+    "patch_version": {
+      "type": "integer",
+      "minimum": 0,
+      "title": "Metadata patch version.",
+      "description": "Incremeted for each change of the metadata record."
+    },
     "depends": {
       "$id": "#/properties/depends",
       "type": "array",
