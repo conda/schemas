@@ -174,7 +174,7 @@
       "type": "integer",
       "minimum": 0,
       "title": "Metadata patch version.",
-      "description": "Incremeted for each change of the metadata record."
+      "description": "Incremented for each change of the metadata record."
     },
     "depends": {
       "$id": "#/properties/depends",
@@ -315,34 +315,28 @@
     "vulns_active": {
       "$id": "#/properties/vulns_active",
       "type": "array",
-      "title": "The Vulns_active Schema",
+      "title": "Active Vulnerabilities",
       "description": "Current vulnerabilities that have been identified for the package.",
       "items": {
-        "$id": "#/properties/vulns_active/items",
-        "type": "string",
-        "pattern": "^CVE-[0-9]{4}-[0-9]{4,6}$",
-        "title": "The Items Schema",
-        "description": "An explanation about the purpose of this instance.",
-        "default": "",
-        "examples": [
-          "CVE-2017-14503"
-        ]
+        "$ref": "#/definitions/vuln_item"
       }
     },
     "vulns_mitigated": {
       "$id": "#/properties/vulns_mitigated",
       "type": "array",
-      "title": "The Vulns_mitigated Schema",
+      "title": "Mitigated Vulnerabilities",
       "description": "Vulnerabilities that have been identified for the package but have actively been mitigated in this package build through a code patch.",
       "items": {
-        "$id": "#/properties/vulns_mitigated/items",
-        "type": "string",
-        "title": "The Items Schema",
-        "description": "An explanation about the purpose of this instance.",
-        "default": "",
-        "examples": [
-          "CVE-2017-14501"
-        ]
+        "$ref": "#/definitions/vuln_item"
+      }
+    },
+    "vulns_cleared": {
+      "$id": "#/properties/vulns_cleared",
+      "type": "array",
+      "title": "Cleared Vulnerabilities",
+      "description": "Vulnerabilities associated with the package that have been analyzed and determined to not be applicable.",
+      "items": {
+        "$ref": "#/definitions/vuln_item"
       }
     }
   },
@@ -364,6 +358,16 @@
         "win-32",
         "win-64",
         "zos-z"
+      ]
+    },
+    "vuln_item": {
+      "$id": "#/definitions/vuln_item",
+      "title": "vulnerability association item",
+      "description": "A CVE or other vulnerability association.",
+      "type": "string",
+      "pattern": "^CVE-[0-9]{4}-[0-9]{4,6}$",
+      "examples": [
+        "CVE-2017-14501"
       ]
     }
   }
