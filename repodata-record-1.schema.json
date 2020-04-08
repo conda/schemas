@@ -316,7 +316,7 @@
       "$id": "#/properties/vulns_active",
       "type": "array",
       "title": "Active Vulnerabilities",
-      "description": "Current vulnerabilities that have been identified for the package.",
+      "description": "Vulnerabilities that have been identified for the package that are potentially active and exploitable.",
       "items": {
         "$ref": "#/definitions/vuln_item"
       }

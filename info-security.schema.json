@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://schemas.conda.io/info-security-1.schema.json",
+  "type": "object",
+  "title": "info/extra.d/security.json",
+  "description": "Security-related information for the package.",
+  "required": [
+    "$schema",
+    "api_version"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://schemas.conda.io/info-security-1.schema.json",
+      "format": "uri"
+    },
+    "api_version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Schema version for the current file."
+    },
+    "vulns_mitigated": {
+      "description": "Vulnerabilities that have been identified for the package but have actively been mitigated in this package build through a code patch.",
+      "type": "array",
+      "items": {
+        "allOf": [
+          {"$ref": "#/definitions/vuln_description_item"},
+          {
+            "properties": {
+              "patch_fn": {
+                "type": "string",
+                "description": "The path for the mitigating patch within the recipe."
+              },
+              "patch_src_url": {
+                "type": "string",
+                "format": "uri",
+                "description": "The public source for the mitigating patch being applied."
+              }
+            }
+          }
+        ]
+      }
+    },
+    "vulns_cleared": {
+      "description": "Vulnerabilities associated with the package that have been analyzed and determined to not be applicable.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/vuln_description_item"
+      }
+    },
+    "vulns_active": {
+      "description": "Vulnerabilities that have been identified for the package that are potentially active and exploitable.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/vuln_description_item"
+      }
+    }
+  },
+  "definitions": {
+    "vuln_description_item": {
+      "$id": "#/definitions/vuln_description_item",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Vulnerability ID",
+          "pattern": "^CVE-[0-9]{4}-[0-9]{4,6}$"
+        },
+        "poc_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Location of vulnerability proof-of-concept or exploit demonstration."
+        },
+        "comment": {
+          "type": "string",
+          "description": "Comment field reserved for the recipe author."
+        },
+        "references": {
+          "description": "References determined to be relevant by the recipe author.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/vuln_description_item_reference"
+          }
+        }
+      }
+    },
+    "vuln_description_item_reference": {
+      "$id": "#/definitions/vuln_description_item_reference",
+      "type": "object",
+      "required": [
+        "type",
+        "url"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of reference. Prefer adding additional enum options rather than using 'other'.",
+          "enum": [
+            "nist",
+            "debian",
+            "other"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    }
+  }
+}
