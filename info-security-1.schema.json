@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema",
   "$id": "https://schemas.conda.io/info-security-1.schema.json",
   "type": "object",
-  "title": "info/extra.d/security.json",
+  "title": "info/security.json",
   "description": "Security-related information for the package.",
   "required": [
     "$schema",
