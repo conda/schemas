@@ -3,9 +3,8 @@
   "$id": "https://schemas.conda.io/repodata-1.schema.json",
   "type": "object",
   "title": "repodata.json",
-  "description": "",
+  "$comment": "TODO add back to required: repodata_version",
   "required": [
-    "repodata_version",
     "info"
   ],
   "properties": {
