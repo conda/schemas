@@ -4,15 +4,12 @@
   "type": "object",
   "title": "Conda Package Metadata Record Schema",
   "description": "The schema for each package file's block of metadata in repodata.",
+  "$comment": "add these back to required: record_version ext fn subdir",
   "required": [
-    "record_version",
-    "subdir",
     "name",
     "version",
     "build_number",
     "build",
-    "ext",
-    "fn",
     "md5",
     "size",
     "sha256"
