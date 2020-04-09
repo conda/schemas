@@ -43,16 +43,12 @@
     "vulns_cleared": {
       "description": "Vulnerabilities associated with the package that have been analyzed and determined to not be applicable.",
       "type": "array",
-      "items": {
-        "$ref": "#/definitions/vuln_description_item"
-      }
+      "items": {"$ref": "#/definitions/vuln_description_item"}
     },
     "vulns_active": {
       "description": "Vulnerabilities that have been identified for the package that are potentially active and exploitable.",
       "type": "array",
-      "items": {
-        "$ref": "#/definitions/vuln_description_item"
-      }
+      "items": {"$ref": "#/definitions/vuln_description_item"}
     }
   },
   "definitions": {
@@ -78,9 +74,7 @@
         "references": {
           "description": "References determined to be relevant by the recipe author.",
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/vuln_description_item_reference"
-          }
+          "items": {"$ref": "#/definitions/vuln_description_item_reference"}
         }
       }
     },
