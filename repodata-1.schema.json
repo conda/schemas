@@ -15,47 +15,41 @@
       "format": "uri"
     },
     "repodata_version": {
-      "$id": "#/properties/repodata_version",
       "type": "integer",
       "title": "The API version or schema version of the repodata file.",
       "description": "",
       "const": 1
     },
     "info": {
-      "$id": "#/properties/info",
       "type": "object",
       "properties": {
         "subdir": {
-          "$ref": "repodata-record-1.schema.json#/definitions/subdir"
+          "$ref": "common-1.schema.json#/definitions/subdir"
         }
       },
       "required": ["subdir"]
     },
     "packages": {
-      "$id": "#/properties/packages",
       "type": "object",
+      "title": "Metadata for 'v1' .tar.bz2 Conda packages.",
+      "description": "Filename key of each package should be validated against {name}-{version}-{build}{ext} metadata for the package.",
       "patternProperties": {
-        "^.+\\.tar\\.bz2$": {
-          "$ref": "repodata-record-1.schema.json"
-        }
+        "^.+\\.tar\\.bz2$": {"$ref": "repodata-record-1.schema.json"}
       },
       "additionalProperties": false
     },
     "packages.conda": {
-      "$id": "#/properties/packages.conda",
       "type": "object",
+      "title": "Metadata for 'v2' .conda Conda packages.",
+      "description": "Filename key of each package should be validated against {name}-{version}-{build}{ext} metadata for the package.",
       "patternProperties": {
-        "^.+\\.conda$": {
-          "$ref": "repodata-record-1.schema.json"
-        }
+        "^.+\\.conda$": {"$ref": "repodata-record-1.schema.json"}
       },
       "additionalProperties": false
     },
     "removed": {
-      "$id": "#/properties/removed",
       "type": "array",
       "items": {
-        "$id": "#/properties/removed/items",
         "type": "string",
         "pattern": "^.+(\\.tar\\.bz2)|(\\.conda)$",
         "description": "Packages that had previously been in this repodata file but have now been removed.",
@@ -66,19 +60,15 @@
       }
     },
     "signatures": {
-      "$id": "#/properties/signatures",
       "type": "object",
       "patternProperties": {
-        "^.+(\\.tar\\.bz2)|(\\.conda)$": {
-          "$ref": "#/definitions/signature"
-        }
+        "^.+(\\.tar\\.bz2)|(\\.conda)$": {"$ref": "#/definitions/signature"}
       },
       "additionalProperties": false
     }
   },
   "definitions": {
     "signature": {
-      "$id": "#/definitions/signature",
       "type": "object",
       "properties": {
         "metadata_sha256": {

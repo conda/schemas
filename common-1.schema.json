@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://schemas.conda.io/common-1.schema.json",
+  "definitions": {
+    "namespace": {
+      "type": "string",
+      "title": "The ecosystem namespace for the package name.",
+      "description": "The default 'g' or 'global' namespace is for packages that aren't governed by any particular namespace authority. Most C libraries fall into the global namespace. The namespace authority for the various ecosystems is identified at https://github.com/conda/conda/blob/4.8.3/conda/base/constants.py#L259-L273.",
+      "enum": [
+        "g",
+        "py",
+        "r",
+        "erlang",
+        "java",
+        "julia",
+        "latex",
+        "lua",
+        "js",
+        "perl",
+        "php",
+        "ruby",
+        "clojure"
+      ]
+    },
+    "subdir": {
+      "type": "string",
+      "description": "The subdir of the channel within which a package is located. Subdirs are subdivisions of channels denoted by <OS>-<Platform> pairs. The 'noarch' subdir contains packages designed to be common among all subdirs.",
+      "enum": [
+        "noarch",
+        "linux-32",
+        "linux-64",
+        "linux-aarch64",
+        "linux-armv6l",
+        "linux-armv7l",
+        "linux-ppc64",
+        "linux-ppc64le",
+        "osx-64",
+        "win-32",
+        "win-64",
+        "zos-z"
+      ]
+    },
+    "license_family": {
+      "type": "string",
+      "description": "The license under which the package is distributed. Must conform to the license families listed at https://github.com/conda/conda-build/blob/3.19.1/conda_build/license_family.py#L8-L24.",
+      "enum": [
+        "AGPL",
+        "LGPL",
+        "GPL3",
+        "GPL2",
+        "GPL",
+        "BSD",
+        "MIT",
+        "APACHE",
+        "PSF",
+        "CC",
+        "MOZILLA",
+        "PUBLIC-DOMAIN",
+        "PROPRIETARY",
+        "OTHER",
+        "NONE"
+      ]
+    },
+    "vuln_id": {
+      "description": "A CVE or other vulnerability identifier.",
+      "type": "string",
+      "pattern": "^CVE-[0-9]{4}-[0-9]{4,6}$",
+      "examples": [
+        "CVE-2017-14501"
+      ]
+    }
+  }
+}

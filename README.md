@@ -9,3 +9,4 @@ This repository is published to https://schemas.conda.io.
 * `info/index.json` [TODO]
 * `info/link.json` [TODO]
 * `info/paths.json` [TODO]
+* `info/about.json` [TODO]

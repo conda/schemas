@@ -13,68 +13,39 @@
     "build",
     "ext",
     "fn",
-    "package_id",
     "md5",
     "size",
     "sha256"
   ],
   "properties": {
     "record_version": {
-      "$id": "#/properties/record_version",
       "type": "integer",
-      "title": "The API version or schema version of the record.",
-      "description": "Conda versions through Conda 4.8 are able to understand record_version <= 1.",
+      "description": "The API version or schema version of the record. Conda versions through at least Conda 4.8 are able to understand record_version <= 1.",
       "const": 1
     },
     "origin_channel_name": {
-      "$id": "#/properties/origin_channel_name",
       "type": "string",
-      "title": "The origin channel of the package.",
-      "description": "Will probably be relevant for package signing.",
-      "pattern": "^[a-z][a-z0-9_/-]*[a-z0-9]$",
+      "description": "The origin channel of the package. Will probably be relevant for package signing.",
+      "pattern": "^([a-z0-9]+(\\-|_|$))+$",
       "examples": [
         "main"
       ]
     },
-    "subdir": {
-      "$ref": "#/definitions/subdir"
-    },
-    "namespace": {
-      "$id": "#/properties/namespace",
-      "type": "string",
-      "title": "The ecosystem namespace for the package name.",
-      "description": "The default 'g' or 'global' namespace is for packages that aren't governed by any particular namespace authority. Most C libraries fall into the global namespace. The namespace authority for the various ecosystems is identified at https://github.com/conda/conda/blob/4.8.3/conda/base/constants.py#L259-L273.",
-      "enum": [
-        "g",
-        "py",
-        "r",
-        "erlang",
-        "java",
-        "julia",
-        "latex",
-        "lua",
-        "js",
-        "perl",
-        "php",
-        "ruby",
-        "clojure"
-      ]
-    },
+    "subdir": {"$ref": "common-1.schema.json#/definitions/subdir"},
+    "namespace": {"$ref": "common-1.schema.json#/definitions/namespace"},
     "name": {
-      "$id": "#/properties/name",
       "type": "string",
-      "title": "The package name.",
-      "description": "Conda restricts each environment to having a single package of any unique package name.",
+      "pattern": "^([a-z0-9]+(\\.|\\-|_|$))+$",
+      "description": "The package name. Conda restricts each environment to having a single package of any unique package name.",
       "examples": [
         "python",
         "numpy"
       ]
     },
     "version": {
-      "$id": "#/properties/version",
       "type": "string",
-      "title": "The package version.",
-      "description": "Must be a valid Conda Version string (validated against VersionOrder).",
+      "description": "The package version. Must be a valid Conda Version string (validated against VersionOrder). Versions are set by the upstream code project and should be faithfully reproduced by the package author.",
+      "pattern": "^([0-9]+!)?(([0-9a-z]+(\\.|_))*[0-9a-z]+)(\\+([0-9a-z]+(\\.|_))*[0-9a-z]+)?$",
       "examples": [
         "0.4.1",
         "0.960923",
@@ -86,85 +57,73 @@
       ]
     },
     "build_number": {
-      "$id": "#/properties/build_number",
       "type": "integer",
-      "title": "The package build number.",
+      "description": "The package build number. Build numbers are incremented by package builders when a material change is made to the package. Unlike other package managers, Conda makes all package builds available during a solve, and not just the latest build number.",
+      "minimum": 0,
       "examples": [
         0,
         1
       ]
     },
     "build": {
-      "$id": "#/properties/build",
       "type": "string",
-      "title": "The package build string.",
-      "description": "The build string _should_ include the build number in the last position of the build string. If the build string includes more than build number, the build number should be delimited by an '_'.",
-      "default": "",
+      "description": "The package build string. The build string should include the build number in the last position of the build string. If the build string includes more than a build number, the build number should be delimited by an '_'.",
+      "pattern": "^([a-z0-9_]+_)?[0-9]+$",
       "examples": [
         "0",
         "py27hbee0394_1"
       ]
     },
     "ext": {
-      "$id": "#/properties/ext",
       "type": "string",
-      "title": "The extension of the package file name.",
+      "title": "The extension of the package file name. The .tar.bz2 extension is used by 'version 1' Conda packages and the '.conda' extension is used by 'version 2' Conda packages.",
       "enum": [
         ".tar.bz2",
         ".conda"
       ]
     },
     "fn": {
-      "$id": "#/properties/fn",
       "type": "string",
-      "title": "The package file name.",
-      "description": "The file name should be generated based on other fields in the package's metadata, i.e. {name}-{version}-{build}{ext}",
-      "default": "",
+      "description": "The file name should be generated based on other fields in the package's metadata, i.e. {name}-{version}-{build}{ext}. It should be validated against those fields.",
       "examples": [
         "ansible-1.9.3-py27_0.tar.bz2",
         "basemap-1.2.0-py27hbee0394_0.conda"
       ]
     },
     "package_id": {
-      "$id": "#/properties/package_id",
       "type": "string",
-      "title": "Except for the channel_name, the unique identifier of a package.",
-      "description": "he package_id should be generated based on other fields in the package's metadata: '{namespace}:{name}-{version}-{build_number}-{build}'",
+      "description": "Except for the channel_name, the unique identifier of a package. The package_id should be generated based on other fields in the package's metadata: '{namespace}:{name}-{version}-{build_number}-{build}'",
       "examples": [
         "py:ansible-1.9.3-0-py27_0"
       ]
     },
     "md5": {
-      "$id": "#/properties/md5",
       "type": "string",
-      "title": "The md5 hash of the package file.",
+      "description": "The md5 hash of the package file.",
       "pattern": "^[0-9a-f]{32}$",
       "examples": [
         "9ceda9e08e97868b6ff7c0961a40544f"
       ]
     },
     "size": {
-      "$id": "#/properties/size",
       "type": "integer",
-      "title": "The size of the package file in bytes.",
+      "description": "The size of the package file in bytes.",
       "minimum": 0,
       "examples": [
         15874157
       ]
     },
     "sha256": {
-      "$id": "#/properties/sha256",
       "type": "string",
-      "title": "The sha256 hash of the package file.",
+      "description": "The sha256 hash of the package file.",
       "pattern": "^[0-9a-f]{64}$",
       "examples": [
         "2efb3826d65af3f3857a35f04a0ba5c6288b9b3e4e47c9e2118fbdcc190406b9"
       ]
     },
     "timestamp": {
-      "$id": "#/properties/timestamp",
       "type": "integer",
-      "title": "The Unix time (Epoch time) when the package was created.",
+      "description": "The Unix time (Epoch time) when the package was created. If a legacy 'date' field is provided and timestamp is not, it should be used to populate the timestamp field.",
       "examples": [
         1539182577753
       ]
@@ -172,18 +131,14 @@
     "patch_version": {
       "type": "integer",
       "minimum": 0,
-      "title": "Metadata patch version.",
-      "description": "Incremented for each change of the metadata record."
+      "description": "Metadata record patch version. Incremented for each change of the metadata record."
     },
     "depends": {
-      "$id": "#/properties/depends",
       "type": "array",
-      "title": "The package's dependencies.",
-      "description": "A list of MatchSpecs required when installing the package.",
+      "description": "The package's dependencies. A list of MatchSpecs required when installing the package.",
       "items": {
         "$id": "#/properties/depends/items",
         "type": "string",
-        "title": "matchspec",
         "description": "Valid Conda MatchSpec.",
         "examples": [
           "geos >=3.6.2,<3.6.3.0a0",
@@ -198,14 +153,10 @@
       }
     },
     "constrains": {
-      "$id": "#/properties/constrains",
       "type": "array",
-      "title": "The package's constraints on other packages in the environment.",
-      "description": "If the package is to be installed into an environment, the other packages in the environment must conform to these constratins. A constraint can be thought of as a 'reverse dependency'.",
+      "description": "The package's constraints on other packages in the environment. If the package is to be installed into an environment, the other packages in the environment must conform to these constratins. A constraint can be thought of as a 'reverse dependency'.",
       "items": {
-        "$id": "#/properties/constrains/items",
         "type": "string",
-        "title": "matchspec",
         "description": "Valid Conda MatchSpec.",
         "examples": [
           "proj4 <6",
@@ -214,52 +165,31 @@
       }
     },
     "features": {
-      "$id": "#/properties/features",
       "deprecated": true,
       "type": "array",
-      "title": "The features provided by the package.",
-      "description": "An explanation about the purpose of this instance.",
-      "items": {
-        "type": "string"
-      }
+      "description": "The features provided by the package. An explanation about the purpose of this instance.",
+      "items": {"type": "string"}
     },
     "track_features": {
-      "$id": "#/properties/track_features",
       "type": "array",
-      "title": "The features 'tracked' by the package.",
-      "description": "https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#track-features",
-      "items": {
-        "type": "string"
-      }
+      "description": "The features 'tracked' by the package. https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#track-features",
+      "items": {"type": "string"}
     },
     "noarch": {
-      "$id": "#/properties/noarch",
+      "deprecated": true,
       "type": "string",
-      "title": "The noarch type of a package (if applicable).",
-      "description": "If the package is a noarch package, the noarch type.",
+      "description": "The noarch type of a package (if applicable).",
       "enum": [
         "generic",
         "python"
       ]
     },
-    "package_type": {
-      "$id": "#/properties/package_type",
-      "type": "string",
-      "title": "The Package_type Schema",
-      "description": "An explanation about the purpose of this instance.",
-      "enum": [
-        "noarch_python"
-      ]
-    },
     "namespace_in_name": {
-      "$id": "#/properties/namespace_in_name",
       "type": "boolean",
-      "title": "The Namespace_in_name Schema",
-      "description": "If the namespace is in the package name. For example, the value is 'true' for the package 'python-socketio' but 'false' for the package 'python-graphviz'.",
+      "description": "Indicates if the package's namespace is in the package name. For example, the value is 'true' for the package 'python-socketio' but 'false' for the package 'python-graphviz'.",
       "default": false
     },
     "license": {
-      "$id": "#/properties/license",
       "type": "string",
       "title": "The package's license.",
       "description": "A free-form text field describing the packages license.",
@@ -268,107 +198,37 @@
         "MIT"
       ]
     },
-    "license_family": {
-      "$id": "#/properties/license_family",
-      "type": "string",
-      "title": "The package's license family.",
-      "description": "A validated field that conforms to the license families listed at https://github.com/conda/conda-build/blob/3.19.1/conda_build/license_family.py#L8-L24.",
-      "enum": [
-        "AGPL",
-        "LGPL",
-        "GPL3",
-        "GPL2",
-        "GPL",
-        "BSD",
-        "MIT",
-        "APACHE",
-        "PSF",
-        "CC",
-        "MOZILLA",
-        "PUBLIC-DOMAIN",
-        "PROPRIETARY",
-        "OTHER",
-        "NONE"
-      ]
-    },
+    "license_family": {"$ref": "common-1.schema.json#/definitions/license_family"},
     "spdx_license": {
-      "$id": "#/properties/spdx_license",
       "type": "string",
-      "title": "The SPDX license description of the package.",
-      "description": "https://spdx.org/licenses/",
-      "default": "",
+      "description": "The SPDX license description of the package. https://spdx.org/licenses/",
+      "$comment": "https://github.com/sindresorhus/spdx-license-list/blob/master/spdx-simple.json",
       "examples": [
         "BSD-3-Clause",
         "MIT OR Apache-2.0"
       ]
     },
     "spdx_version": {
-      "$id": "#/properties/spdx_version",
       "type": "string",
-      "title": "SPDX specification version.",
-      "description": "Note this the specification version, not the SPDX license list version.",
+      "description": "SPDX specification version. Note that this is the specification version that describes the schema for spdx_license, not the SPDX license list version (https://github.com/sindresorhus/spdx-license-list/blob/master/spdx.json).",
       "examples": [
         "2.1"
       ]
     },
     "vulns_active": {
-      "$id": "#/properties/vulns_active",
       "type": "array",
-      "title": "Active Vulnerabilities",
       "description": "Vulnerabilities that have been identified for the package that are potentially active and exploitable.",
-      "items": {
-        "$ref": "#/definitions/vuln_id"
-      }
+      "items": {"$ref": "common-1.schema.json#/definitions/vuln_id"}
     },
     "vulns_mitigated": {
-      "$id": "#/properties/vulns_mitigated",
       "type": "array",
-      "title": "Mitigated Vulnerabilities",
-      "description": "Vulnerabilities that have been identified for the package but have actively been mitigated in this package build through a code patch.",
-      "items": {
-        "$ref": "#/definitions/vuln_id"
-      }
+      "description": "Vulnerabilities that have been identified for the package but have proactively been mitigated in this package build through a code patch.",
+      "items": {"$ref": "common-1.schema.json#/definitions/vuln_id"}
     },
     "vulns_cleared": {
-      "$id": "#/properties/vulns_cleared",
       "type": "array",
-      "title": "Cleared Vulnerabilities",
       "description": "Vulnerabilities associated with the package that have been analyzed and determined to not be applicable.",
-      "items": {
-        "$ref": "#/definitions/vuln_id"
-      }
-    }
-  },
-  "definitions": {
-    "subdir": {
-      "$id": "#/definitions/subdir",
-      "type": "string",
-      "title": "The subdir of the channel within which the package is located.",
-      "description": "Subdirs are subdivisions of channels denoted by OS-Platform pairs. The 'noarch' subdir is common among all OS-Platform pairs.",
-      "enum": [
-        "noarch",
-        "linux-32",
-        "linux-64",
-        "linux-aarch64",
-        "linux-armv6l",
-        "linux-armv7l",
-        "linux-ppc64",
-        "linux-ppc64le",
-        "osx-64",
-        "win-32",
-        "win-64",
-        "zos-z"
-      ]
-    },
-    "vuln_id": {
-      "$id": "#/definitions/vuln_id",
-      "title": "vulnerability association item",
-      "description": "A CVE or other vulnerability association.",
-      "type": "string",
-      "pattern": "^CVE-[0-9]{4}-[0-9]{4,6}$",
-      "examples": [
-        "CVE-2017-14501"
-      ]
+      "items": {"$ref": "common-1.schema.json#/definitions/vuln_id"}
     }
   }
 }

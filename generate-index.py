@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # Copyright (C) 2020 Anaconda, Inc
+import os
 from os.path import dirname, join
 import sys
 
@@ -92,11 +93,7 @@ _TEMPLATE = """\
 
 """
 
-files = (
-    "repodata-1.schema.json",
-    "repodata-record-1.schema.json",
-)
-
+files=sorted(p for p in os.listdir(".") if p.endswith(".schema.json"))
 rendered = Template(_TEMPLATE).render(files=files)
 
 print(rendered, file=sys.stderr)
