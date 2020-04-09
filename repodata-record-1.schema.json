@@ -32,7 +32,7 @@
     "namespace": {"$ref": "common-1.schema.json#/definitions/namespace"},
     "name": {
       "type": "string",
-      "pattern": "^[a-z0-9_](?!_)([a-z0-9]+(\\.|\\-|_|$))*$",
+      "pattern": "^[a-z0-9_](?!_)[._-]?([a-z0-9]+(\\.|\\-|_|$))*$",
       "description": "The package name. Conda restricts each environment to having a single package of any unique package name.",
       "examples": [
         "python",
@@ -163,14 +163,14 @@
     },
     "features": {
       "deprecated": true,
-      "type": "array",
-      "description": "The features provided by the package. An explanation about the purpose of this instance.",
-      "items": {"type": "string"}
+      "type": "string",
+      "description": "The features provided by the package. Format is a space-delimited string of items.",
+      "pattern": "^([a-z0-9-_.]+( |$))*$"
     },
     "track_features": {
       "type": "array",
-      "description": "The features 'tracked' by the package. https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#track-features",
-      "items": {"type": "string"}
+      "description": "The features 'tracked' by the package. Format is a space-delimited string of items. https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#track-features",
+      "pattern": "^([a-z0-9-_.]+( |$))*$"
     },
     "noarch": {
       "deprecated": true,

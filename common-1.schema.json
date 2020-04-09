@@ -54,12 +54,16 @@
         "GPL",
         "BSD",
         "MIT",
+        "APACHE",
         "Apache",
         "PSF",
         "CC",
         "MOZILLA",
+        "PUBLIC-DOMAIN",
         "Public-Domain",
+        "PROPRIETARY",
         "Proprietary",
+        "OTHER",
         "Other",
         null
       ]
