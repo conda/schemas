@@ -6,7 +6,6 @@
   "description": "The schema for each package file's block of metadata in repodata.",
   "required": [
     "record_version",
-    "origin_channel_name",
     "subdir",
     "name",
     "version",
@@ -318,7 +317,7 @@
       "title": "Active Vulnerabilities",
       "description": "Vulnerabilities that have been identified for the package that are potentially active and exploitable.",
       "items": {
-        "$ref": "#/definitions/vuln_item"
+        "$ref": "#/definitions/vuln_id"
       }
     },
     "vulns_mitigated": {
@@ -327,7 +326,7 @@
       "title": "Mitigated Vulnerabilities",
       "description": "Vulnerabilities that have been identified for the package but have actively been mitigated in this package build through a code patch.",
       "items": {
-        "$ref": "#/definitions/vuln_item"
+        "$ref": "#/definitions/vuln_id"
       }
     },
     "vulns_cleared": {
@@ -336,7 +335,7 @@
       "title": "Cleared Vulnerabilities",
       "description": "Vulnerabilities associated with the package that have been analyzed and determined to not be applicable.",
       "items": {
-        "$ref": "#/definitions/vuln_item"
+        "$ref": "#/definitions/vuln_id"
       }
     }
   },
@@ -353,6 +352,7 @@
         "linux-aarch64",
         "linux-armv6l",
         "linux-armv7l",
+        "linux-ppc64",
         "linux-ppc64le",
         "osx-64",
         "win-32",
@@ -360,8 +360,8 @@
         "zos-z"
       ]
     },
-    "vuln_item": {
-      "$id": "#/definitions/vuln_item",
+    "vuln_id": {
+      "$id": "#/definitions/vuln_id",
       "title": "vulnerability association item",
       "description": "A CVE or other vulnerability association.",
       "type": "string",

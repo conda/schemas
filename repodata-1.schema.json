@@ -5,7 +5,6 @@
   "title": "repodata.json",
   "description": "",
   "required": [
-    "$schema",
     "repodata_version",
     "info"
   ],

@@ -5,7 +5,6 @@
   "title": "info/security.json",
   "description": "Security-related information for the package.",
   "required": [
-    "$schema",
     "api_version"
   ],
   "properties": {
@@ -60,6 +59,7 @@
     "vuln_description_item": {
       "$id": "#/definitions/vuln_description_item",
       "type": "object",
+      "required": ["id"],
       "properties": {
         "id": {
           "type": "string",
