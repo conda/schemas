@@ -187,7 +187,7 @@
       "default": false
     },
     "license": {
-      "type": "string",
+      "type": [ "string", "null" ],
       "title": "The package's license.",
       "description": "A free-form text field describing the packages license.",
       "default": "",
