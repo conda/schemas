@@ -168,7 +168,7 @@
       "pattern": "^([a-z0-9-_.]+( |$))*$"
     },
     "track_features": {
-      "type": "array",
+      "type": "string",
       "description": "The features 'tracked' by the package. Format is a space-delimited string of items. https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#track-features",
       "pattern": "^([a-z0-9-_.]+( |$))*$"
     },
