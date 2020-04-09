@@ -32,7 +32,7 @@
     "namespace": {"$ref": "common-1.schema.json#/definitions/namespace"},
     "name": {
       "type": "string",
-      "pattern": "^([a-z0-9]+(\\.|\\-|_|$))+$",
+      "pattern": "^[a-z0-9_](?!_)([a-z0-9]+(\\.|\\-|_|$))*$",
       "description": "The package name. Conda restricts each environment to having a single package of any unique package name.",
       "examples": [
         "python",
@@ -65,7 +65,7 @@
     "build": {
       "type": "string",
       "description": "The package build string. The build string should include the build number in the last position of the build string. If the build string includes more than a build number, the build number should be delimited by an '_'.",
-      "pattern": "^([a-z0-9_]+_)?[0-9]+$",
+      "pattern": "^([a-z0-9_.]+_)?[0-9]+$",
       "examples": [
         "0",
         "py27hbee0394_1"

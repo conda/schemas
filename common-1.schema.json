@@ -6,6 +6,7 @@
       "type": "string",
       "title": "The ecosystem namespace for the package name.",
       "description": "The default 'g' or 'global' namespace is for packages that aren't governed by any particular namespace authority. Most C libraries fall into the global namespace. The namespace authority for the various ecosystems is identified at https://github.com/conda/conda/blob/4.8.3/conda/base/constants.py#L259-L273.",
+      "$comment": "TODO remove global and python",
       "enum": [
         "g",
         "py",
@@ -19,7 +20,9 @@
         "perl",
         "php",
         "ruby",
-        "clojure"
+        "clojure",
+        "global",
+        "python"
       ]
     },
     "subdir": {
@@ -51,14 +54,14 @@
         "GPL",
         "BSD",
         "MIT",
-        "APACHE",
+        "Apache",
         "PSF",
         "CC",
         "MOZILLA",
-        "PUBLIC-DOMAIN",
-        "PROPRIETARY",
-        "OTHER",
-        "NONE"
+        "Public-Domain",
+        "Proprietary",
+        "Other",
+        null
       ]
     },
     "vuln_id": {
