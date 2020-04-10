@@ -46,6 +46,7 @@
     "license_family": {
       "type": "string",
       "description": "The license under which the package is distributed. Must conform to the license families listed at https://github.com/conda/conda-build/blob/3.19.1/conda_build/license_family.py#L8-L24.",
+      "$comment": "TODO resolve capitalization issues.",
       "enum": [
         "AGPL",
         "LGPL",
@@ -61,6 +62,7 @@
         "MOZILLA",
         "PUBLIC-DOMAIN",
         "Public-Domain",
+        "Public Domain",
         "PROPRIETARY",
         "Proprietary",
         "OTHER",

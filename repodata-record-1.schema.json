@@ -4,7 +4,7 @@
   "type": "object",
   "title": "Conda Package Metadata Record Schema",
   "description": "The schema for each package file's block of metadata in repodata.",
-  "$comment": "add these back to required: record_version ext fn subdir",
+  "$comment": "TODO add these back to required: record_version ext fn subdir",
   "required": [
     "name",
     "version",
@@ -187,7 +187,8 @@
       "default": false
     },
     "license": {
-      "type": [ "string", "null" ],
+      "$comment": "TODO don't allow null",
+      "type": ["string", "null"],
       "title": "The package's license.",
       "description": "A free-form text field describing the packages license.",
       "default": "",
