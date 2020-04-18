@@ -5,7 +5,7 @@
   "title": "info/security.json",
   "description": "Security-related information for the package.",
   "required": [
-    "api_version"
+    "schema_version"
   ],
   "properties": {
     "$schema": {
@@ -13,7 +13,7 @@
       "const": "https://schemas.conda.io/info-security-1.schema.json",
       "format": "uri"
     },
-    "api_version": {
+    "schema_version": {
       "type": "integer",
       "minimum": 1,
       "description": "Schema version for the current file."
@@ -39,6 +39,11 @@
           }
         ]
       }
+    },
+    "vulns_disputed": {
+      "description": "Vulnerabilities where one party, particularly the project maintainers, disagrees with another party's assertion that a particular issue in software is a vulnerability",
+      "type": "array",
+      "items": {"$ref": "#/definitions/vuln_description_item"}
     },
     "vulns_cleared": {
       "description": "Vulnerabilities associated with the package that have been analyzed and determined to not be applicable.",
