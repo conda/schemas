@@ -52,7 +52,7 @@
     "package_id": {
       "type": "string",
       "description": "Except for the channel_name, the unique identifier of a package. The package_id should be generated based on other fields in the package's metadata: '{namespace}:{name}-{version}-{build_number}-{build}'",
-      "$comment": "Patchable for now, while we're still working out the details.",
+      "$comment": "Patchable for now, while we're still working out the details. Need to indicate subdir without having to indicate channel.",
       "patchable": true,
       "examples": [
         "py:ansible-1.9.3-0-py27_0"
@@ -84,16 +84,7 @@
         "9ceda9e08e97868b6ff7c0961a40544f"
       ]
     },
-    "timestamp": {
-      "type": "integer",
-      "maximum": 253402300799,
-      "$comment": "Maximum corresponds to 9999-12-31. Helps ensure units are in seconds.",
-      "description": "The Unix time (Epoch time) when the package was created. If a legacy 'date' field is provided and timestamp is not, it should be used to populate the timestamp field.",
-      "patchable": true,
-      "examples": [
-        1539182577753
-      ]
-    },
+    "timestamp": {"$ref": "common-1.schema.json#/definitions/timestamp"},
     "patch_version": {
       "type": "integer",
       "minimum": 0,
@@ -172,25 +163,7 @@
       ]
     },
     "license_family": {"$ref": "common-1.schema.json#/definitions/license_family"},
-    "spdx_license": {
-      "type": "string",
-      "description": "The SPDX license description of the package. https://spdx.org/licenses/",
-      "patchable": true,
-      "$comment": "Consider validation using https://github.com/nexB/license-expression. https://github.com/sindresorhus/spdx-license-list/blob/master/spdx-simple.json",
-      "examples": [
-        "BSD-3-Clause",
-        "MIT OR Apache-2.0"
-      ]
-    },
-    "spdx_version": {
-      "$comment": "TODO: fold into spdx_license field using colon delimiter",
-      "type": "string",
-      "description": "SPDX specification version. Note that this is the specification version that describes the schema for spdx_license, not the SPDX license list version (https://github.com/sindresorhus/spdx-license-list/blob/master/spdx.json).",
-      "patchable": true,
-      "examples": [
-        "2.1"
-      ]
-    },
+    "spdx_license": {"$ref": "common-1.schema.json#/definitions/spdx_license"},
     "vulns_active": {
       "type": "array",
       "description": "Vulnerabilities that have been identified for the package that are potentially active and exploitable.",

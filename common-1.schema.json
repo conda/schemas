@@ -5,7 +5,7 @@
     "origin_channel_name": {
       "type": "string",
       "description": "The origin channel of the package. Will probably be relevant for package signing.",
-      "pattern": "^([a-z0-9]+(\\-|_|$))+$",
+      "pattern": "^([a-z0-9]+(-|_|$))+$",
       "patchable": true,
       "examples": [
         "main",
@@ -57,7 +57,7 @@
     },
     "name": {
       "type": "string",
-      "pattern": "^[a-z0-9_](?!_)[._-]?([a-z0-9]+(\\.|\\-|_|$))*$",
+      "pattern": "^[a-z0-9_](?!_)[._-]?([a-z0-9]+(\\.|-|_|$))*$",
       "description": "The package name. Conda restricts each environment to having a single package of any unique package name.",
       "patchable": false,
       "examples": [
@@ -68,7 +68,7 @@
     "package_version": {
       "type": "string",
       "description": "The package version. Must be a valid Conda Version string (validated against VersionOrder). Versions are set by the upstream code project and should be faithfully reproduced by the package author.",
-      "pattern": "^([0-9]+!)?(([0-9a-z]+(\\.|_))*[0-9a-z]+_?)(\\+([0-9a-z]+(\\.|_))*[0-9a-z]+)?$",
+      "pattern": "^([0-9]+!)?(([0-9a-z]+([._]))*[0-9a-z]+_?)(\\+([0-9a-z]+([._]))*[0-9a-z]+)?$",
       "patchable": false,
       "examples": [
         "0.4.1",
@@ -127,6 +127,27 @@
         "Other",
         "other",
         null
+      ]
+    },
+    "spdx_license": {
+      "type": "string",
+      "description": "The SPDX license description of the package. https://spdx.org/licenses/ The first section of the string, delimited by a colon, is the SPDX specification version. Note that this is the specification version that describes the schema for spdx_license, not the SPDX license list version (https://github.com/sindresorhus/spdx-license-list/blob/master/spdx.json).",
+      "pattern": "^[0-9]\\.[0-9]:.*$",
+      "patchable": true,
+      "$comment": "Consider validation using https://github.com/nexB/license-expression. https://github.com/sindresorhus/spdx-license-list/blob/master/spdx-simple.json",
+      "examples": [
+        "2.1:BSD-3-Clause",
+        "2.1:MIT OR Apache-2.0"
+      ]
+    },
+    "timestamp": {
+      "type": "integer",
+      "maximum": 253402300799,
+      "$comment": "Maximum corresponds to 9999-12-31. Helps ensure units are in seconds.",
+      "description": "The Unix time (Epoch time) when the package was created. If a legacy 'date' field is provided and timestamp is not, it should be used to populate the timestamp field.",
+      "patchable": true,
+      "examples": [
+        1539182577753
       ]
     },
     "vuln_id": {

@@ -84,7 +84,7 @@ _TEMPLATE = """\
     </tr>
 {% for fn in files %}
     <tr>
-      <td><a href="{{ fn }}">{{ fn}}</td>
+      <td><a href="{{ fn }}">{{ fn }}</a></td>
     </tr>
 {%- endfor %}
   </table>

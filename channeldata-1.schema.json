@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://schemas.conda.io/channeldata-1.schema.json",
+  "type": "object",
+  "title": "channeldata.json",
+  "required": [
+    "schema_version"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "const": "https://schemas.conda.io/channeldata-1.schema.json",
+      "format": "uri"
+    },
+    "schema_version": {
+      "type": "integer",
+      "description": "The API version or schema version of the channeldata file.",
+      "const": 1
+    },
+    "packages": {
+      "description": "The value for each key is a package name contained within the channel.",
+      "patternProperties": {
+        "^[a-z0-9_](?!_)[._-]?([a-z0-9]+(\\.|-|_|$))*$": {
+          "$ref": "#/definitions/channeldata_record"
+        }
+      },
+      "additionalProperties": false
+    },
+    "subdirs": {
+      "type": "array",
+      "items": {"$ref": "common-1.schema.json#/definitions/subdir"},
+      "description": "All subdirs contained within the channel."
+    }
+  },
+  "definitions": {
+    "channeldata_record": {
+      "$id": "#/definitions/channeldata_record",
+      "type": "object",
+      "description": "Information about the latest version of each package name contained within the channel.",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "dev_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "doc_source_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "doc_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "home": {
+          "type": "string",
+          "format": "uri"
+        },
+        "icon_hash": {
+          "oneOf": [
+            {
+              "type": "string",
+              "pattern": "^md5:[0-9a-f]{32}$"
+            },
+            {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-f]{64}$"
+            }
+          ]
+        },
+        "icon_url": {
+          "type": "string",
+          "pattern": "^icons/.+$"
+        },
+        "license": {
+          "type": "string"
+        },
+        "license_family": {"$ref": "common-1.schema.json#/definitions/license_family"},
+        "spdx_license": {"$ref": "common-1.schema.json#/definitions/spdx_license"},
+        "source_git_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "source_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "subdirs": {
+          "type": "array",
+          "items": {"$ref": "common-1.schema.json#/definitions/subdir"}
+        },
+        "summary": {
+          "type": "string"
+        },
+        "timestamp": {"$ref": "common-1.schema.json#/definitions/timestamp"},
+        "version": {"$ref": "common-1.schema.json#/definitions/package_version"}
+      }
+    }
+  }
+}

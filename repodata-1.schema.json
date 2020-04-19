@@ -16,7 +16,6 @@
     "repodata_version": {
       "type": "integer",
       "title": "The API version or schema version of the repodata file.",
-      "description": "",
       "const": 1
     },
     "info": {
