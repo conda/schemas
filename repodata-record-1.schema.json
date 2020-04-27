@@ -12,7 +12,6 @@
     "build_number",
     "build",
     "fn",
-    "ext",
     "sha256",
     "size",
     "md5"
@@ -38,24 +37,6 @@
       "examples": [
         "ansible-1.9.3-py27_0.tar.bz2",
         "basemap-1.2.0-py27hbee0394_0.conda"
-      ]
-    },
-    "ext": {
-      "type": "string",
-      "title": "The extension of the package file name. The .tar.bz2 extension is used by 'version 1' Conda packages and the '.conda' extension is used by 'version 2' Conda packages.",
-      "patchable": false,
-      "enum": [
-        ".tar.bz2",
-        ".conda"
-      ]
-    },
-    "package_id": {
-      "type": "string",
-      "description": "Except for the channel_name, the unique identifier of a package. The package_id should be generated based on other fields in the package's metadata: '{namespace}:{name}-{version}-{build_number}-{build}'",
-      "$comment": "Patchable for now, while we're still working out the details. Need to indicate subdir without having to indicate channel.",
-      "patchable": true,
-      "examples": [
-        "py:ansible-1.9.3-0-py27_0"
       ]
     },
     "sha256": {
@@ -145,12 +126,6 @@
         "generic",
         "python"
       ]
-    },
-    "namespace_in_name": {
-      "type": "boolean",
-      "description": "Indicates if the package's namespace is in the package name. For example, the value is 'true' for the package 'python-socketio' but 'false' for the package 'python-graphviz'.",
-      "patchable": true,
-      "default": false
     },
     "license": {
       "$comment": "TODO don't allow null",

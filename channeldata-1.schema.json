@@ -3,6 +3,7 @@
   "$id": "https://schemas.conda.io/channeldata-1.schema.json",
   "type": "object",
   "title": "channeldata.json",
+  "description": "The channeldata file contains information that is common to the channel as a whole. Split out by package name, the information for each package name should be the latest available and consistent across all subdirs.",
   "required": [
     "schema_version"
   ],
@@ -37,6 +38,10 @@
       "$id": "#/definitions/channeldata_record",
       "type": "object",
       "description": "Information about the latest version of each package name contained within the channel.",
+      "required": [
+        "reference_package",
+        "version"
+      ],
       "properties": {
         "description": {
           "type": "string"
@@ -81,6 +86,10 @@
         "source_git_url": {
           "type": "string",
           "format": "uri"
+        },
+        "reference_package": {
+          "type": "string",
+          "description": "The {subdir}/{fn} that was used to create the entry in channeldata."
         },
         "source_url": {
           "type": "string",
