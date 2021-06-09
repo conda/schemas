@@ -124,6 +124,16 @@
         "py:ansible-1.9.3-0-py27_0"
       ]
     },
+    "license": {
+      "$comment": "TODO don't allow null",
+      "type": ["string", "null"],
+      "title": "The package's license.",
+      "description": "A free-form text field describing the packages license.",
+      "patchable": true,
+      "examples": [
+        "MIT"
+      ]
+    },
     "license_family": {
       "type": "string",
       "description": "The license under which the package is distributed. Must conform to the license families listed at https://github.com/conda/conda-build/blob/3.19.1/conda_build/license_family.py#L8-L24.",
@@ -174,12 +184,80 @@
         1539182577753
       ]
     },
+    "sha256": {
+      "type": "string",
+      "description": "The sha256 hash of the package file.",
+      "patchable": false,
+      "pattern": "^[0-9a-f]{64}$",
+      "examples": [
+        "2efb3826d65af3f3857a35f04a0ba5c6288b9b3e4e47c9e2118fbdcc190406b9"
+      ]
+    },
+    "size": {
+      "type": "integer",
+      "description": "The size of the package file in bytes.",
+      "patchable": false,
+      "minimum": 0,
+      "examples": [
+        15874157
+      ]
+    },
+    "md5": {
+      "type": "string",
+      "description": "The md5 hash of the package file.",
+      "pattern": "^[0-9a-f]{32}$",
+      "examples": [
+        "9ceda9e08e97868b6ff7c0961a40544f"
+      ]
+    },
+    "depends": {
+      "type": "array",
+      "description": "The package's dependencies. A list of MatchSpecs required when installing the package.",
+      "patchable": true,
+      "items": {
+        "type": "string",
+        "description": "Valid Conda MatchSpec.",
+        "examples": [
+          "geos >=3.6.2,<3.6.3.0a0",
+          "matplotlib >=1.0.0",
+          "numpy >=1.11.3,<2.0a0",
+          "pyproj >=1.9.3",
+          "pyshp >=1.2.0",
+          "python >=2.7,<2.8.0a0",
+          "six",
+          "vc 9.*"
+        ]
+      }
+    },
+    "constrains": {
+      "type": "array",
+      "description": "The package's constraints on other packages in the environment. If the package is to be installed into an environment, the other packages in the environment must conform to these constratins. A constraint can be thought of as a 'reverse dependency'.",
+      "patchable": true,
+      "items": {
+        "type": "string",
+        "description": "Valid Conda MatchSpec.",
+        "examples": [
+          "proj4 <6",
+          "proj <6"
+        ]
+      }
+    },
     "vuln_id": {
       "description": "A CVE or other vulnerability identifier.",
       "type": "string",
       "pattern": "^CVE-[0-9]{4}-[0-9]{4,8}$",
       "examples": [
         "CVE-2017-14501"
+      ]
+    },
+    "noarch": {
+      "deprecated": true,
+      "type": "string",
+      "description": "The noarch type of a package (if applicable).",
+      "patchable": true,
+      "enum": [
+        "generic",
+        "python"
       ]
     }
   }

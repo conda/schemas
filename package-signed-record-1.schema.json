@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://schemas.conda.io/package-signed-meta-1.schema.json",
+  "type": "object",
+  "title": "Conda Package Metadata Signed Record Schema",
+  "description": "The schema for each package file's block of metadata in repodata, used for signature.",
+  "required": [
+    "subdir",
+    "name",
+    "version",
+    "build_number",
+    "build",
+    "depends",
+    "constrains",
+    "sha256",
+    "timestamp",
+    "size",
+    "md5"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "signed_record_version": {
+      "type": "integer",
+      "description": "The API version or schema version of the signed record.",
+      "const": 1,
+      "patchable": true
+    },
+    "origin_channel_name": {"$ref": "common-1.schema.json#/definitions/origin_channel_name"},
+    "subdir": {"$ref": "common-1.schema.json#/definitions/subdir"},
+    "namespace": {"$ref": "common-1.schema.json#/definitions/namespace"},
+    "name": {"$ref": "common-1.schema.json#/definitions/name"},
+    "version": {"$ref": "common-1.schema.json#/definitions/package_version"},
+    "build_number": {"$ref": "common-1.schema.json#/definitions/build_number"},
+    "build": {"$ref": "common-1.schema.json#/definitions/build"},
+    "depends": {"$ref": "common-1.schema.json#/definitions/depends"},
+    "constrains": {"$ref": "common-1.schema.json#/definitions/constrains"},
+    "sha256": {"$ref": "common-1.schema.json#/definitions/sha256"},
+    "size": {"$ref": "common-1.schema.json#/definitions/size"},
+    "md5": {"$ref": "common-1.schema.json#/definitions/md5"},
+    "timestamp": {"$ref": "common-1.schema.json#/definitions/timestamp"},
+    "noarch": {"$ref": "common-1.schema.json#/definitions/noarch"}
+  }
+}
