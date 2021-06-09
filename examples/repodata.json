@@ -24,10 +24,10 @@
   },
   "signatures": {
     "itsdangerous-2.3.4-23.tar.bz2": {
-      "metadata_sha256": "9ceda9e08e97868b6ff7c0961a40544f9ceda9e08e97868b6ff7c0961a40544f",
-      "metadata_size": 18,
-      "sig": "",
-      "key": ""
+      "44885b23be8effe63dae13363d8306e0c20ae201b4acc5e177f7827c839dff41": {
+        "signature": "bca8d5f5db688ebf706fdadd29fdf1935baeaa567a795649217c3adaf2a3e56d9cbcdbcf62de5eda8eba1a216fdea2f0f4ea6592584db12690e19308a758b7f9",
+        "other_headers": "26a26316ae5110f49ce75744716d6876b11da700497c348ec2e0964d4c8f"
+      }
     }
   }
 }

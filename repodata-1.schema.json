@@ -60,7 +60,7 @@
     "signatures": {
       "type": "object",
       "patternProperties": {
-        "^.+(\\.tar\\.bz2)|(\\.conda)$": {"$ref": "#/definitions/signature"}
+        "^.+(\\.tar\\.bz2)|(\\.conda)$": {"$ref": "#/definitions/package_signatures"}
       },
       "additionalProperties": false
     }
@@ -69,26 +69,29 @@
     "signature": {
       "type": "object",
       "properties": {
-        "metadata_sha256": {
+        "signature": {
+          "type": "string",
+          "minLength": 128,
+          "maxLength": 128
+        },
+        "other_headers": {
           "type": "string"
         },
-        "metadata_size": {
-          "type": "integer",
-          "minimum": 0
-        },
-        "sig": {
-          "type": "string"
-        },
-        "key": {
+        "see_also": {
           "type": "string"
         }
       },
       "required": [
-        "metadata_sha256",
-        "metadata_size",
-        "sig",
-        "key"
-      ]
+        "signature"
+      ],
+      "additionalProperties": false
+    },
+    "package_signatures": {
+      "type": "object",
+      "patternProperties": {
+        "^\\w{64}$": {"$ref": "#/definitions/signature"}
+      },
+      "additionalProperties": false
     }
   }
 }
