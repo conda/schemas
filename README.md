@@ -1,8 +1,9 @@
 # Conda Schemas
 
-**CAUTION: This schemas within this repository should be considered works in
-progress/drafts.  Their contents may not fully reflect the current state of
-`conda` and associated tools.**
+> **Warning**
+> The schemas within this repository are considered works in
+> progress/drafts.  Their contents may not fully reflect the current state of
+> `conda` and associated tools.
 
 JSON schema for Conda file structures.
 
