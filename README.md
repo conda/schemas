@@ -1,5 +1,10 @@
 # Conda Schemas
 
+> **Warning**
+> The schemas within this repository are considered works in
+> progress/drafts.  Their contents may not fully reflect the current state of
+> `conda` and associated tools.
+
 JSON schema for Conda file structures.
 
 This repository is published to https://schemas.conda.io.
