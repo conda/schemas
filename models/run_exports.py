@@ -2,7 +2,7 @@ from typing import Iterable
 
 from pydantic import BaseModel, schema_json_of, constr, Field, Extra
 
-
+CURRENT_VERSION = 1
 
 ArtifactFilenameAny = constr(
     min_length=5, 
@@ -36,7 +36,7 @@ class InfoHeader(_OurBaseModel):
     platform: str
     arch: str
     subdir: str
-    version: int
+    version: int = CURRENT_VERSION
 
 
 class RunExports(_OurBaseModel):
@@ -56,6 +56,7 @@ class RunExports(_OurBaseModel):
 if __name__ == "__main__":
     from pathlib import Path
 
-    (Path(__file__).parent / "../schemas/run_exports.json").write_text(
-        schema_json_of(RunExports, indent=2)
+    fn = f"run_exports-{CURRENT_VERSION}.schema.json"
+    (Path(__file__).parent / "../schemas" / fn).write_text(
+schema_json_of(RunExports, indent=2)
     )

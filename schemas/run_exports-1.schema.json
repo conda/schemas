@@ -20,14 +20,14 @@
         },
         "version": {
           "title": "Version",
+          "default": 1,
           "type": "integer"
         }
       },
       "required": [
         "platform",
         "arch",
-        "subdir",
-        "version"
+        "subdir"
       ],
       "additionalProperties": false
     },
