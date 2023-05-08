@@ -1,0 +1,119 @@
+{
+  "title": "ParsingModel[RunExports]",
+  "$ref": "#/definitions/RunExports",
+  "definitions": {
+    "InfoHeader": {
+      "title": "InfoHeader",
+      "type": "object",
+      "properties": {
+        "platform": {
+          "title": "Platform",
+          "type": "string"
+        },
+        "arch": {
+          "title": "Arch",
+          "type": "string"
+        },
+        "subdir": {
+          "title": "Subdir",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "platform",
+        "arch",
+        "subdir",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "RunExportsMap": {
+      "title": "RunExportsMap",
+      "type": "object",
+      "properties": {
+        "weak": {
+          "title": "Weak",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "strong": {
+          "title": "Strong",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "weak_constrains": {
+          "title": "Weak Constrains",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "strong_constrains": {
+          "title": "Strong Constrains",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "noarch": {
+          "title": "Noarch",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "RunExports": {
+      "title": "RunExports",
+      "type": "object",
+      "properties": {
+        "info": {
+          "$ref": "#/definitions/InfoHeader"
+        },
+        "packages": {
+          "title": "Packages",
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9_\\-\\.]+-[a-zA-Z0-9_\\.]+-[a-zA-Z0-9_\\.]+\\.tar\\.bz2$": {
+              "$ref": "#/definitions/RunExportsMap"
+            }
+          },
+          "additionalProperties": {
+            "$ref": "#/definitions/RunExportsMap"
+          }
+        },
+        "packages.conda": {
+          "title": "Packages.Conda",
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9_\\-\\.]+-[a-zA-Z0-9_\\.]+-[a-zA-Z0-9_\\.]+\\.conda$": {
+              "$ref": "#/definitions/RunExportsMap"
+            }
+          },
+          "additionalProperties": {
+            "$ref": "#/definitions/RunExportsMap"
+          }
+        }
+      },
+      "required": [
+        "info"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
