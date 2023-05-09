@@ -6,7 +6,7 @@ from enum import Enum, auto
 from pydantic import conint, constr
 
 
-class Noarch(str, Enum):
+class NoarchStr(str, Enum):
     Python = "python"
     """
     A noarch python package is a python package without any precompiled python files (`.pyc` or
@@ -75,8 +75,9 @@ build_string_spec_regex = r"[0-9a-zA-Z\._\*]+"
 
 MD5Str = constr(min_length=32, max_length=32, regex=r"[a-fA-F0-9]{32}")
 SHA256Str = constr(min_length=64, max_length=64, regex=r"[a-fA-F0-9]{64}")
-MatchSpec = NonEmptyStr
-BuildStr = NonEmptyStr
+MatchSpecStr = NonEmptyStr  # TODO: implement regex???
+BuildStr = constr(min_length=1, regex=build_string_regex)
+BuildSpecStr = constr(min_length=1, regex=build_string_spec_regex)
 PackageNameStr = constr(min_length=1, regex=package_name_regex)
 PackageFileNameStr = constr(
     min_length=1,
@@ -90,3 +91,4 @@ NameVersionBuildMatchSpecStr = constr(
     rf")?",
 )
 VersionStr = constr(min_length=1, regex=version_regex)
+VersionSpecStr = constr(min_length=1, regex=version_spec_regex)

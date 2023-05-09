@@ -7,10 +7,14 @@ from ._base import ExtrasForbiddenModel
 from .types import (
     BuildNumber,
     BuildStr,
+    MD5Str,
     NameVersionBuildMatchSpecStr,
     NaturalInt,
-    Noarch,
-    Subdir,
+    NoarchStr,
+    NonEmptyStr,
+    PackageNameStr,
+    SHA256Str,
+    SubdirStr,
     VersionStr,
 )
 
@@ -37,37 +41,37 @@ class RepodataRecord(ExtrasForbiddenModel):
     """
     depends: Iterable[NameVersionBuildMatchSpecStr]
     "Specification of packages this package depends on."
-    features: str = None
+    features: NonEmptyStr = None
     """
     Features are a deprecated way to specify different feature sets for the conda solver. This is
     not supported anymore and should not be used. Instead, `mutex` packages should be used to
     specify mutually exclusive features.
     """
-    legacy_bz2_md5: str = None
+    legacy_bz2_md5: NonEmptyStr = None
     "A deprecated md5 hash"
     legacy_bz2_size: NaturalInt = None
     "A deprecated package archive size"
-    license: str = None
+    license: NonEmptyStr = None
     "The specific license of the package"
-    license_family: str = None
+    license_family: NonEmptyStr = None
     "The specific license of the package"
-    md5: str = None
+    md5: MD5Str = None
     "The md5 hash of the package archive"
-    name: str
+    name: PackageNameStr
     "The name of the package"
-    noarch: Noarch
+    noarch: NoarchStr
     "Whether the package is architecture independent, and in which way."
     platform: str = None
     "The platform the package supports"
-    sha256: str = None
+    sha256: SHA256Str = None
     "The sha256 hash of the package archive"
     size: NaturalInt = None
     "The size of the package archive, in bytes"
-    subdir: Subdir
+    subdir: SubdirStr
     "The subdirectory of the channel this package is in"
-    timestamp: int = None
+    timestamp: NaturalInt = None
     "The date this entry was created"
-    track_features: Union[str, Iterable[str]] = None
+    track_features: Union[NonEmptyStr, Iterable[NonEmptyStr]] = None
     """
     Nowadays only used to downweight package variants (ie. give a variant less priority). To that
     effect, the number of track features is counted (number of commas) and the package is
