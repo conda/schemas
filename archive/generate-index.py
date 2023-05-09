@@ -93,7 +93,7 @@ _TEMPLATE = """\
 
 """
 
-files=sorted(p for p in os.listdir(".") if p.endswith(".schema.json"))
+files = sorted(p for p in os.listdir(".") if p.endswith(".schema.json"))
 rendered = Template(_TEMPLATE).render(files=files)
 
 print(rendered, file=sys.stderr)
