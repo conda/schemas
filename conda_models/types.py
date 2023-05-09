@@ -1,15 +1,21 @@
 """
 conda-specific constrains for scalar types.
 """
-from enum import Enum
+from enum import Enum, auto
 
 from pydantic import conint, constr
 
 
-class Noarch(str, Enum):
-    GenericV1 = "generic"
-    GenericV2 = "generic"
+class NoarchKind(str, Enum):
+    Generic = "generic"
     Python = "python"
+
+
+class NoarchType(str, Enum):
+    GenericV1 = auto()
+    GenericV2 = auto()
+    Python = auto()
+
 
 class SubdirStr(str, Enum):
     Linux64 = "linux-64"
@@ -41,7 +47,7 @@ NonEmptyStr = constr(min_length=1)
 
 package_name_regex = r"[0-9a-zA-Z\._-]+"
 version_regex = r"([0-9]!)?[0-9a-z\._]+"
-version_spec_regex= r"[0-9a-z<>=!\.\*]+"
+version_spec_regex = r"[0-9a-z<>=!\.\*]+"
 build_string_regex = r"[0-9a-zA-Z\._]+"
 build_string_spec_regex = r"[0-9a-zA-Z\._\*]+"
 
@@ -49,12 +55,16 @@ MD5Str = constr(min_length=32, max_length=32, regex=r"[a-fA-F0-9]{32}")
 SHA256Str = constr(min_length=64, max_length=64, regex=r"[a-fA-F0-9]{64}")
 MatchSpec = NonEmptyStr
 BuildStr = NonEmptyStr
-PackageNameStr = NonEmptyStr
+PackageNameStr = constr(min_length=1, regex=package_name_regex)
+PackageFileNameStr = constr(
+    min_length=1,
+    regex=rf"({package_name_regex})-({version_regex})-({build_string_regex})\.(conda|tar\.bz2)",
+)
 NameVersionBuildMatchSpecStr = constr(
-    min_length=1, 
-    regex=fr"({package_name_regex})\s+("
-        fr"({version_spec_regex})"
-        fr"|({version_spec_regex})?\s+({build_string_spec_regex})"
-    fr")?"
+    min_length=1,
+    regex=rf"({package_name_regex})\s+("
+    rf"({version_spec_regex})"
+    rf"|({version_spec_regex})?\s+({build_string_spec_regex})"
+    rf")?",
 )
 VersionStr = constr(min_length=1, regex=version_regex)

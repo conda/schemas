@@ -4,15 +4,24 @@ Definitions for the repodata.json files served in conda channels.
 from typing import Iterable, Union
 
 from ._base import ExtrasForbiddenModel
-from .types import Subdir, BuildStr, BuildNumber, VersionStr, NaturalInt, Noarch, NameVersionBuildMatchSpecStr
+from .types import (
+    BuildNumber,
+    BuildStr,
+    NameVersionBuildMatchSpecStr,
+    NaturalInt,
+    Noarch,
+    Subdir,
+    VersionStr,
+)
 
 
 class RepodataRecord(ExtrasForbiddenModel):
     """
-    A single record in the conda repodata. 
-    
+    A single record in the conda repodata.
+
     A single record refers to a single binary distribution of a package on a conda channel.
     """
+
     arch: str = None
     "Optionally the architecture the package supports"
     build: BuildStr
