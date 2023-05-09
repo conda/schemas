@@ -3,9 +3,15 @@ Definitions for the repodata.json files served in conda channels.
 """
 from pydantic import AnyUrl, Field
 
-from ._base import ExtrasForbiddenModel
+from ._base import AllOptional, ExtrasForbiddenModel
 from .package_record import PackageRecord
-from .types import NonEmptyStr, Subdir
+from .types import (
+    CondaPackageFileNameStr,
+    NonEmptyStr,
+    PackageFileNameStr,
+    Subdir,
+    TarBz2PackageFileNameStr,
+)
 
 
 class RepodataRecord(PackageRecord):
@@ -26,6 +32,10 @@ class RepodataRecord(PackageRecord):
     """
 
 
+class AllOptionalRepodataRecord(PackageRecord, metaclass=AllOptional):
+    pass
+
+
 class ChannelInfo(ExtrasForbiddenModel):
     """ """
 
@@ -37,11 +47,14 @@ class Repodata(ExtrasForbiddenModel):
 
     info: ChannelInfo
     "Information about the repodata"
-    packages: dict
+    packages: dict[TarBz2PackageFileNameStr, AllOptionalRepodataRecord]
     "The .tar.bz2 packages in the repodata"
-    packages_conda: dict = Field(..., alias="packages.conda")
+    packages_conda: dict[CondaPackageFileNameStr, AllOptionalRepodataRecord] = Field(
+        ...,
+        alias="packages.conda",
+    )
     "The .conda packages in the repodata"
-    removed: set[str]
+    removed: set[PackageFileNameStr]
     "The packages that have been removed from the repodata"
     version: int = Field(..., alias="repodata_version")
     "The version of the repodata"

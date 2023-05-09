@@ -83,6 +83,14 @@ PackageFileNameStr = constr(
     min_length=1,
     regex=rf"({package_name_regex})-({version_regex})-({build_string_regex})\.(conda|tar\.bz2)",
 )
+TarBz2PackageFileNameStr = constr(
+    min_length=1,
+    regex=rf"({package_name_regex})-({version_regex})-({build_string_regex})\.tar\.bz2",
+)
+CondaPackageFileNameStr = constr(
+    min_length=1,
+    regex=rf"({package_name_regex})-({version_regex})-({build_string_regex})\.conda",
+)
 NameVersionBuildMatchSpecStr = constr(
     min_length=1,
     regex=rf"({package_name_regex})\s+("

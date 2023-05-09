@@ -80,6 +80,7 @@ class MatchSpec(ExtrasForbiddenModel):
     """
     TODO: In theory, any PackageRecord (scalar) keys should be admitted here.
     """
+
     name: Optional[Union[PackageNameStr, Literal["*"]]] = None
     "The name of the package"
     version: Optional[VersionSpecStr] = None
