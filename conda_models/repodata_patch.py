@@ -4,14 +4,14 @@ WIP
 from pydantic import Field
 
 from ._base import ExtrasForbiddenModel
-from .repodata import AllOptionalRepodataRecord
+from .repodata import OptionalRepodataRecord
 from .types import CondaPackageFileNameStr, PackageFileNameStr, TarBz2PackageFileNameStr
 
 
 class RepodataPatchInstructions(ExtrasForbiddenModel):
-    packages: dict[TarBz2PackageFileNameStr, AllOptionalRepodataRecord]
+    packages: dict[TarBz2PackageFileNameStr, OptionalRepodataRecord]
     "The .tar.bz2 packages in the repodata that will be patched"
-    packages_conda: dict[CondaPackageFileNameStr, AllOptionalRepodataRecord] = Field(
+    packages_conda: dict[CondaPackageFileNameStr, OptionalRepodataRecord] = Field(
         ...,
         alias="packages.conda",
     )

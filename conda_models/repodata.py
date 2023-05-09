@@ -3,7 +3,7 @@ Definitions for the repodata.json files served in conda channels.
 """
 from pydantic import AnyUrl, Field
 
-from ._base import AllOptional, ExtrasForbiddenModel
+from ._base import ExtrasForbiddenModel, make_optional
 from .package_record import PackageRecord
 from .types import (
     CondaPackageFileNameStr,
@@ -32,8 +32,7 @@ class RepodataRecord(PackageRecord):
     """
 
 
-class AllOptionalRepodataRecord(PackageRecord, metaclass=AllOptional):
-    pass
+OptionalRepodataRecord = make_optional(RepodataRecord)
 
 
 class ChannelInfo(ExtrasForbiddenModel):
@@ -47,9 +46,9 @@ class Repodata(ExtrasForbiddenModel):
 
     info: ChannelInfo
     "Information about the repodata"
-    packages: dict[TarBz2PackageFileNameStr, AllOptionalRepodataRecord]
+    packages: dict[TarBz2PackageFileNameStr, OptionalRepodataRecord]
     "The .tar.bz2 packages in the repodata"
-    packages_conda: dict[CondaPackageFileNameStr, AllOptionalRepodataRecord] = Field(
+    packages_conda: dict[CondaPackageFileNameStr, OptionalRepodataRecord] = Field(
         ...,
         alias="packages.conda",
     )

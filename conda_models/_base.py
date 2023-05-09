@@ -1,5 +1,7 @@
-from pydantic import BaseModel, Extra
-from pydantic.main import ModelMetaclass
+from functools import lru_cache
+from typing import Optional, Type
+
+from pydantic import BaseModel, Extra, create_model
 
 
 class ExtrasForbiddenModel(BaseModel):
@@ -7,12 +9,15 @@ class ExtrasForbiddenModel(BaseModel):
         extra = Extra.forbid
 
 
-class AllOptional(ModelMetaclass):
-    def __new__(mcls, name, bases, namespaces, **kwargs):
-        cls = super().__new__(mcls, name, bases, namespaces, **kwargs)
-        for field in cls.__fields__.values():
-            field.required = False
-        return cls
+@lru_cache(maxsize=None)
+def make_optional(baseclass: Type[BaseModel]) -> Type[BaseModel]:
+    """Extracts the fields and validators from the baseclass and make fields optional"""
+    fields = baseclass.__fields__
+    validators = {"__validators__": baseclass.__validators__}
+    optional_fields = {key: (Optional[item.type_], None)
+                       for key, item in fields.items()}
+    return create_model(f"Optional{baseclass.__name__}", **optional_fields,
+                        __validators__=validators)
 
 
 def export_to_json(model, path):
