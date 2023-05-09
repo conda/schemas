@@ -62,7 +62,7 @@ In the future, the namespace field might be added to this list.
 Alternatively, an exact spec is given by
 `*[sha256=01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b]`.
 """
-from typing import Literal, Union
+from typing import Literal, Optional, Union
 
 from ._base import ExtrasForbiddenModel
 from .types import (
@@ -80,25 +80,25 @@ class MatchSpec(ExtrasForbiddenModel):
     """
     TODO: In theory, any PackageRecord (scalar) keys should be admitted here.
     """
-    name: Union[PackageNameStr, Literal["*"]] = None
+    name: Optional[Union[PackageNameStr, Literal["*"]]] = None
     "The name of the package"
-    version: VersionSpecStr = None
+    version: Optional[VersionSpecStr] = None
     "The version spec of the package (e.g. `1.2.3`, `>=1.2.3`, `1.2.*`)"
-    build: BuildSpecStr = None
+    build: Optional[BuildSpecStr] = None
     "The build string of the package (e.g. `py37_0`, `py37h6de7cb9_0`, `py*`)"
-    build_number: int = None
+    build_number: Optional[int] = None
     "The build number of the package"
-    file_name: PackageFileNameStr = None
+    file_name: Optional[PackageFileNameStr] = None
     "Match the specific filename of the package"
-    channel: str = None
+    channel: Optional[str] = None
     "The channel of the package"
-    subdir: SubdirStr = None
+    subdir: Optional[SubdirStr] = None
     "The subdir of the channel"
-    namespace: str = None
+    namespace: Optional[str] = None
     "The namespace of the package (currently not used)"
-    md5: MD5Str = None
+    md5: Optional[MD5Str] = None
     "The MD5 hash of the package archive"
-    sha256: SHA256Str = None
+    sha256: Optional[SHA256Str] = None
     "The SHA256 hash of the package archive"
 
     @classmethod

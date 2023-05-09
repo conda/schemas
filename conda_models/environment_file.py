@@ -1,7 +1,7 @@
 """
 WIP
 """
-from typing import Dict, Iterable, Union
+from typing import Dict, Iterable, Optional, Union
 
 from pydantic import DirectoryPath, validator
 
@@ -10,20 +10,20 @@ from .types import MatchSpecStr, NonEmptyStr, PackageNameStr, SubdirStr
 
 
 class EnvironmentYaml(ExtrasForbiddenModel):
-    name: str = None
+    name: Optional[str] = None
     "Name for the environment"
-    channels: Iterable[NonEmptyStr] = None
+    channels: Optional[Iterable[NonEmptyStr]] = None
     "Channels to search for packages"
     dependencies: Union[
         str,
         Iterable[Union[MatchSpecStr, Dict[PackageNameStr, Iterable[str]]]],
     ] = ()
     "Packages to install into the environment, as a series of match specifications."
-    variables: Dict[NonEmptyStr, str] = None
+    variables: Optional[Dict[NonEmptyStr, str]] = None
     "Shell variables to define for the environment."
-    prefix: DirectoryPath = None
+    prefix: Optional[DirectoryPath] = None
     "Path where the environment should be created."
-    platforms: Iterable[SubdirStr] = None
+    platforms: Optional[Iterable[SubdirStr]] = None
     "Platforms to search for packages"
 
     @validator("dependencies")
