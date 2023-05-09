@@ -57,3 +57,10 @@ combine-as-imports = true
 [tool.black]
 target-version = ['py38', 'py39', 'py310']
 line-length = 99
+
+[tool.interrogate]
+# TODO: https://github.com/econchick/interrogate/issues/129
+ignore-module = true
+fail-under = 100
+exclude = ["archive", "docs", "tests", "conda_models/_version.py"]
+verbose = 2

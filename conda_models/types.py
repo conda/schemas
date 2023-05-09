@@ -6,15 +6,37 @@ from enum import Enum, auto
 from pydantic import conint, constr
 
 
-class NoarchKind(str, Enum):
-    Generic = "generic"
+class Noarch(str, Enum):
     Python = "python"
+    """
+    A noarch python package is a python package without any precompiled python files (`.pyc` or
+    `__pycache__`). Normally these files are bundled with the package. However, these files are
+    tied to a specific version of Python and must therefor be generated for every target
+    platform and architecture. This complicates the build process.
+
+    For noarch python packages these files are generated when installing the package by invoking
+    the compilation process through the python binary that is installed in the same environment.
+
+    This introductory blog post highlights some of specific of noarch python packages:
+    <https://www.anaconda.com/blog/condas-new-noarch-packages>
+
+    Or read the docs for more information:
+    <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/packages.html#noarch-python>
+    """
+    Generic = "generic"
+    """
+    Noarch generic packages allow users to distribute docs, datasets, and source code in conda
+    packages.
+    """
 
 
 class NoarchType(str, Enum):
     GenericV1 = auto()
+    "An old-format generic noarch package"
     GenericV2 = auto()
+    "A new-format generic noarch package"
     Python = auto()
+    "A noarch Python package"
 
 
 class SubdirStr(str, Enum):

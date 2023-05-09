@@ -1,14 +1,3 @@
-"""
-Datastructures that are present in a `channeldata.json` file. Some channels on anaconda.org contain
-a `channeldata.json` file which describes the subdirs the channel contains, the packages stored in
-the channel and additional data about them like their latest version.
-
-The `ChannelData` struct represents the data found within the `channeldata.json` file. The
-`ChannelDataPackage` contains information about a package.
-
-Note that certain aspects of `ChannelData` are broken (e.g. run_exports is only available for a
-single package variant) and therefore the `ChannelData` struct is not really used much more.
-"""
 from typing import Iterable
 
 from pydantic import AnyUrl, Field
@@ -58,6 +47,18 @@ class ChannelDataPackage(ExtrasForbiddenModel):
 
 
 class ChannelData(ExtrasForbiddenModel):
+    """
+    Data structures that are present in a `channeldata.json` file. Some channels on anaconda.org
+    contain a `channeldata.json` file which describes the subdirs the channel contains, the
+    packages stored in the channel and additional data about them like their latest version.
+
+    The `ChannelData` struct represents the data found within the `channeldata.json` file. The
+    `ChannelDataPackage` contains information about a package.
+
+    Note that certain aspects of `ChannelData` are broken (e.g. run_exports is only available for a
+    single package variant) and therefore the `ChannelData` struct is not really used much more.
+    """
+
     channeldata_version: int
     "The version of the channeldata format"
     packages: dict[PackageNameStr, ChannelDataPackage]
