@@ -3,13 +3,14 @@ Definitions for the repodata.json files served in conda channels.
 """
 from typing import Iterable, Optional, Union
 
+from pydantic import PositiveInt
+
 from ._base import ExtrasForbiddenModel
 from .types import (
     BuildNumber,
     BuildStr,
     MD5Str,
     NameVersionBuildMatchSpecStr,
-    NaturalInt,
     NoarchStr,
     NonEmptyStr,
     PackageNameStr,
@@ -49,7 +50,7 @@ class RepodataRecord(ExtrasForbiddenModel):
     """
     legacy_bz2_md5: Optional[NonEmptyStr] = None
     "A deprecated md5 hash"
-    legacy_bz2_size: Optional[NaturalInt] = None
+    legacy_bz2_size: Optional[PositiveInt] = None
     "A deprecated package archive size"
     license: Optional[NonEmptyStr] = None
     "The specific license of the package"
@@ -65,11 +66,11 @@ class RepodataRecord(ExtrasForbiddenModel):
     "The platform the package supports"
     sha256: Optional[SHA256Str] = None
     "The sha256 hash of the package archive"
-    size: Optional[NaturalInt] = None
+    size: Optional[PositiveInt] = None
     "The size of the package archive, in bytes"
     subdir: SubdirStr
     "The subdirectory of the channel this package is in"
-    timestamp: Optional[NaturalInt] = None
+    timestamp: Optional[PositiveInt] = None
     "The date this entry was created"
     track_features: Optional[Union[NonEmptyStr, Iterable[NonEmptyStr]]] = None
     """

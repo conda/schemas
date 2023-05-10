@@ -3,7 +3,7 @@ conda-specific constrains for scalar types.
 """
 from enum import Enum, auto
 
-from pydantic import conint, constr
+from pydantic import constr
 
 
 class NoarchStr(str, Enum):
@@ -64,7 +64,6 @@ class Platform(str, Enum):
     pass
 
 
-NaturalInt = conint(ge=0)
 NonEmptyStr = constr(min_length=1)
 
 package_name_regex = r"[0-9a-zA-Z\._-]+"
@@ -74,6 +73,7 @@ build_string_regex = r"[0-9a-zA-Z\._]+"
 build_string_spec_regex = r"[0-9a-zA-Z\._\*]+"
 
 MD5Str = constr(min_length=32, max_length=32, regex=r"[a-fA-F0-9]{32}")
+SHA1Str = constr(min_length=40, max_length=40, regex=r"[a-fA-F0-9]{40}")
 SHA256Str = constr(min_length=64, max_length=64, regex=r"[a-fA-F0-9]{64}")
 MatchSpecStr = NonEmptyStr  # TODO: implement regex???
 BuildStr = constr(min_length=1, regex=build_string_regex)
@@ -100,3 +100,5 @@ NameVersionBuildMatchSpecStr = constr(
 )
 VersionStr = constr(min_length=1, regex=version_regex)
 VersionSpecStr = constr(min_length=1, regex=version_spec_regex)
+
+EntryPointStr = constr(min_length=5, regex=r"\S+\s*=\s*[A-z0-9_\.]:[A-z0-9_]")

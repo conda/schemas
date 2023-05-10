@@ -24,6 +24,7 @@ class RequirementsTxt(ExtrasForbiddenModel):
     https://repo.anaconda.com/pkgs/free/osx-64/readline-6.2-2.tar.bz2
     ```
     """
+
     platform: Optional[SubdirStr] = None
     explicit: bool = False
     records: Iterable[MatchSpecStr] = ()
@@ -31,4 +32,3 @@ class RequirementsTxt(ExtrasForbiddenModel):
     @classmethod
     def from_str(cls, value: str):
         raise NotImplementedError("TODO")
-

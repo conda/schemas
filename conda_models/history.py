@@ -15,6 +15,7 @@ class HistoryRecord(ExtrasForbiddenModel):
     """
     A single record in the conda history.
     """
+
     timestamp: int
     "Date when the action was recorded"
     command: str
@@ -51,6 +52,7 @@ class History(ExtrasForbiddenModel):
     # update specs: ['numpy']
     ```
     """
+
     records: Iterable[HistoryRecord]
 
     @classmethod
