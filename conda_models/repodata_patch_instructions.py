@@ -19,6 +19,6 @@ class RepodataPatchInstructions(ExtrasForbiddenModel):
     remove: set[PackageFileNameStr]
     "The packages (conda or tar.bz2) that should be removed from the index"
     revoke: set[str]
-    "Unclear"
+    "DEPRECATED."
     patch_instructions_version: int
     "Version of the patch instructions schema"

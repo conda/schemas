@@ -30,6 +30,8 @@ class RepodataRecord(PackageRecord):
     String representation of the channel where the package comes from.
     It can be a URL (preferred) or a channel name.
     """
+    revoked: bool = None
+    "DEPRECATED."
 
 
 OptionalRepodataRecord = make_optional(RepodataRecord)
