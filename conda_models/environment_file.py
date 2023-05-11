@@ -1,12 +1,12 @@
 """
 WIP
 """
-from typing import Dict, Iterable, Optional, Union
+from typing import Dict, Iterable, Literal, Optional, Union
 
-from pydantic import DirectoryPath, validator
+from pydantic import DirectoryPath
 
 from ._base import ExtrasForbiddenModel
-from .types import MatchSpecStr, NonEmptyStr, PackageNameStr, SubdirStr
+from .types import MatchSpecStr, NonEmptyStr, SubdirStr
 
 
 class EnvironmentYaml(ExtrasForbiddenModel):
@@ -15,8 +15,8 @@ class EnvironmentYaml(ExtrasForbiddenModel):
     channels: Optional[Iterable[NonEmptyStr]] = None
     "Channels to search for packages"
     dependencies: Union[
-        str,
-        Iterable[Union[MatchSpecStr, Dict[PackageNameStr, Iterable[str]]]],
+        NonEmptyStr,
+        Iterable[Union[MatchSpecStr, Dict[Literal["pip"], Iterable[NonEmptyStr]]]],
     ] = ()
     "Packages to install into the environment, as a series of match specifications."
     variables: Optional[Dict[NonEmptyStr, str]] = None
@@ -24,12 +24,4 @@ class EnvironmentYaml(ExtrasForbiddenModel):
     prefix: Optional[DirectoryPath] = None
     "Path where the environment should be created."
     platforms: Optional[Iterable[SubdirStr]] = None
-    "Platforms to search for packages"
-
-    @validator("dependencies")
-    def only_pip_key_allowed(cls, v):
-        for item in v:
-            if isinstance(item, dict) and item.keys() != {"pip"}:
-                msg = "Only 'pip: [str]' is allowed in 'dependencies'"
-                raise ValueError(msg)
-        return v
+    "Platforms to search for packages."
