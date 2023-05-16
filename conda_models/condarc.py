@@ -204,7 +204,7 @@ class Condarc(ExtrasForbiddenModel):
 
     client_ssl_cert_key: Optional[str] = Field(
         default=None,
-        alias="client_cert_key,"
+        alias="client_cert_key",
         description="""
         **aliases** -> client_cert_key
 
