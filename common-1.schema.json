@@ -2,132 +2,36 @@
   "$schema": "http://json-schema.org/draft-07/schema",
   "$id": "https://schemas.conda.io/common-1.schema.json",
   "definitions": {
-    "origin_channel_name": {
-      "type": "string",
-      "description": "The origin channel of the package. Will probably be relevant for package signing.",
-      "pattern": "^([a-z0-9]+(-|_|$))+$",
-      "patchable": true,
-      "examples": [
-        "main",
-        "conda-forge"
-      ]
-    },
-    "namespace": {
-      "type": "string",
-      "title": "The ecosystem namespace for the package name.",
-      "description": "The default 'g' or 'global' namespace is for packages that aren't governed by any particular namespace authority. Most C libraries fall into the global namespace. The namespace authority for the various ecosystems is identified at https://github.com/conda/conda/blob/4.8.3/conda/base/constants.py#L259-L273.",
-      "$comment": "TODO remove global and python. Patchable is true for now, but later may become false.",
-      "patchable": true,
-      "enum": [
-        "g",
-        "py",
-        "r",
-        "erlang",
-        "java",
-        "julia",
-        "latex",
-        "lua",
-        "js",
-        "perl",
-        "php",
-        "ruby",
-        "clojure",
-        "global",
-        "python"
-      ]
-    },
-    "subdir": {
-      "type": "string",
-      "description": "The subdir of the channel within which a package is located. Subdirs are subdivisions of channels denoted by <OS>-<Platform> pairs. The 'noarch' subdir contains packages designed to be common among all subdirs.",
-      "patchable": false,
-      "enum": [
-        "noarch",
-        "linux-32",
-        "linux-64",
-        "linux-aarch64",
-        "linux-armv6l",
-        "linux-armv7l",
-        "linux-ppc64",
-        "linux-ppc64le",
-        "osx-64",
-        "win-32",
-        "win-64",
-        "zos-z"
-      ]
-    },
-    "name": {
-      "type": "string",
-      "pattern": "^[a-z0-9_](?!_)[._-]?([a-z0-9]+(\\.|-|_|$))*$",
-      "description": "The package name. Conda restricts each environment to having a single package of any unique package name.",
-      "patchable": false,
-      "examples": [
-        "python",
-        "numpy"
-      ]
-    },
-    "package_version": {
-      "type": "string",
-      "description": "The package version. Must be a valid Conda Version string (validated against VersionOrder). Versions are set by the upstream code project and should be faithfully reproduced by the package author.",
-      "pattern": "^([0-9]+!)?(([0-9a-z]+([._]))*[0-9a-z]+_?)(\\+([0-9a-z]+([._]))*[0-9a-z]+)?$",
-      "patchable": false,
-      "examples": [
-        "0.4.1",
-        "0.960923",
-        "1.1.a1",
-        "1.1.0post1",
-        "1.1.0post1+g123abcd",
-        "1996.07.12",
-        "2!0.4.1"
-      ]
-    },
-    "build_number": {
-      "type": "integer",
-      "description": "The package build number. Build numbers are incremented by package builders when a material change is made to the package. Unlike other package managers, Conda makes all package builds available during a solve, and not just the latest build number.",
-      "patchable": false,
-      "minimum": 0,
-      "examples": [
-        0,
-        1
-      ]
-    },
     "build": {
-      "type": "string",
       "description": "The package build string. The build string should include the build number in the last position of the build string. If the build string includes more than a build number, the build number should be delimited by an '_'.",
-      "patchable": false,
-      "pattern": "^([a-z0-9_.]+_)?[0-9]+$",
       "examples": [
         "0",
         "py27hbee0394_1"
-      ]
+      ],
+      "type": "string",
+      "pattern": "^([a-z0-9_.]+_)?[0-9]+$",
+      "patchable": false
+    },
+    "build_number": {
+      "description": "The package build number. Build numbers are incremented by package builders when a material change is made to the package. Unlike other package managers, Conda makes all package builds available during a solve, and not just the latest build number.",
+      "examples": [
+        0,
+        1
+      ],
+      "type": "integer",
+      "minimum": 0,
+      "patchable": false
     },
     "ext": {
-      "type": "string",
       "title": "The extension of the package file name. The .tar.bz2 extension is used by 'version 1' Conda packages and the '.conda' extension is used by 'version 2' Conda packages.",
-      "patchable": false,
       "enum": [
         ".tar.bz2",
         ".conda"
-      ]
-    },
-    "namespace_in_name": {
-      "type": "boolean",
-      "description": "Indicates if the package's namespace is in the package name. For example, the value is 'true' for the package 'python-socketio' but 'false' for the package 'python-graphviz'.",
-      "patchable": true,
-      "default": false
-    },
-    "package_id": {
-      "type": "string",
-      "description": "Except for the channel_name, the unique identifier of a package. The package_id should be generated based on other fields in the package's metadata: '{namespace}:{name}-{version}-{build_number}-{build}'",
-      "$comment": "Patchable for now, while we're still working out the details. Need to indicate subdir without having to indicate channel.",
-      "patchable": true,
-      "examples": [
-        "py:ansible-1.9.3-0-py27_0"
-      ]
+      ],
+      "patchable": false
     },
     "license_family": {
-      "type": "string",
       "description": "The license under which the package is distributed. Must conform to the license families listed at https://github.com/conda/conda-build/blob/3.19.1/conda_build/license_family.py#L8-L24.",
-      "patchable": true,
       "$comment": "TODO resolve capitalization issues.",
       "enum": [
         "AGPL",
@@ -151,36 +55,128 @@
         "Other",
         "other",
         null
-      ]
+      ],
+      "patchable": true
+    },
+    "name": {
+      "description": "The package name. Conda restricts each environment to having a single package of any unique package name.",
+      "examples": [
+        "python",
+        "numpy"
+      ],
+      "type": "string",
+      "pattern": "^[a-z0-9_](?!_)[._-]?([a-z0-9]+(\\.|-|_|$))*$",
+      "patchable": false
+    },
+    "namespace": {
+      "title": "The ecosystem namespace for the package name.",
+      "description": "The default 'g' or 'global' namespace is for packages that aren't governed by any particular namespace authority. Most C libraries fall into the global namespace. The namespace authority for the various ecosystems is identified at https://github.com/conda/conda/blob/4.8.3/conda/base/constants.py#L259-L273.",
+      "$comment": "TODO remove global and python. Patchable is true for now, but later may become false.",
+      "enum": [
+        "g",
+        "py",
+        "r",
+        "erlang",
+        "java",
+        "julia",
+        "latex",
+        "lua",
+        "js",
+        "perl",
+        "php",
+        "ruby",
+        "clojure",
+        "global",
+        "python"
+      ],
+      "patchable": true
+    },
+    "namespace_in_name": {
+      "description": "Indicates if the package's namespace is in the package name. For example, the value is 'true' for the package 'python-socketio' but 'false' for the package 'python-graphviz'.",
+      "default": false,
+      "type": "boolean",
+      "patchable": true
+    },
+    "origin_channel_name": {
+      "description": "The origin channel of the package. Will probably be relevant for package signing.",
+      "examples": [
+        "main",
+        "conda-forge"
+      ],
+      "type": "string",
+      "pattern": "^([a-z0-9]+(-|_|$))+$",
+      "patchable": true
+    },
+    "package_id": {
+      "description": "Except for the channel_name, the unique identifier of a package. The package_id should be generated based on other fields in the package's metadata: '{namespace}:{name}-{version}-{build_number}-{build}'",
+      "$comment": "Patchable for now, while we're still working out the details. Need to indicate subdir without having to indicate channel.",
+      "examples": [
+        "py:ansible-1.9.3-0-py27_0"
+      ],
+      "type": "string",
+      "patchable": true
+    },
+    "package_version": {
+      "description": "The package version. Must be a valid Conda Version string (validated against VersionOrder). Versions are set by the upstream code project and should be faithfully reproduced by the package author.",
+      "examples": [
+        "0.4.1",
+        "0.960923",
+        "1.1.a1",
+        "1.1.0post1",
+        "1.1.0post1+g123abcd",
+        "1996.07.12",
+        "2!0.4.1"
+      ],
+      "type": "string",
+      "pattern": "^([0-9]+!)?(([0-9a-z]+([._]))*[0-9a-z]+_?)(\\+([0-9a-z]+([._]))*[0-9a-z]+)?$",
+      "patchable": false
     },
     "spdx_license": {
-      "type": "string",
       "description": "The SPDX license description of the package. https://spdx.org/licenses/ The first section of the string, delimited by a colon, is the SPDX specification version. Note that this is the specification version that describes the schema for spdx_license, not the SPDX license list version (https://github.com/sindresorhus/spdx-license-list/blob/master/spdx.json).",
-      "pattern": "^[0-9]\\.[0-9]:.*$",
-      "patchable": true,
       "$comment": "Consider validation using https://github.com/nexB/license-expression. https://github.com/sindresorhus/spdx-license-list/blob/master/spdx-simple.json",
       "examples": [
         "2.1:BSD-3-Clause",
         "2.1:MIT OR Apache-2.0"
-      ]
+      ],
+      "type": "string",
+      "pattern": "^[0-9]\\.[0-9]:.*$",
+      "patchable": true
+    },
+    "subdir": {
+      "description": "The subdir of the channel within which a package is located. Subdirs are subdivisions of channels denoted by <OS>-<Platform> pairs. The 'noarch' subdir contains packages designed to be common among all subdirs.",
+      "enum": [
+        "noarch",
+        "linux-32",
+        "linux-64",
+        "linux-aarch64",
+        "linux-armv6l",
+        "linux-armv7l",
+        "linux-ppc64",
+        "linux-ppc64le",
+        "osx-64",
+        "win-32",
+        "win-64",
+        "zos-z"
+      ],
+      "patchable": false
     },
     "timestamp": {
-      "type": "integer",
-      "maximum": 253402300799,
-      "$comment": "Maximum corresponds to 9999-12-31. Helps ensure units are in seconds.",
       "description": "The Unix time (Epoch time) when the package was created. If a legacy 'date' field is provided and timestamp is not, it should be used to populate the timestamp field.",
-      "patchable": true,
+      "$comment": "Maximum corresponds to 9999-12-31. Helps ensure units are in seconds.",
       "examples": [
         1539182577753
-      ]
+      ],
+      "type": "integer",
+      "maximum": 253402300799,
+      "patchable": true
     },
     "vuln_id": {
       "description": "A CVE or other vulnerability identifier.",
-      "type": "string",
-      "pattern": "^CVE-[0-9]{4}-[0-9]{4,8}$",
       "examples": [
         "CVE-2017-14501"
-      ]
+      ],
+      "type": "string",
+      "pattern": "^CVE-[0-9]{4}-[0-9]{4,8}$"
     }
   }
 }
