@@ -1,85 +1,96 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
   "$id": "https://schemas.conda.io/info-security-1.schema.json",
-  "type": "object",
   "title": "info/security.json",
   "description": "Security-related information for the package.",
+  "type": "object",
   "required": [
     "schema_version"
   ],
   "properties": {
     "$schema": {
-      "type": "string",
       "const": "https://schemas.conda.io/info-security-1.schema.json",
       "format": "uri"
     },
     "schema_version": {
+      "description": "Schema version for the current file.",
       "type": "integer",
-      "minimum": 1,
-      "description": "Schema version for the current file."
+      "minimum": 1
+    },
+    "vulns_active": {
+      "description": "Vulnerabilities that have been identified for the package that are potentially active and exploitable.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/vuln_description_item"
+      }
+    },
+    "vulns_cleared": {
+      "description": "Vulnerabilities associated with the package that have been analyzed and determined to not be applicable.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/vuln_description_item"
+      }
+    },
+    "vulns_disputed": {
+      "description": "Vulnerabilities where one party, particularly the project maintainers, disagrees with another party's assertion that a particular issue in software is a vulnerability",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/vuln_description_item"
+      }
     },
     "vulns_mitigated": {
       "description": "Vulnerabilities that have been identified for the package but have actively been mitigated in this package build through a code patch.",
       "type": "array",
       "items": {
         "allOf": [
-          {"$ref": "#/definitions/vuln_description_item"},
+          {
+            "$ref": "#/definitions/vuln_description_item"
+          },
           {
             "properties": {
               "patch_fn": {
-                "type": "string",
-                "description": "The path for the mitigating patch within the recipe."
+                "description": "The path for the mitigating patch within the recipe.",
+                "type": "string"
               },
               "patch_src_url": {
+                "description": "The public source for the mitigating patch being applied.",
                 "type": "string",
-                "format": "uri",
-                "description": "The public source for the mitigating patch being applied."
+                "format": "uri"
               }
             }
           }
         ]
       }
-    },
-    "vulns_disputed": {
-      "description": "Vulnerabilities where one party, particularly the project maintainers, disagrees with another party's assertion that a particular issue in software is a vulnerability",
-      "type": "array",
-      "items": {"$ref": "#/definitions/vuln_description_item"}
-    },
-    "vulns_cleared": {
-      "description": "Vulnerabilities associated with the package that have been analyzed and determined to not be applicable.",
-      "type": "array",
-      "items": {"$ref": "#/definitions/vuln_description_item"}
-    },
-    "vulns_active": {
-      "description": "Vulnerabilities that have been identified for the package that are potentially active and exploitable.",
-      "type": "array",
-      "items": {"$ref": "#/definitions/vuln_description_item"}
     }
   },
   "definitions": {
     "vuln_description_item": {
       "$id": "#/definitions/vuln_description_item",
       "type": "object",
-      "required": ["id"],
+      "required": [
+        "id"
+      ],
       "properties": {
         "id": {
-          "type": "string",
           "title": "Vulnerability ID",
+          "type": "string",
           "pattern": "^CVE-[0-9]{4}-[0-9]{4,6}$"
         },
-        "poc_url": {
-          "type": "string",
-          "format": "uri",
-          "description": "Location of vulnerability proof-of-concept or exploit demonstration."
-        },
         "comment": {
+          "description": "Comment field reserved for the recipe author.",
+          "type": "string"
+        },
+        "poc_url": {
+          "description": "Location of vulnerability proof-of-concept or exploit demonstration.",
           "type": "string",
-          "description": "Comment field reserved for the recipe author."
+          "format": "uri"
         },
         "references": {
           "description": "References determined to be relevant by the recipe author.",
           "type": "array",
-          "items": {"$ref": "#/definitions/vuln_description_item_reference"}
+          "items": {
+            "$ref": "#/definitions/vuln_description_item_reference"
+          }
         }
       }
     },
@@ -92,7 +103,6 @@
       ],
       "properties": {
         "type": {
-          "type": "string",
           "description": "The type of reference. Prefer adding additional enum options rather than using 'other'.",
           "enum": [
             "nist",

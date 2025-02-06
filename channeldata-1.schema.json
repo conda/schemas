@@ -1,22 +1,16 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
   "$id": "https://schemas.conda.io/channeldata-1.schema.json",
-  "type": "object",
   "title": "channeldata.json",
   "description": "The channeldata file contains information that is common to the channel as a whole. Split out by package name, the information for each package name should be the latest available and consistent across all subdirs.",
+  "type": "object",
   "required": [
     "schema_version"
   ],
   "properties": {
     "$schema": {
-      "type": "string",
       "const": "https://schemas.conda.io/channeldata-1.schema.json",
       "format": "uri"
-    },
-    "schema_version": {
-      "type": "integer",
-      "description": "The API version or schema version of the channeldata file.",
-      "const": 1
     },
     "packages": {
       "description": "The value for each key is a package name contained within the channel.",
@@ -27,17 +21,23 @@
       },
       "additionalProperties": false
     },
+    "schema_version": {
+      "description": "The API version or schema version of the channeldata file.",
+      "const": 1
+    },
     "subdirs": {
+      "description": "All subdirs contained within the channel.",
       "type": "array",
-      "items": {"$ref": "common-1.schema.json#/definitions/subdir"},
-      "description": "All subdirs contained within the channel."
+      "items": {
+        "$ref": "common-1.schema.json#/definitions/subdir"
+      }
     }
   },
   "definitions": {
     "channeldata_record": {
       "$id": "#/definitions/channeldata_record",
-      "type": "object",
       "description": "Information about the latest version of each package name contained within the channel.",
+      "type": "object",
       "required": [
         "reference_package",
         "version"
@@ -81,29 +81,39 @@
         "license": {
           "type": "string"
         },
-        "license_family": {"$ref": "common-1.schema.json#/definitions/license_family"},
-        "spdx_license": {"$ref": "common-1.schema.json#/definitions/spdx_license"},
+        "license_family": {
+          "$ref": "common-1.schema.json#/definitions/license_family"
+        },
+        "reference_package": {
+          "description": "The {subdir}/{fn} that was used to create the entry in channeldata.",
+          "type": "string"
+        },
         "source_git_url": {
           "type": "string",
           "format": "uri"
-        },
-        "reference_package": {
-          "type": "string",
-          "description": "The {subdir}/{fn} that was used to create the entry in channeldata."
         },
         "source_url": {
           "type": "string",
           "format": "uri"
         },
+        "spdx_license": {
+          "$ref": "common-1.schema.json#/definitions/spdx_license"
+        },
         "subdirs": {
           "type": "array",
-          "items": {"$ref": "common-1.schema.json#/definitions/subdir"}
+          "items": {
+            "$ref": "common-1.schema.json#/definitions/subdir"
+          }
         },
         "summary": {
           "type": "string"
         },
-        "timestamp": {"$ref": "common-1.schema.json#/definitions/timestamp"},
-        "version": {"$ref": "common-1.schema.json#/definitions/package_version"}
+        "timestamp": {
+          "$ref": "common-1.schema.json#/definitions/timestamp"
+        },
+        "version": {
+          "$ref": "common-1.schema.json#/definitions/package_version"
+        }
       }
     }
   }
