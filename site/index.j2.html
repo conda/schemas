@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>{{ title }} | {{ site_name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="content-language" content="en">
+    <meta name="description" content="{{ description }}" />
+    <meta property="og:title" content="{{ title }}"" />
+    <meta property="og:description" content="{{ description }}"" />
+    <meta property="og:url" content="https://schemas.conda.org/" />
+    <meta property="og:site_name" content="{{ site_name }}" />
+    <meta property="og:locale" content="en_US" />
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="content">
+        <h1 id="top">conda schemas</h1>
+        <p>{{ description }}</p>
+        {% for section in sections %}
+        <h2 id="{{ section['name']|lower }}">{{ section['name'] }}</h1>
+        <p>{{ markdown(section['description']) }}</p>
+        <ul>
+            {% for item in section["items"] %}
+            <li>
+                <a href="{{ item['url'] }}" target="_blank">{{ item['name'] }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    </div>
+  </body>
+</html>
