@@ -21,7 +21,7 @@ Details about each `site/` item:
 
 - `index.j2.html`: HTML document templated with Jinja.
 - `config.toml`: The variables used to render the HTML template.
-- `_static/`: Anything in this directory is copied as is to `_build/`. 
+- `_static/`: Anything in this directory is copied as is to `_build/`.
 - `publish.py`: Python script to load the HTML template and render it with the contents in `config.toml`. It also handles `_static/` contents.
 - `requirements.txt`: The dependencies needed by `publish.py`.
 
