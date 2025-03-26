@@ -5,7 +5,7 @@ from pathlib import Path
 import requests
 from jinja2 import Template
 from ruamel.yaml import YAML
-from markdown import markdown
+from commonmark import commonmark
 
 HERE = Path(__file__).parent
 BUILD = HERE / ".." / "_build"
@@ -35,7 +35,7 @@ for section in config["sections"]:
 
 
 template = Template(Path(HERE / "index.j2.html").read_text())
-template.globals["markdown"] = markdown
+template.globals["markdown"] = commonmark
 (BUILD / "index.html").write_text(template.render(config))
 for path in (HERE / "_static").glob("*"):
     shutil.copy(path, BUILD)
