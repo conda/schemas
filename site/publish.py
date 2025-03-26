@@ -29,7 +29,7 @@ for section in config["sections"]:
             (BUILD / dirname).mkdir(parents=True, exist_ok=True)
         (BUILD / output_path).write_text(text)
         item["name"] = name
-        item["url"] = f"/{output_path}"
+        item["url"] = output_path
 
 
 template = Template(Path(HERE / "index.j2.html").read_text())
