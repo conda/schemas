@@ -4,13 +4,11 @@ from pathlib import Path
 
 import requests
 from jinja2 import Template
-from ruamel.yaml import YAML
 from commonmark import commonmark
 
 HERE = Path(__file__).parent
 BUILD = HERE / ".." / "_build"
 BUILD.mkdir(exist_ok=True)
-yaml = YAML(typ="safe")
 
 
 config = tomllib.loads((HERE / "config.toml").read_text())
