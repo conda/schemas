@@ -1,4 +1,5 @@
 import shutil
+import tomllib
 from pathlib import Path
 
 import requests
@@ -12,8 +13,7 @@ BUILD.mkdir(exist_ok=True)
 yaml = YAML(typ="safe")
 
 
-with open(HERE / "config.yml") as f:
-    config = yaml.load(f)
+config = tomllib.loads((HERE / "config.toml").read_text())
 
 for section in config["sections"]:
     dirname = section.get("dirname", "")
