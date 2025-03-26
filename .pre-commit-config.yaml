@@ -28,5 +28,5 @@ repos:
     rev: v2.14.0
     hooks:
     - id: pretty-format-toml
-      args: [--autofix, --no-sort]
+      args: [--autofix, --no-sort, --trailing-comma]
 exclude: ^CNAME$
