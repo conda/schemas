@@ -1,0 +1,25 @@
+title = "conda schemas"
+description = "Schemas for the conda ecosystem"
+site_name = "schemas.conda.org"
+
+[[sections]]
+name = "General"
+description = "Foundational schemas for the conda ecosystem"
+items = [
+  {schema = "channeldata-1.schema.json"},
+  {schema = "common-1.schema.json"},
+  {schema = "info-security-1.schema.json"},
+  {schema = "repodata-1.schema.json"},
+  {schema = "repodata-record-1.schema.json"},
+]
+
+[[sections]]
+name = "Menuinst"
+dirname = "menuinst"
+description = "Schemas for the `menuinst` package"
+items = [
+  {schema = "https://raw.githubusercontent.com/conda/menuinst/refs/heads/main/menuinst/data/menuinst-1-1-0.schema.json"},
+  {schema = "https://raw.githubusercontent.com/conda/menuinst/refs/heads/main/menuinst/data/menuinst-1-0-2.schema.json"},
+  {schema = "https://raw.githubusercontent.com/conda/menuinst/refs/heads/main/menuinst/data/menuinst-1-0-1.schema.json"},
+  {schema = "https://raw.githubusercontent.com/conda/menuinst/refs/heads/main/menuinst/data/menuinst-1-0-0.schema.json"},
+]
