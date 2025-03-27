@@ -29,7 +29,9 @@
     },
     "subdirs": {
       "type": "array",
-      "items": {"$ref": "common-1.schema.json#/definitions/subdir"},
+      "items": {
+        "$ref": "common-1.schema.json#/definitions/subdir"
+      },
       "description": "All subdirs contained within the channel."
     }
   },
@@ -81,8 +83,12 @@
         "license": {
           "type": "string"
         },
-        "license_family": {"$ref": "common-1.schema.json#/definitions/license_family"},
-        "spdx_license": {"$ref": "common-1.schema.json#/definitions/spdx_license"},
+        "license_family": {
+          "$ref": "common-1.schema.json#/definitions/license_family"
+        },
+        "spdx_license": {
+          "$ref": "common-1.schema.json#/definitions/spdx_license"
+        },
         "source_git_url": {
           "type": "string",
           "format": "uri"
@@ -97,13 +103,19 @@
         },
         "subdirs": {
           "type": "array",
-          "items": {"$ref": "common-1.schema.json#/definitions/subdir"}
+          "items": {
+            "$ref": "common-1.schema.json#/definitions/subdir"
+          }
         },
         "summary": {
           "type": "string"
         },
-        "timestamp": {"$ref": "common-1.schema.json#/definitions/timestamp"},
-        "version": {"$ref": "common-1.schema.json#/definitions/package_version"}
+        "timestamp": {
+          "$ref": "common-1.schema.json#/definitions/timestamp"
+        },
+        "version": {
+          "$ref": "common-1.schema.json#/definitions/package_version"
+        }
       }
     }
   }

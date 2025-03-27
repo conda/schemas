@@ -25,14 +25,18 @@
           "$ref": "common-1.schema.json#/definitions/subdir"
         }
       },
-      "required": ["subdir"]
+      "required": [
+        "subdir"
+      ]
     },
     "packages": {
       "type": "object",
       "title": "Metadata for 'v1' .tar.bz2 Conda packages.",
       "description": "Filename key of each package should be validated against {name}-{version}-{build}{ext} metadata for the package.",
       "patternProperties": {
-        "^.+\\.tar\\.bz2$": {"$ref": "repodata-record-1.schema.json"}
+        "^.+\\.tar\\.bz2$": {
+          "$ref": "repodata-record-1.schema.json"
+        }
       },
       "additionalProperties": false
     },
@@ -41,7 +45,9 @@
       "title": "Metadata for 'v2' .conda Conda packages.",
       "description": "Filename key of each package should be validated against {name}-{version}-{build}{ext} metadata for the package.",
       "patternProperties": {
-        "^.+\\.conda$": {"$ref": "repodata-record-1.schema.json"}
+        "^.+\\.conda$": {
+          "$ref": "repodata-record-1.schema.json"
+        }
       },
       "additionalProperties": false
     },
@@ -60,7 +66,9 @@
     "signatures": {
       "type": "object",
       "patternProperties": {
-        "^.+(\\.tar\\.bz2)|(\\.conda)$": {"$ref": "#/definitions/signature"}
+        "^.+(\\.tar\\.bz2)|(\\.conda)$": {
+          "$ref": "#/definitions/signature"
+        }
       },
       "additionalProperties": false
     }

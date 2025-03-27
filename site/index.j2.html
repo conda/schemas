@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title>{{ title }} | {{ site_name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="content-language" content="en">
+    <meta name="description" content="{{ description }}" />
+    <meta property="og:title" content="{{ title }}"" />
+    <meta property="og:description" content="{{ description }}"" />
+    <meta property="og:url" content="https://schemas.conda.org/" />
+    <meta property="og:site_name" content="{{ site_name }}" />
+    <meta property="og:locale" content="en_US" />
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="content">
+        <h1 id="top">conda schemas</h1>
+        <p>{{ description }}</p>
+        <p><strong>Table of contents:</strong></p>
+        <ul>
+        {%- for section in sections %}
+            <li><a href="#{{ section['name']|lower }}">{{ section['name'] }}</a></li>
+        {%- endfor %}
+        </ul>
+        {%- for section in sections %}
+        <h2 id="{{ section['name']|lower }}"><a href="#{{ section['name']|lower }}">#</a> {{ section['name'] }}</h2>
+        <p>{{ markdown(section['description']) }}</p>
+        <ul>
+            {%- for item in section["items"] %}
+            <li>
+                <a href="{{ item['url'] }}" target="_blank">{{ item['name'] }}</a> &middot;
+                (<a href="https://json-schema.app/view/%23?url={{ site_url }}/{{ item['url'] }}" target="_blank">explore</a>)
+            </li>
+            {%- endfor %}
+        </ul>
+        {%- endfor %}
+    </div>
+  </body>
+</html>
