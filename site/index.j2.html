@@ -30,6 +30,7 @@
             <li>
                 <a href="{{ item['url'] }}" target="_blank">{{ item['name'] }}</a> &middot;
                 (<a href="https://json-schema.app/view/%23?url={{ site_url }}/{{ item['url'] }}" target="_blank">explore</a>)
+                {% if item.get('draft') %}&middot; <em class="draft">draft</em>{% endif %}
             </li>
             {%- endfor %}
         </ul>
