@@ -7,11 +7,11 @@ site_url = "https://schemas.conda.org"
 name = "General"
 description = "Foundational schemas for the conda ecosystem"
 items = [
-  {schema = "channeldata-1.schema.json"},
-  {schema = "common-1.schema.json"},
-  {schema = "info-security-1.schema.json"},
-  {schema = "repodata-1.schema.json"},
-  {schema = "repodata-record-1.schema.json"},
+  {schema = "channeldata-1.schema.json", draft = true},
+  {schema = "common-1.schema.json", draft = true},
+  {schema = "info-security-1.schema.json", draft = true},
+  {schema = "repodata-1.schema.json", draft = true},
+  {schema = "repodata-record-1.schema.json", draft = true},
 ]
 
 [[sections]]

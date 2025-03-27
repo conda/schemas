@@ -226,3 +226,7 @@ h3 {
 code>* {
     font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
 }
+
+em.draft {
+    color: #999;
+}
