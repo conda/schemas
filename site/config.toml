@@ -2,6 +2,8 @@ title = "conda schemas"
 description = "Schemas for the conda ecosystem"
 site_name = "schemas.conda.org"
 site_url = "https://schemas.conda.org"
+repo_url = "https://github.com/conda/schemas"
+issues_url = "https://github.com/conda/schemas/issues"
 
 [[sections]]
 name = "General"
