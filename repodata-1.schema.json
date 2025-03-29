@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://schemas.conda.io/repodata-1.schema.json",
+  "$id": "https://schemas.conda.org/repodata-1.schema.json",
   "type": "object",
   "title": "repodata.json",
   "$comment": "TODO add back to required: repodata_version",
@@ -10,7 +10,7 @@
   "properties": {
     "$schema": {
       "type": "string",
-      "const": "https://schemas.conda.io/repodata-1.schema.json",
+      "const": "https://schemas.conda.org/repodata-1.schema.json",
       "format": "uri"
     },
     "repodata_version": {
