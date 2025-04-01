@@ -1,9 +1,14 @@
 title = "conda schemas"
-description = "Schemas for the conda ecosystem"
+description = """
+This site contains schemas for the conda ecosystem, including schemas for the conda package manager, constructor, and menuinst.
+
+## Links
+
+- [Repository](https://github.com/conda/schemas)
+- [Report Issues](https://github.com/conda/schemas/issues)
+"""
 site_name = "schemas.conda.org"
 site_url = "https://schemas.conda.org"
-repo_url = "https://github.com/conda/schemas"
-issues_url = "https://github.com/conda/schemas/issues"
 
 [[sections]]
 name = "General"

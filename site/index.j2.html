@@ -15,7 +15,7 @@
   <body>
     <div id="content">
         <h1 id="top">conda schemas</h1>
-        <p>{{ description }}</p>
+        <p>{{ markdown(description) }}</p>
         <h2>Table of contents</h2>
         <ul>
         {%- for section in sections %}
@@ -36,11 +36,6 @@
             {%- endfor %}
         </ul>
         {%- endfor %}
-        <h2>Links</h2>
-        <ul>
-          <li><a href="{{ repo_url }}">Code repo</a></li>
-          <li><a href="{{ issues_url }}">Issues</a></li>
-        </ul>
     </div>
   </body>
 </html>
