@@ -1,12 +1,14 @@
 """
 WIP
 """
-from typing import Dict, Iterable, Literal, Optional, Union
+
+from collections.abc import Iterable
+from typing import Literal
 
 from pydantic import AnyUrl, Field, FilePath
 
 from ._base import ExtrasForbiddenModel
-from .types import ChannelNameOrUrl, NonEmptyStr, PackageNameStr, MatchSpecStr
+from .types import ChannelNameOrUrl, MatchSpecStr, NonEmptyStr, PackageNameStr
 
 
 class Condarc(ExtrasForbiddenModel):
@@ -20,10 +22,7 @@ class Condarc(ExtrasForbiddenModel):
     ####################################################
 
     channels: Iterable[
-        Union[
-            ChannelNameOrUrl,
-            Dict[ChannelNameOrUrl, Dict[NonEmptyStr, str]],  # Check channel options schema
-        ]
+        ChannelNameOrUrl | dict[ChannelNameOrUrl, dict[NonEmptyStr, str]]
     ] = Field(
         default=("defaults",),
         alias="channel",
@@ -65,7 +64,9 @@ class Condarc(ExtrasForbiddenModel):
     or left undefined, no channel exclusions will be enforced.
     """
 
-    custom_channels: Dict[NonEmptyStr, ChannelNameOrUrl] = {"pkgs/pro": "https://repo.anaconda.com"},
+    custom_channels: dict[NonEmptyStr, ChannelNameOrUrl] = (
+        {"pkgs/pro": "https://repo.anaconda.com"},
+    )
     """
     A map of key-value pairs where the key is a channel name and the value
     is a channel location. Channels defined here override the default
@@ -76,7 +77,7 @@ class Condarc(ExtrasForbiddenModel):
     add an entry 'conda-forge: https://anaconda-repo.dev/packages'.
     """
 
-    custom_multichannels: Dict[NonEmptyStr, Iterable[ChannelNameOrUrl]] = Field(
+    custom_multichannels: dict[NonEmptyStr, Iterable[ChannelNameOrUrl]] = Field(
         default_factory=dict,
         description="""
         A multichannel is a metachannel composed of multiple channels. The two
@@ -96,7 +97,7 @@ class Condarc(ExtrasForbiddenModel):
     between different Anaconda Repository instances.
     """
 
-    migrated_custom_channels: Dict[NonEmptyStr, ChannelNameOrUrl] = Field(
+    migrated_custom_channels: dict[NonEmptyStr, ChannelNameOrUrl] = Field(
         default_factory=dict,
         description="""
         A map of key-value pairs where the key is a channel name and the value
@@ -190,7 +191,7 @@ class Condarc(ExtrasForbiddenModel):
     #              Network Configuration               #
     ####################################################
 
-    client_ssl_cert: Optional[FilePath] = Field(
+    client_ssl_cert: FilePath | None = Field(
         default=None,
         alias="client_cert",
         description="""
@@ -202,7 +203,7 @@ class Condarc(ExtrasForbiddenModel):
         """,
     )
 
-    client_ssl_cert_key: Optional[str] = Field(
+    client_ssl_cert_key: str | None = Field(
         default=None,
         alias="client_cert_key",
         description="""
@@ -212,7 +213,7 @@ class Condarc(ExtrasForbiddenModel):
         """,
     )
 
-    local_repodata_ttl: Union[int, bool] = 1
+    local_repodata_ttl: int | bool = 1
     """
     For a value of False or 0, always fetch remote repodata (HTTP 304
     responses respected). For a value of True or 1, respect the HTTP
@@ -226,7 +227,7 @@ class Condarc(ExtrasForbiddenModel):
     Restrict conda to cached download content and file:// based urls.
     """
 
-    proxy_servers: Dict[NonEmptyStr, AnyUrl] = Field(
+    proxy_servers: dict[NonEmptyStr, AnyUrl] = Field(
         default_factory=dict,
         description="""
         A mapping to enable proxy settings. Keys can be either (1) a
@@ -281,7 +282,9 @@ class Condarc(ExtrasForbiddenModel):
     #               Solver Configuration               #
     ####################################################
 
-    aggressive_update_packages: Iterable[PackageNameStr] = ("ca-certificates", "certifi", "openssl"),
+    aggressive_update_packages: Iterable[PackageNameStr] = (
+        ("ca-certificates", "certifi", "openssl"),
+    )
     """
     A list of packages that, if installed, are always updated to the
     latest possible version.
@@ -298,7 +301,7 @@ class Condarc(ExtrasForbiddenModel):
         """,
     )
 
-    channel_priority: Union[Literal["flexible", "strict", "disabled"], bool] = "flexible"
+    channel_priority: Literal["flexible", "strict", "disabled"] | bool = "flexible"
     """
     Accepts values of 'strict', 'flexible', and 'disabled'. The default
     value is 'flexible'. With strict channel priority, packages in lower
@@ -353,7 +356,7 @@ class Condarc(ExtrasForbiddenModel):
     track_features: Iterable[NonEmptyStr] = ()
     """
     DEPRECATED.
-    
+
     A list of features that are tracked by default. An entry here is
     similar to adding an entry to the create_default_packages list.
     """
@@ -437,7 +440,7 @@ class Condarc(ExtrasForbiddenModel):
     verification on every file within each package during installation.
     """
 
-    signing_metadata_url_base: Optional[str] = None
+    signing_metadata_url_base: str | None = None
     """
     Base URL for obtaining trust metadata updates (i.e., the `*.root.json`
     and `key_mgr.json` files) used to verify metadata and (eventually)
@@ -473,7 +476,7 @@ class Condarc(ExtrasForbiddenModel):
     execute_threads: int = 1
     """
     Threads to use when performing the unlink/link transaction.
-    This step is pretty strongly I/O limited, and you may not see much 
+    This step is pretty strongly I/O limited, and you may not see much
     benefit here.
     """
 

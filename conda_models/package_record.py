@@ -1,7 +1,8 @@
 """
 Definitions for the repodata.json files served in conda channels.
 """
-from typing import Iterable, Optional, Union
+
+from collections.abc import Iterable
 
 from pydantic import PositiveInt
 
@@ -27,7 +28,7 @@ class RepodataRecord(ExtrasForbiddenModel):
     A single record refers to a single binary distribution of a package on a conda channel.
     """
 
-    arch: Optional[str] = None
+    arch: str | None = None
     "Optionally the architecture the package supports"
     build: BuildStr
     "The build string of the package."
@@ -42,37 +43,37 @@ class RepodataRecord(ExtrasForbiddenModel):
     """
     depends: Iterable[NameVersionBuildMatchSpecStr]
     "Specification of packages this package depends on."
-    features: Optional[NonEmptyStr] = None
+    features: NonEmptyStr | None = None
     """
     Features are a deprecated way to specify different feature sets for the conda solver. This is
     not supported anymore and should not be used. Instead, `mutex` packages should be used to
     specify mutually exclusive features.
     """
-    legacy_bz2_md5: Optional[NonEmptyStr] = None
+    legacy_bz2_md5: NonEmptyStr | None = None
     "A deprecated md5 hash"
-    legacy_bz2_size: Optional[PositiveInt] = None
+    legacy_bz2_size: PositiveInt | None = None
     "A deprecated package archive size"
-    license: Optional[NonEmptyStr] = None
+    license: NonEmptyStr | None = None
     "The specific license of the package"
-    license_family: Optional[NonEmptyStr] = None
+    license_family: NonEmptyStr | None = None
     "The specific license of the package"
-    md5: Optional[MD5Str] = None
+    md5: MD5Str | None = None
     "The md5 hash of the package archive"
     name: PackageNameStr
     "The name of the package"
     noarch: NoarchStr
     "Whether the package is architecture independent, and in which way."
-    platform: Optional[str] = None
+    platform: str | None = None
     "The platform the package supports"
-    sha256: Optional[SHA256Str] = None
+    sha256: SHA256Str | None = None
     "The sha256 hash of the package archive"
-    size: Optional[PositiveInt] = None
+    size: PositiveInt | None = None
     "The size of the package archive, in bytes"
     subdir: SubdirStr
     "The subdirectory of the channel this package is in"
-    timestamp: Optional[PositiveInt] = None
+    timestamp: PositiveInt | None = None
     "The date this entry was created"
-    track_features: Optional[Union[NonEmptyStr, Iterable[NonEmptyStr]]] = None
+    track_features: NonEmptyStr | Iterable[NonEmptyStr] | None = None
     """
     Nowadays only used to downweight package variants (ie. give a variant less priority). To that
     effect, the number of track features is counted (number of commas) and the package is
@@ -80,9 +81,9 @@ class RepodataRecord(ExtrasForbiddenModel):
     """
     version: VersionStr
     "The version of the package"
-    preferred_env: Optional[str] = None
+    preferred_env: str | None = None
     "Unused"
-    date: Optional[str] = None
+    date: str | None = None
     "Unused"
-    package_type: Optional[str] = None
+    package_type: str | None = None
     "Unused"

@@ -1,7 +1,8 @@
 """
 WIP
 """
-from typing import Iterable, Optional
+
+from collections.abc import Iterable
 
 from ._base import ExtrasForbiddenModel
 from .types import MatchSpecStr, SubdirStr
@@ -25,7 +26,7 @@ class RequirementsTxt(ExtrasForbiddenModel):
     ```
     """
 
-    platform: Optional[SubdirStr] = None
+    platform: SubdirStr | None = None
     explicit: bool = False
     records: Iterable[MatchSpecStr] = ()
 

@@ -29,11 +29,4 @@ repos:
     hooks:
     - id: pretty-format-toml
       args: [--autofix, --no-sort, --trailing-comma]
-  - repo: https://github.com/econchick/interrogate
-    rev: 1.7.0
-    hooks:
-      - id: interrogate
-        types: [python]
-        # exclude: ^(docs/conf.py|setup.py|tests/functional/sample)
-        args: [--config=pyproject.toml]
 exclude: ^CNAME$

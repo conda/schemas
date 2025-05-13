@@ -1,66 +1,39 @@
 [tool.ruff]
-line-length = 99
-select = [
-    "E", "F", "W", #flake8
-    "UP", # pyupgrade
-    "I", # isort
-    "YTT", #flake8-2020
-    "TCH", # flake8-type-checing
-    "BLE", # flake8-blind-exception
-    "B", # flake8-bugbear
-    "A", # flake8-builtins
-    "C4", # flake8-comprehensions
-    "ISC", # flake8-implicit-str-concat
-    "G", # flake8-logging-format
-    "PIE", # flake8-pie
-    "COM", # flake8-commas
-    "SIM", # flake8-simplify
-    "INP", # flake8-no-pep420
-    "PYI", # flake8-pyi
-    "Q", # flake8-quotes
-    "RSE", # flake8-raise
-    "RET", # flake8-return
-    "TID",  # flake8-tidy-imports # replace absolutify import
-    "TRY", # tryceratops
-    "ICN", # flake8-import-conventions
-    "RUF", # ruff specyfic rules
-]
-ignore = [
-    "A003", # shadowed builtin in class
-]
 exclude = [
-    ".bzr",
-    ".direnv",
-    ".eggs",
-    ".git",
-    ".mypy_cache",
-    ".pants.d",
-    ".ruff_cache",
-    ".svn",
-    ".tox",
-    ".venv",
-    "__pypackages__",
-    "_build",
-    "generate-index.py",
+  "conda/auxlib",
+  "tests/data/conda_format_repo",
+  "tests/data/env_metadata",
 ]
+target-version = "py310"
 
-target-version = "py38"
-fix = true
-
-[tool.ruff.flake8-quotes]
-docstring-quotes = "double"
-
-[tool.ruff.isort]
-known-first-party=['conda_models']
-combine-as-imports = true
-
-[tool.black]
-target-version = ['py38', 'py39', 'py310']
-line-length = 99
-
-[tool.interrogate]
-# TODO: https://github.com/econchick/interrogate/issues/129
-ignore-module = true
-fail-under = 100
-exclude = ["archive", "docs", "tests", "conda_models/_version.py"]
-verbose = 2
+[tool.ruff.lint]
+extend-per-file-ignores = {"docs/*" = ["D1"], "tests/*" = ["D1"]}
+flake8-type-checking = {exempt-modules = [], strict = true}
+ignore = [
+  "D101",  # Missing docstring in public class
+  "D102",  # Missing docstring in public method
+  "D103",  # Missing docstring in public function
+  "D104",  # Missing docstring in public package
+  "D105",  # Missing docstring in magic method
+  "D107",  # Missing docstring in `__init__`
+  "E402",  # module level import not at top of file
+  "E501",  # line too long
+  "E722",  # do not use bare 'except'
+  "E731",  # do not assign a lambda expression, use a def
+  "UP031",  # do not fix printf-style string formatting
+]
+pydocstyle = {convention = "pep257"}
+# see https://docs.astral.sh/ruff/rules/
+select = [
+  "D1",  # pydocstyle
+  "E",  # pycodestyle errors
+  "F",  # pyflakes
+  "FA",  # flake8-future-annotations
+  "I",  # isort
+  "ISC",  # flake8-implicit-str-concat
+  "RUF100",  # Unused noqa directive
+  "T10",  # flake8-debugger
+  "TCH",  # flake8-type-checking
+  "UP",  # pyupgrade
+  "W",  # pycodestyle warnings
+]

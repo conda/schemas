@@ -1,6 +1,7 @@
 """
 Definitions for the repodata.json files served in conda channels.
 """
+
 from pydantic import AnyUrl, Field
 
 from ._base import ExtrasForbiddenModel, make_optional

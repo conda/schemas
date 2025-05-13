@@ -1,7 +1,9 @@
 """
 WIP
 """
-from typing import Iterable, Literal, Union
+
+from collections.abc import Iterable
+from typing import Literal
 
 from pydantic import AnyUrl, Field, PositiveInt, constr
 
@@ -50,7 +52,7 @@ class _Package(ExtrasForbiddenModel):
 
 class _Source(ExtrasForbiddenModel):
     fn: str = None
-    url: Union[AnyUrl, Iterable[AnyUrl]] = None
+    url: AnyUrl | Iterable[AnyUrl] = None
     md5: MD5Str = None
     sha1: SHA1Str = None
     sha256: SHA256Str = None
@@ -109,7 +111,7 @@ class _Build(ExtrasForbiddenModel):
     Linux. The default is True. It also accepts False, which indicates no relocation for any files,
     or a list of files, which indicates relocation only for listed files.
     """
-    script: Union[NonEmptyStr, Iterable[NonEmptyStr]] = None
+    script: NonEmptyStr | Iterable[NonEmptyStr] = None
     """
     Used instead of build.sh or bld.bat. For short build scripts, this can be more convenient. You
     may need to use selectors to use different scripts for different platforms.
@@ -133,7 +135,7 @@ class _Build(ExtrasForbiddenModel):
     when it may be incorrectly detected as text for some reason. Binary files are those containing
     NULL bytes
     """
-    ignore_prefix_files: Union[bool, Iterable[NonEmptyStr]] = None
+    ignore_prefix_files: bool | Iterable[NonEmptyStr] = None
     """
     Used to exclude some or all of the files in the build recipe from the list of files that have
     the build prefix replaced with the install prefix. Use 'True' to ignore all files, or a list of
@@ -188,7 +190,7 @@ class _Build(ExtrasForbiddenModel):
     The full conda-build recipe and rendered meta.yaml file is included in the Package metadata by
     default. You can disable it here.
     """
-    run_exports: Union[Iterable[PackageNameStr], _RunExports] = None
+    run_exports: Iterable[PackageNameStr] | _RunExports = None
     """
     List of packages that will be injected as a runtime dependency in other recipes.
     Use the 'strong' key to indicate which dependencies will be injected when this package is used
@@ -368,9 +370,9 @@ class _About(ExtrasForbiddenModel):
     identifiers: Iterable[NonEmptyStr] = None
     tags: Iterable[NonEmptyStr] = None
     keywords: Iterable[NonEmptyStr] = None
-    license_file: Union[NonEmptyStr, Iterable[NonEmptyStr]] = None
+    license_file: NonEmptyStr | Iterable[NonEmptyStr] = None
     prelink_message: NonEmptyStr = None
-    readme: Union[NonEmptyStr, Iterable[NonEmptyStr]] = None
+    readme: NonEmptyStr | Iterable[NonEmptyStr] = None
 
 
 class _OutputTest(ExtrasForbiddenModel):
@@ -392,8 +394,8 @@ class _Output(ExtrasForbiddenModel):
     files: Iterable[NonEmptyStr] = None
     "List of files to include in the package, run after 'script', if any."
     build: dict  # Is this really allowed / used ???
-    requirements: Union[Iterable[NameVersionBuildMatchSpecStr], _Requirements] = None
-    run_exports: Union[Iterable[NameVersionBuildMatchSpecStr], _RunExports] = None
+    requirements: Iterable[NameVersionBuildMatchSpecStr] | _Requirements = None
+    run_exports: Iterable[NameVersionBuildMatchSpecStr] | _RunExports = None
     test: _OutputTest = None
     type_: Literal["conda", "conda_v2", "wheel"] = Field("conda", alias="type")
     about: _About = None
@@ -404,7 +406,7 @@ class _Output(ExtrasForbiddenModel):
 
 class MetaYaml(ExtrasForbiddenModel):
     package: _Package
-    source: Union[_Source, Iterable[_Source]]
+    source: _Source | Iterable[_Source]
     build: _Build
     requirements: _Requirements
     test: _Test

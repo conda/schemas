@@ -1,5 +1,4 @@
-from functools import lru_cache
-from typing import Optional, Type
+from functools import cache
 
 from pydantic import BaseModel, Extra, create_model
 
@@ -9,12 +8,12 @@ class ExtrasForbiddenModel(BaseModel):
         extra = Extra.forbid
 
 
-@lru_cache(maxsize=None)
-def make_optional(baseclass: Type[BaseModel]) -> Type[BaseModel]:
+@cache
+def make_optional(baseclass: type[BaseModel]) -> type[BaseModel]:
     """Extracts the fields and validators from the baseclass and make fields optional"""
     fields = baseclass.__fields__
     validators = {"__validators__": baseclass.__validators__}
-    optional_fields = {key: (Optional[item.type_], None) for key, item in fields.items()}
+    optional_fields = {key: (item.type_ | None, None) for key, item in fields.items()}
     return create_model(
         f"Optional{baseclass.__name__}",
         **optional_fields,

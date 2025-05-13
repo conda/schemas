@@ -1,8 +1,8 @@
 """
 conda-specific constrains for scalar types.
 """
+
 from enum import Enum, auto
-from typing import Union
 
 from pydantic import AnyUrl, constr
 
@@ -104,4 +104,4 @@ VersionSpecStr = constr(min_length=1, regex=version_spec_regex)
 
 EntryPointStr = constr(min_length=5, regex=r"\S+\s*=\s*[A-z0-9_\.]:[A-z0-9_]")
 
-ChannelNameOrUrl = Union[NonEmptyStr, AnyUrl]
+ChannelNameOrUrl = NonEmptyStr | AnyUrl

@@ -1,7 +1,8 @@
 """
 WIP
 """
-from typing import Iterable, Union
+
+from collections.abc import Iterable
 
 from pydantic import Field
 
@@ -20,7 +21,7 @@ class HistoryRecord(ExtrasForbiddenModel):
     "Date when the action was recorded"
     command: str
     "The command that was run"
-    specs: Iterable[Union[MatchSpec, MatchSpecStr]]
+    specs: Iterable[MatchSpec | MatchSpecStr]
     "The specs that the user asked for explicitly"
     added: Iterable[PackageRecord] = ()
     "The packages that were added to the environment as a result of the transaction"
