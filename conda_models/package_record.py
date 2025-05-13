@@ -133,6 +133,7 @@ class PrefixRecord(PackageRecord):
     Extends `PackageRecord` with additional details about how the package was installed
     in the target environment.
     """
+
     extracted_package_dir: str = ...
     "Full path to the local extracted package"
 

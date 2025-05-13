@@ -39,7 +39,7 @@ jobs:
 
       - name: Regenerate schemas
         run: python conda_models.main
-      
+
       - name: Error out if there were changes
         run: git diff --exit-code
 

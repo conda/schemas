@@ -156,7 +156,9 @@ class _Build(ExtrasForbiddenModel):
     Set which RPATHs are used when making executables relocatable on Linux. This is a Linux feature
     that is ignored on other systems. The default is lib/.
     """
-    script_env: Iterable[Annotated[str, Field(min_length=3, pattern=r"[A-z0-9_]+(=.+)?")]] = None
+    script_env: Iterable[
+        Annotated[str, Field(min_length=3, pattern=r"[A-z0-9_]+(=.+)?")]
+    ] = None
     """
     Allow these environment variables to be seen by the build process. You can also (re)define
     their values with the `NAME=VAR` syntax.

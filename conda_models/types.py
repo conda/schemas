@@ -75,7 +75,9 @@ build_string_regex = r"[0-9a-zA-Z\._]+"
 build_string_spec_regex = r"[0-9a-zA-Z\._\*]+"
 
 MD5Str = Annotated[str, Field(min_length=32, max_length=32, pattern=r"[a-fA-F0-9]{32}")]
-SHA1Str = Annotated[str, Field(min_length=40, max_length=40, pattern=r"[a-fA-F0-9]{40}")]
+SHA1Str = Annotated[
+    str, Field(min_length=40, max_length=40, pattern=r"[a-fA-F0-9]{40}")
+]
 SHA256Str = Annotated[
     str, Field(min_length=64, max_length=64, pattern=r"[a-fA-F0-9]{64}")
 ]
