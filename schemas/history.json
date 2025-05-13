@@ -385,7 +385,15 @@
           "type": "string"
         },
         "noarch": {
-          "$ref": "#/$defs/NoarchStr",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NoarchStr"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
           "description": "Whether the package is architecture independent, and in which way."
         },
         "package_type": {
@@ -462,18 +470,11 @@
           "description": "The subdirectory of the channel this package is in"
         },
         "timestamp": {
-          "anyOf": [
-            {
-              "exclusiveMinimum": 0,
-              "type": "integer"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
+          "default": 0,
           "description": "The date this entry was created",
-          "title": "Timestamp"
+          "exclusiveMinimum": 0,
+          "title": "Timestamp",
+          "type": "integer"
         },
         "track_features": {
           "anyOf": [
@@ -510,7 +511,6 @@
         "constrains",
         "depends",
         "name",
-        "noarch",
         "subdir",
         "version"
       ],

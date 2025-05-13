@@ -12,6 +12,17 @@ items = [
   {schema = "archive/info-security-1.schema.json", draft = true},
   {schema = "archive/repodata-1.schema.json", draft = true},
   {schema = "archive/repodata-record-1.schema.json", draft = true},
+  {schema = "schemas/channeldata.json", draft = true},
+  {schema = "schemas/condarc.json", draft = true},
+  {schema = "schemas/environmentyaml.json", draft = true},
+  {schema = "schemas/history.json", draft = true},
+  {schema = "schemas/matchspec.json", draft = true},
+  {schema = "schemas/metayaml.json", draft = true},
+  {schema = "schemas/optionalrepodatarecord.json", draft = true},
+  {schema = "schemas/packagerecord.json", draft = true},
+  {schema = "schemas/repodatapatchinstructions.json", draft = true},
+  {schema = "schemas/repodatarecord.json", draft = true},
+  {schema = "schemas/requirementstxt.json", draft = true},
 ]
 
 [[sections]]

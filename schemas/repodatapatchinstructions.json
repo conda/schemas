@@ -309,7 +309,6 @@
         "timestamp": {
           "anyOf": [
             {
-              "exclusiveMinimum": 0,
               "type": "integer"
             },
             {
