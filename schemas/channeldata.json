@@ -1,0 +1,306 @@
+{
+  "$defs": {
+    "ChannelDataPackage": {
+      "additionalProperties": false,
+      "properties": {
+        "activate.d": {
+          "description": "Whether the package contains activation scripts",
+          "title": "Activate.D",
+          "type": "boolean"
+        },
+        "binary_prefix": {
+          "description": "Whether the package contains binary files that hardcode the installation prefix",
+          "title": "Binary Prefix",
+          "type": "boolean"
+        },
+        "deactivate.d": {
+          "description": "Whether the package contains deactivation scripts",
+          "title": "Deactivate.D",
+          "type": "boolean"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The description of the package",
+          "title": "Description"
+        },
+        "dev_url": {
+          "anyOf": [
+            {
+              "items": {
+                "format": "uri",
+                "minLength": 1,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The URL to the development page of the package",
+          "title": "Dev Url"
+        },
+        "doc_url": {
+          "anyOf": [
+            {
+              "items": {
+                "format": "uri",
+                "minLength": 1,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The URL to the documentation page of the package",
+          "title": "Doc Url"
+        },
+        "has_post_link_scripts": {
+          "description": "Whether the package contains post-link scripts",
+          "title": "Has Post Link Scripts",
+          "type": "boolean"
+        },
+        "has_pre_link_scripts": {
+          "description": "Whether the package contains pre-link scripts",
+          "title": "Has Pre Link Scripts",
+          "type": "boolean"
+        },
+        "has_pre_unlink_scripts": {
+          "description": "Whether the package contains pre-unlink scripts",
+          "title": "Has Pre Unlink Scripts",
+          "type": "boolean"
+        },
+        "home": {
+          "anyOf": [
+            {
+              "items": {
+                "format": "uri",
+                "minLength": 1,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The URL to the homepage of the package",
+          "title": "Home"
+        },
+        "license": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The license of the package",
+          "title": "License"
+        },
+        "run_exports": {
+          "description": "The run exports of the package, per package version (not build!)",
+          "patternProperties": {
+            "([0-9]!)?[0-9a-z\\._]+": {
+              "$ref": "#/$defs/RunExports"
+            }
+          },
+          "propertyNames": {
+            "minLength": 1
+          },
+          "title": "Run Exports",
+          "type": "object"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "items": {
+                "format": "uri",
+                "minLength": 1,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The URL to the latest source code of the package",
+          "title": "Source Url"
+        },
+        "subdirs": {
+          "description": "Which subdirs the package is available in",
+          "items": {
+            "type": "string"
+          },
+          "title": "Subdirs",
+          "type": "array"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The summary of the package. Shorter than description.",
+          "title": "Summary"
+        },
+        "text_prefix": {
+          "description": "Whether the package contains text files that hardcode the installation prefix",
+          "title": "Text Prefix",
+          "type": "boolean"
+        },
+        "timestamp": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Last update time for artifacts of this package",
+          "title": "Timestamp"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "([0-9]!)?[0-9a-z\\._]+",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The latest version of the package",
+          "title": "Version"
+        }
+      },
+      "required": [
+        "activate.d",
+        "deactivate.d",
+        "binary_prefix",
+        "has_post_link_scripts",
+        "has_pre_link_scripts",
+        "has_pre_unlink_scripts",
+        "run_exports",
+        "subdirs",
+        "text_prefix"
+      ],
+      "title": "ChannelDataPackage",
+      "type": "object"
+    },
+    "RunExports": {
+      "additionalProperties": false,
+      "properties": {
+        "strong": {
+          "default": null,
+          "description": "Dependencies to be exported to runtime requirements when package is added as a build\ndependency.",
+          "items": {
+            "minLength": 1,
+            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "type": "string"
+          },
+          "title": "Strong",
+          "type": "array"
+        },
+        "strong_constrains": {
+          "default": null,
+          "description": "Dependencies to be exported to runtime constrains when package is added as a build\ndependency.",
+          "items": {
+            "minLength": 1,
+            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "type": "string"
+          },
+          "title": "Strong Constrains",
+          "type": "array"
+        },
+        "weak": {
+          "default": null,
+          "description": "Dependencies to be exported to runtime requirements when package is added as a host\ndependency.",
+          "items": {
+            "minLength": 1,
+            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "type": "string"
+          },
+          "title": "Weak",
+          "type": "array"
+        },
+        "weak_constrains": {
+          "default": null,
+          "description": "Dependencies to be exported to runtime constrains when package is added as a host\ndependency.",
+          "items": {
+            "minLength": 1,
+            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "type": "string"
+          },
+          "title": "Weak Constrains",
+          "type": "array"
+        }
+      },
+      "title": "RunExports",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Data structures that are present in a `channeldata.json` file. Some channels on anaconda.org\ncontain a `channeldata.json` file which describes the subdirs the channel contains, the\npackages stored in the channel and additional data about them like their latest version.\n\nThe `ChannelData` struct represents the data found within the `channeldata.json` file. The\n`ChannelDataPackage` contains information about a package.\n\nNote that certain aspects of `ChannelData` are broken (e.g. run_exports is only available for a\nsingle package variant) and therefore the `ChannelData` struct is not really used much more.",
+  "properties": {
+    "channeldata_version": {
+      "description": "The version of the channeldata format",
+      "title": "Channeldata Version",
+      "type": "integer"
+    },
+    "packages": {
+      "description": "The packages available in the channel, grouped by name",
+      "patternProperties": {
+        "[0-9a-zA-Z\\._-]+": {
+          "$ref": "#/$defs/ChannelDataPackage"
+        }
+      },
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Packages",
+      "type": "object"
+    },
+    "subdirs": {
+      "description": "The subdirs available in the channel",
+      "items": {
+        "type": "string"
+      },
+      "title": "Subdirs",
+      "type": "array"
+    }
+  },
+  "required": [
+    "channeldata_version",
+    "packages",
+    "subdirs"
+  ],
+  "title": "ChannelData",
+  "type": "object"
+}

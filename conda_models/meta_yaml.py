@@ -3,9 +3,9 @@ WIP
 """
 
 from collections.abc import Iterable
-from typing import Literal
+from typing import Annotated, Literal
 
-from pydantic import AnyUrl, Field, PositiveInt, constr
+from pydantic import AnyUrl, Field, PositiveInt
 
 from ._base import ExtrasForbiddenModel
 from .types import (
@@ -156,7 +156,7 @@ class _Build(ExtrasForbiddenModel):
     Set which RPATHs are used when making executables relocatable on Linux. This is a Linux feature
     that is ignored on other systems. The default is lib/.
     """
-    script_env: Iterable[constr(min_length=3, regex=r"[A-z0-9_]+(=.+)?")] = None
+    script_env: Iterable[Annotated[str, Field(min_length=3, pattern=r"[A-z0-9_]+(=.+)?")]] = None
     """
     Allow these environment variables to be seen by the build process. You can also (re)define
     their values with the `NAME=VAR` syntax.
@@ -326,7 +326,7 @@ class _Test(ExtrasForbiddenModel):
     """
     Shell commands that are run as part of the test.
     """
-    imports: Iterable[constr(regex=r"[A-z0-9\._]+")] = None
+    imports: Iterable[Annotated[str, Field(pattern=r"[A-z0-9\._]+")]] = None
     """
     Python modules that will be imported as part of the test checks.
     """

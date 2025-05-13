@@ -1,0 +1,144 @@
+{
+  "$defs": {
+    "SubdirStr": {
+      "enum": [
+        "linux-64",
+        "linux-32",
+        "linux-armv6l",
+        "linux-armv7l",
+        "linux-ppc64le",
+        "linux-s390x",
+        "osx-64",
+        "osx-32",
+        "osx-arm64",
+        "win-64",
+        "win-32",
+        "win-arm64",
+        "zos-z",
+        "noarch"
+      ],
+      "title": "SubdirStr",
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "channels": {
+      "anyOf": [
+        {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Channels to search for packages",
+      "title": "Channels"
+    },
+    "dependencies": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "items": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "additionalProperties": {
+                  "items": {
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "propertyNames": {
+                  "const": "pip"
+                },
+                "type": "object"
+              }
+            ]
+          },
+          "type": "array"
+        }
+      ],
+      "default": [],
+      "description": "Packages to install into the environment, as a series of match specifications.",
+      "title": "Dependencies"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Name for the environment",
+      "title": "Name"
+    },
+    "platforms": {
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "#/$defs/SubdirStr"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Platforms to search for packages.",
+      "title": "Platforms"
+    },
+    "prefix": {
+      "anyOf": [
+        {
+          "format": "directory-path",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Path where the environment should be created.",
+      "title": "Prefix"
+    },
+    "variables": {
+      "anyOf": [
+        {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "propertyNames": {
+            "minLength": 1
+          },
+          "type": "object"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Shell variables to define for the environment.",
+      "title": "Variables"
+    }
+  },
+  "title": "EnvironmentYaml",
+  "type": "object"
+}

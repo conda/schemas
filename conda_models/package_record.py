@@ -21,7 +21,7 @@ from .types import (
 )
 
 
-class RepodataRecord(ExtrasForbiddenModel):
+class PackageRecord(ExtrasForbiddenModel):
     """
     A single record in the conda repodata.
 

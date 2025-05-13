@@ -10,7 +10,7 @@ from .types import (
     CondaPackageFileNameStr,
     NonEmptyStr,
     PackageFileNameStr,
-    Subdir,
+    SubdirStr,
     TarBz2PackageFileNameStr,
 )
 
@@ -41,7 +41,7 @@ OptionalRepodataRecord = make_optional(RepodataRecord)
 class ChannelInfo(ExtrasForbiddenModel):
     """ """
 
-    subdir: Subdir
+    subdir: SubdirStr
 
 
 class Repodata(ExtrasForbiddenModel):

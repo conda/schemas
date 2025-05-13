@@ -3,8 +3,9 @@ conda-specific constrains for scalar types.
 """
 
 from enum import Enum, auto
+from typing import Annotated
 
-from pydantic import AnyUrl, constr
+from pydantic import AnyUrl, Field
 
 
 class NoarchStr(str, Enum):
@@ -65,7 +66,7 @@ class Platform(str, Enum):
     pass
 
 
-NonEmptyStr = constr(min_length=1)
+NonEmptyStr = Annotated[str, Field(min_length=1)]
 
 package_name_regex = r"[0-9a-zA-Z\._-]+"
 version_regex = r"([0-9]!)?[0-9a-z\._]+"
@@ -73,35 +74,52 @@ version_spec_regex = r"[0-9a-z<>=!\.\*]+"
 build_string_regex = r"[0-9a-zA-Z\._]+"
 build_string_spec_regex = r"[0-9a-zA-Z\._\*]+"
 
-MD5Str = constr(min_length=32, max_length=32, regex=r"[a-fA-F0-9]{32}")
-SHA1Str = constr(min_length=40, max_length=40, regex=r"[a-fA-F0-9]{40}")
-SHA256Str = constr(min_length=64, max_length=64, regex=r"[a-fA-F0-9]{64}")
+MD5Str = Annotated[str, Field(min_length=32, max_length=32, pattern=r"[a-fA-F0-9]{32}")]
+SHA1Str = Annotated[str, Field(min_length=40, max_length=40, pattern=r"[a-fA-F0-9]{40}")]
+SHA256Str = Annotated[
+    str, Field(min_length=64, max_length=64, pattern=r"[a-fA-F0-9]{64}")
+]
 MatchSpecStr = NonEmptyStr  # TODO: implement regex???
-BuildStr = constr(min_length=1, regex=build_string_regex)
-BuildSpecStr = constr(min_length=1, regex=build_string_spec_regex)
-PackageNameStr = constr(min_length=1, regex=package_name_regex)
-PackageFileNameStr = constr(
-    min_length=1,
-    regex=rf"({package_name_regex})-({version_regex})-({build_string_regex})\.(conda|tar\.bz2)",
-)
-TarBz2PackageFileNameStr = constr(
-    min_length=1,
-    regex=rf"({package_name_regex})-({version_regex})-({build_string_regex})\.tar\.bz2",
-)
-CondaPackageFileNameStr = constr(
-    min_length=1,
-    regex=rf"({package_name_regex})-({version_regex})-({build_string_regex})\.conda",
-)
-NameVersionBuildMatchSpecStr = constr(
-    min_length=1,
-    regex=rf"({package_name_regex})\s+("
-    rf"({version_spec_regex})"
-    rf"|({version_spec_regex})?\s+({build_string_spec_regex})"
-    rf")?",
-)
-VersionStr = constr(min_length=1, regex=version_regex)
-VersionSpecStr = constr(min_length=1, regex=version_spec_regex)
+BuildNumber = Annotated[int, Field(ge=0)]
+BuildStr = Annotated[str, Field(min_length=1, pattern=build_string_regex)]
+BuildSpecStr = Annotated[str, Field(min_length=1, pattern=build_string_spec_regex)]
+PackageNameStr = Annotated[str, Field(min_length=1, pattern=package_name_regex)]
+PackageFileNameStr = Annotated[
+    str,
+    Field(
+        min_length=1,
+        pattern=rf"({package_name_regex})-({version_regex})-({build_string_regex})\.(conda|tar\.bz2)",
+    ),
+]
+TarBz2PackageFileNameStr = Annotated[
+    str,
+    Field(
+        min_length=1,
+        pattern=rf"({package_name_regex})-({version_regex})-({build_string_regex})\.tar\.bz2",
+    ),
+]
+CondaPackageFileNameStr = Annotated[
+    str,
+    Field(
+        min_length=1,
+        pattern=rf"({package_name_regex})-({version_regex})-({build_string_regex})\.conda",
+    ),
+]
+NameVersionBuildMatchSpecStr = Annotated[
+    str,
+    Field(
+        min_length=1,
+        pattern=rf"({package_name_regex})\s+("
+        rf"({version_spec_regex})"
+        rf"|({version_spec_regex})?\s+({build_string_spec_regex})"
+        rf")?",
+    ),
+]
+VersionStr = Annotated[str, Field(min_length=1, pattern=version_regex)]
+VersionSpecStr = Annotated[str, Field(min_length=1, pattern=version_spec_regex)]
 
-EntryPointStr = constr(min_length=5, regex=r"\S+\s*=\s*[A-z0-9_\.]:[A-z0-9_]")
+EntryPointStr = Annotated[
+    str, Field(min_length=5, pattern=r"\S+\s*=\s*[A-z0-9_\.]:[A-z0-9_]")
+]
 
 ChannelNameOrUrl = NonEmptyStr | AnyUrl

@@ -1,0 +1,650 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "This is the configuration file for conda. It can be used to configure\nseveral aspects of its behavior.",
+  "properties": {
+    "add_binstar_token": {
+      "default": true,
+      "description": "\n        In conjunction with the anaconda command-line client (installed with\n        `conda install anaconda-client`), and following logging into an\n        Anaconda Server API site using `anaconda login`, automatically apply a\n        matching private token to enable access to private packages and\n        channels.\n        ",
+      "title": "Add Binstar Token",
+      "type": "boolean"
+    },
+    "aggressive_update_packages": {
+      "default": [
+        [
+          "ca-certificates",
+          "certifi",
+          "openssl"
+        ]
+      ],
+      "description": "A list of packages that, if installed, are always updated to the\nlatest possible version.",
+      "items": {
+        "minLength": 1,
+        "pattern": "[0-9a-zA-Z\\._-]+",
+        "type": "string"
+      },
+      "title": "Aggressive Update Packages",
+      "type": "array"
+    },
+    "allow_non_channel_urls": {
+      "default": false,
+      "description": "Warn, but do not fail, when conda detects a channel url is not a valid\nchannel.",
+      "title": "Allow Non Channel Urls",
+      "type": "boolean"
+    },
+    "allow_softlinks": {
+      "default": false,
+      "description": "When allow_softlinks is True, conda uses hard-links when possible, and\nsoft-links (symlinks) when hard-links are not possible, such as when\ninstalling on a different filesystem than the one that the package\ncache is on. When allow_softlinks is False, conda still uses hard-\nlinks when possible, but when it is not possible, conda copies files.\nIndividual packages can override this setting, specifying that certain\nfiles should never be soft-linked (see the no_link option in the build\nrecipe documentation).",
+      "title": "Allow Softlinks",
+      "type": "boolean"
+    },
+    "allowlist_channels": {
+      "default": [],
+      "description": "The exclusive list of channels allowed to be used on the system. Use\nof any other channels will result in an error. If conda-build channels\nare to be allowed, along with the --use-local command line flag, be\nsure to include the 'local' channel in the list. If the list is empty\nor left undefined, no channel exclusions will be enforced.",
+      "items": {
+        "anyOf": [
+          {
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "format": "uri",
+            "minLength": 1,
+            "type": "string"
+          }
+        ]
+      },
+      "title": "Allowlist Channels",
+      "type": "array"
+    },
+    "auto_activate_base": {
+      "default": true,
+      "description": "Automatically activate the base environment during shell\ninitialization.",
+      "title": "Auto Activate Base",
+      "type": "boolean"
+    },
+    "auto_stack": {
+      "default": 0,
+      "description": "Implicitly use --stack when using activate if current level of nesting\n(as indicated by CONDA_SHLVL environment variable) is less than or\nequal to specified value. 0 or false disables automatic stacking, 1 or\ntrue enables it for one level.",
+      "title": "Auto Stack",
+      "type": "integer"
+    },
+    "binstar_upload": {
+      "default": false,
+      "description": "\n        **aliases** -> binstar_upload\n\n        Automatically upload packages built with conda build to anaconda.org.\n        ",
+      "title": "Binstar Upload",
+      "type": "boolean"
+    },
+    "bld_path": {
+      "default": "",
+      "description": "The location where conda-build will put built packages. Same as\n'croot', but 'croot' takes precedence when both are defined. Also used\nin construction of the 'local' multichannel.",
+      "format": "file-path",
+      "title": "Bld Path",
+      "type": "string"
+    },
+    "changeps1": {
+      "default": true,
+      "description": "When using activate, change the command prompt ($PS1) to include the\nactivated environment.",
+      "title": "Changeps1",
+      "type": "boolean"
+    },
+    "channel": {
+      "default": [
+        "defaults"
+      ],
+      "description": "\n        The list of conda channels to include for relevant operations.\n        ",
+      "items": {
+        "anyOf": [
+          {
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "format": "uri",
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "additionalProperties": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "propertyNames": {
+                "minLength": 1
+              },
+              "type": "object"
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "title": "Channel",
+      "type": "array"
+    },
+    "channel_alias": {
+      "default": "https://conda.anaconda.org",
+      "description": "The prepended url location to associate with channel names.",
+      "format": "uri",
+      "minLength": 1,
+      "title": "Channel Alias",
+      "type": "string"
+    },
+    "channel_priority": {
+      "anyOf": [
+        {
+          "enum": [
+            "flexible",
+            "strict",
+            "disabled"
+          ],
+          "type": "string"
+        },
+        {
+          "type": "boolean"
+        }
+      ],
+      "default": "flexible",
+      "description": "Accepts values of 'strict', 'flexible', and 'disabled'. The default\nvalue is 'flexible'. With strict channel priority, packages in lower\npriority channels are not considered if a package with the same name\nappears in a higher priority channel. With flexible channel priority,\nthe solver may reach into lower priority channels to fulfill\ndependencies, rather than raising an unsatisfiable error. With channel\npriority disabled, package version takes precedence, and the\nconfigured priority of channels is used only to break ties. In\nprevious versions of conda, this parameter was configured as either\nTrue or False. True is now an alias to 'flexible'.",
+      "title": "Channel Priority"
+    },
+    "client_cert": {
+      "anyOf": [
+        {
+          "format": "file-path",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "\n        **aliases** -> client_cert\n\n        A path to a single file containing a private key and certificate (e.g.\n        .pem file). Alternately, use client_ssl_cert_key in conjunction with\n        client_ssl_cert for individual files.\n        ",
+      "title": "Client Cert"
+    },
+    "client_cert_key": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "\n        **aliases** -> client_cert_key\n\n        Used in conjunction with client_ssl_cert for a matching key file.\n        ",
+      "title": "Client Cert Key"
+    },
+    "conda-build": {
+      "additionalProperties": true,
+      "description": "\n        **aliases** -> conda-build\n\n        General configuration parameters for conda-build.\n        ",
+      "title": "Conda-Build",
+      "type": "object"
+    },
+    "copy": {
+      "default": false,
+      "description": "\n        **aliases** -> copy\n\n        Register a preference that files be copied into a prefix during\n        install rather than hard-linked.\n        ",
+      "title": "Copy",
+      "type": "boolean"
+    },
+    "create_default_packages": {
+      "default": [],
+      "description": "Packages that are by default added to newly created environments.",
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Create Default Packages",
+      "type": "array"
+    },
+    "croot": {
+      "default": "",
+      "description": "The location where conda-build will put built packages. Same as\n'bld_path', but 'croot' takes precedence when both are defined. Also\nused in construction of the 'local' multichannel.",
+      "format": "file-path",
+      "title": "Croot",
+      "type": "string"
+    },
+    "custom_channels": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "format": "uri",
+            "minLength": 1,
+            "type": "string"
+          }
+        ]
+      },
+      "default": [
+        {
+          "pkgs/pro": "https://repo.anaconda.com"
+        }
+      ],
+      "description": "A map of key-value pairs where the key is a channel name and the value\nis a channel location. Channels defined here override the default\n'channel_alias' value. The channel name (key) is not included in the\nchannel location (value).  For example, to override the location of\nthe 'conda-forge' channel where the url to repodata is\nhttps://anaconda-repo.dev/packages/conda-forge/linux-64/repodata.json,\nadd an entry 'conda-forge: https://anaconda-repo.dev/packages'.",
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Custom Channels",
+      "type": "object"
+    },
+    "custom_multichannels": {
+      "additionalProperties": {
+        "items": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "format": "uri",
+              "minLength": 1,
+              "type": "string"
+            }
+          ]
+        },
+        "type": "array"
+      },
+      "description": "\n        A multichannel is a metachannel composed of multiple channels. The two\n        reserved multichannels are 'defaults' and 'local'. The 'defaults'\n        multichannel is customized using the 'default_channels' parameter. The\n        'local' multichannel is a list of file:// channel locations where\n        conda-build stashes successfully-built packages.  Other multichannels\n        can be defined with custom_multichannels, where the key is the\n        multichannel name and the value is a list of channel names and/or\n        channel urls.\n        ",
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Custom Multichannels",
+      "type": "object"
+    },
+    "default_channels": {
+      "default": [
+        "https://repo.anaconda.com/pkgs/main",
+        "https://repo.anaconda.com/pkgs/r"
+      ],
+      "description": "The list of channel names and/or urls used for the 'defaults'\nmultichannel.",
+      "items": {
+        "anyOf": [
+          {
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "format": "uri",
+            "minLength": 1,
+            "type": "string"
+          }
+        ]
+      },
+      "title": "Default Channels",
+      "type": "array"
+    },
+    "default_threads": {
+      "default": 0,
+      "description": "Threads to use by default for parallel operations. Default is None,\nwhich allows operations to choose themselves. For more specific\ncontrol, see the other *_threads parameters:\n\n- repodata_threads: for fetching/loading repodata\n- verify_threads: for verifying package contents in transactions\n- execute_threads: for carrying out the unlinking and linking steps",
+      "title": "Default Threads",
+      "type": "integer"
+    },
+    "disallow": {
+      "default": [],
+      "description": "\n        **aliases** -> disallow\n\n        Package specifications to disallow installing. The default is to allow\n        all packages.\n        **env_var_string_delimiter** ->  '&'\n        ",
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Disallow",
+      "type": "array"
+    },
+    "env_prompt": {
+      "default": "({default_env})",
+      "description": "Template for prompt modification based on the active environment.\nCurrently supported template variables are '{prefix}', '{name}', and\n'{default_env}'. '{prefix}' is the absolute path to the active\nenvironment. '{name}' is the basename of the active environment\nprefix. '{default_env}' holds the value of '{name}' if the active\nenvironment is a conda named environment ('-n' flag), or otherwise\nholds the value of '{prefix}'. Templating uses python's str.format()\nmethod.",
+      "title": "Env Prompt",
+      "type": "string"
+    },
+    "envs_path": {
+      "default": [],
+      "description": "\n        The list of directories to search for named environments. When\n        creating a new named environment, the environment will be placed in\n        the first writable location.\n\n        **env_var_string_delimiter** ->  ':'\n        ",
+      "items": {
+        "format": "file-path",
+        "type": "string"
+      },
+      "title": "Envs Path",
+      "type": "array"
+    },
+    "execute_threads": {
+      "default": 1,
+      "description": "Threads to use when performing the unlink/link transaction.\nThis step is pretty strongly I/O limited, and you may not see much\nbenefit here.",
+      "title": "Execute Threads",
+      "type": "integer"
+    },
+    "extra_safety_checks": {
+      "default": false,
+      "description": "Perform additional validation on package contents. Currently, runs sha256\nverification on every file within each package during installation.",
+      "title": "Extra Safety Checks",
+      "type": "boolean"
+    },
+    "force_reinstall": {
+      "default": false,
+      "description": "Ensure that any user-requested package for the current operation is\nuninstalled and reinstalled, even if that package already exists in\nthe environment.",
+      "title": "Force Reinstall",
+      "type": "boolean"
+    },
+    "json": {
+      "default": false,
+      "description": "\n        Ensure all output written to stdout is structured json.\n        ",
+      "title": "Json",
+      "type": "boolean"
+    },
+    "local_repodata_ttl": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "boolean"
+        }
+      ],
+      "default": 1,
+      "description": "For a value of False or 0, always fetch remote repodata (HTTP 304\nresponses respected). For a value of True or 1, respect the HTTP\nCache-Control max-age header. Any other positive integer values is the\nnumber of seconds to locally cache repodata before checking the remote\nserver for an update.",
+      "title": "Local Repodata Ttl"
+    },
+    "migrated_channel_aliases": {
+      "default": [],
+      "description": "A list of previously-used channel_alias values. Useful when switching\nbetween different Anaconda Repository instances.",
+      "items": {
+        "anyOf": [
+          {
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "format": "uri",
+            "minLength": 1,
+            "type": "string"
+          }
+        ]
+      },
+      "title": "Migrated Channel Aliases",
+      "type": "array"
+    },
+    "migrated_custom_channels": {
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "format": "uri",
+            "minLength": 1,
+            "type": "string"
+          }
+        ]
+      },
+      "description": "\n        A map of key-value pairs where the key is a channel name and the value\n        is the previous location of the channel.\n        ",
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Migrated Custom Channels",
+      "type": "object"
+    },
+    "non_admin_enabled": {
+      "default": true,
+      "description": "Allows completion of conda's create, install, update, and remove\noperations, for non-privileged (non-root or non-administrator) users.",
+      "title": "Non Admin Enabled",
+      "type": "boolean"
+    },
+    "notify_outdated_conda": {
+      "default": true,
+      "description": "Notify if a newer version of conda is detected during a create,\ninstall, update, or remove operation.",
+      "title": "Notify Outdated Conda",
+      "type": "boolean"
+    },
+    "offline": {
+      "default": false,
+      "description": "Restrict conda to cached download content and file:// based urls.",
+      "title": "Offline",
+      "type": "boolean"
+    },
+    "override_channels_enabled": {
+      "default": true,
+      "description": "Permit use of the --overide-channels command-line flag.",
+      "title": "Override Channels Enabled",
+      "type": "boolean"
+    },
+    "path_conflict": {
+      "default": "clobber",
+      "description": "The method by which conda handle's conflicting/overlapping paths\nduring a create, install, or update operation. The value must be one\nof 'clobber', 'warn', or 'prevent'. The '--clobber' command-line flag\nor clobber configuration parameter overrides path_conflict set to\n'prevent'.",
+      "enum": [
+        "clobber",
+        "warn",
+        "prevent"
+      ],
+      "title": "Path Conflict",
+      "type": "string"
+    },
+    "pinned_packages": {
+      "default": [],
+      "description": "A list of package specs to pin for every environment resolution. This\nparameter is in BETA, and its behavior may change in a future release.\n\n**env_var_string_delimiter** ->  '&'",
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Pinned Packages",
+      "type": "array"
+    },
+    "pip_interop_enabled": {
+      "default": false,
+      "description": "Allow the conda solver to interact with non-conda-installed Python\npackages.",
+      "title": "Pip Interop Enabled",
+      "type": "boolean"
+    },
+    "pkgs_dirs": {
+      "default": [],
+      "description": "The list of directories where locally-available packages are linked\nfrom at install time. Packages not locally available are downloaded\nand extracted into the first writable directory.",
+      "items": {
+        "format": "file-path",
+        "type": "string"
+      },
+      "title": "Pkgs Dirs",
+      "type": "array"
+    },
+    "proxy_servers": {
+      "additionalProperties": {
+        "format": "uri",
+        "minLength": 1,
+        "type": "string"
+      },
+      "description": "\n        A mapping to enable proxy settings. Keys can be either (1) a\n        scheme://hostname form, which will match any request to the given\n        scheme and exact hostname, or (2) just a scheme, which will match\n        requests to that scheme. Values are are the actual proxy server, and\n        are of the form 'scheme://[user:password@]host[:port]'. The optional\n        'user:password' inclusion enables HTTP Basic Auth with your proxy.\n        ",
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Proxy Servers",
+      "type": "object"
+    },
+    "quiet": {
+      "default": false,
+      "description": "Disable progress bar display and other output.",
+      "title": "Quiet",
+      "type": "boolean"
+    },
+    "remote_backoff_factor": {
+      "default": 1,
+      "description": "The factor determines the time HTTP connection should wait for\nattempt.",
+      "title": "Remote Backoff Factor",
+      "type": "integer"
+    },
+    "remote_connect_timeout_secs": {
+      "default": 9.15,
+      "description": "The number seconds conda will wait for your client to establish a\nconnection to a remote url resource.",
+      "title": "Remote Connect Timeout Secs",
+      "type": "number"
+    },
+    "remote_max_retries": {
+      "default": 3,
+      "description": "The maximum number of retries each HTTP connection should attempt.",
+      "title": "Remote Max Retries",
+      "type": "integer"
+    },
+    "remote_read_timeout_secs": {
+      "default": 60.0,
+      "description": "Once conda has connected to a remote resource and sent an HTTP\nrequest, the read timeout is the number of seconds conda will wait for\nthe server to send a response.",
+      "title": "Remote Read Timeout Secs",
+      "type": "number"
+    },
+    "repodata_fns": {
+      "default": [
+        "current_repodata.json",
+        "repodata.json"
+      ],
+      "description": "Specify filenames for repodata fetching. The default is\n('current_repodata.json', 'repodata.json'), which tries a subset of\nthe full index containing only the latest version for each package,\nthen falls back to repodata.json.  You may want to specify something\nelse to use an alternate index that has been reduced somehow.",
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Repodata Fns",
+      "type": "array"
+    },
+    "repodata_threads": {
+      "default": 0,
+      "description": "Threads to use when downloading and reading repodata. When not set,\ndefaults to None, which uses the default ThreadPoolExecutor behavior.",
+      "title": "Repodata Threads",
+      "type": "integer"
+    },
+    "report_errors": {
+      "default": false,
+      "description": "Opt in, or opt out, of automatic error reporting to core maintainers.\nError reports are anonymous, with only the error stack trace and\ninformation given by `conda info` being sent.",
+      "title": "Report Errors",
+      "type": "boolean"
+    },
+    "restore_free_channel": {
+      "default": false,
+      "description": "Add the \"free\" channel back into defaults, behind \"main\" in priority.\nThe \"free\" channel was removed from the collection of default channels\nin conda 4.7.0.",
+      "title": "Restore Free Channel",
+      "type": "boolean"
+    },
+    "rollback_enabled": {
+      "default": true,
+      "description": "Should any error occur during an unlink/link transaction, revert any\ndisk mutations made to that point in the transaction.",
+      "title": "Rollback Enabled",
+      "type": "boolean"
+    },
+    "safety_checks": {
+      "default": "warn",
+      "description": "Enforce available safety guarantees during package installation. The\nvalue must be one of 'enabled', 'warn', or 'disabled'.",
+      "enum": [
+        "warn",
+        "enabled",
+        "disabled"
+      ],
+      "title": "Safety Checks",
+      "type": "string"
+    },
+    "self_update": {
+      "default": true,
+      "description": "\n        **aliases** -> self_update\n\n        Automatically update conda when a newer or higher priority version is\n        detected.\n        ",
+      "title": "Self Update",
+      "type": "boolean"
+    },
+    "separate_format_cache": {
+      "default": false,
+      "description": "Treat .tar.bz2 files as different from .conda packages when filenames\nare otherwise similar. This defaults to False, so that your package\ncache doesn't churn when rolling out the new package format. If you'd\nrather not assume that a .tar.bz2 and .conda from the same place\nrepresent the same content, set this to True.",
+      "title": "Separate Format Cache",
+      "type": "boolean"
+    },
+    "shortcuts": {
+      "default": true,
+      "description": "Allow packages to create OS-specific shortcuts (e.g. in the Windows\nStart Menu) at install time.",
+      "title": "Shortcuts",
+      "type": "boolean"
+    },
+    "show_channel_urls": {
+      "default": false,
+      "description": "Show channel URLs when displaying what is going to be downloaded.",
+      "title": "Show Channel Urls",
+      "type": "boolean"
+    },
+    "signing_metadata_url_base": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Base URL for obtaining trust metadata updates (i.e., the `*.root.json`\nand `key_mgr.json` files) used to verify metadata and (eventually)\npackage signatures.",
+      "title": "Signing Metadata Url Base"
+    },
+    "softlink": {
+      "default": false,
+      "description": "\n        **aliases** -> softlink\n\n        Register a preference that files be soft-linked (symlinked) into a\n        prefix during install rather than hard-linked. The link source is the\n        'pkgs_dir' package cache from where the package is being linked.\n        WARNING: Using this option can result in corruption of long-lived\n        conda environments. Package caches are *caches*, which means there is\n        some churn and invalidation. With this option, the contents of\n        environments can be switched out (or erased) via operations on other\n        environments.\n        ",
+      "title": "Softlink",
+      "type": "boolean"
+    },
+    "solver": {
+      "default": "classic",
+      "description": "A string to choose between the different solver logics implemented in\nconda. A solver logic takes care of turning your requested packages\ninto a list of specs to add and/or remove from a given environment,\nbased on their dependencies and specified constraints.",
+      "minLength": 1,
+      "title": "Solver",
+      "type": "string"
+    },
+    "track_features": {
+      "default": [],
+      "description": "DEPRECATED.\n\nA list of features that are tracked by default. An entry here is\nsimilar to adding an entry to the create_default_packages list.",
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Track Features",
+      "type": "array"
+    },
+    "unsatisfiable_hints": {
+      "default": true,
+      "description": "A boolean to determine if conda should find conflicting packages in\nthe case of a failed install.",
+      "title": "Unsatisfiable Hints",
+      "type": "boolean"
+    },
+    "unsatisfiable_hints_check_depth": {
+      "default": 2,
+      "description": "An integer that specifies how many levels deep to search for\nunsatisfiable dependencies. If this number is 1 it will complete the\nunsatisfiable hints fastest (but perhaps not the most complete). The\nhigher this number, the longer the generation of the unsat hint will\ntake. Defaults to 3.",
+      "title": "Unsatisfiable Hints Check Depth",
+      "type": "integer"
+    },
+    "use_local": {
+      "default": false,
+      "description": "Add the 'local' channel (as configured with conda-build) to the channel list.",
+      "title": "Use Local",
+      "type": "boolean"
+    },
+    "use_only_tar_bz2": {
+      "default": false,
+      "description": "A boolean indicating that only .tar.bz2 conda packages should be\ndownloaded. This is forced to True if conda-build is installed and\nolder than 3.18.3, because older versions of conda break when conda\nfeeds it the new file format.",
+      "title": "Use Only Tar Bz2",
+      "type": "boolean"
+    },
+    "verbose": {
+      "default": 0,
+      "description": "\n        **aliases** -> verbose\n\n        Sets output log level. 0 is warn. 1 is info. 2 is debug. 3 is trace.\n        ",
+      "title": "Verbose",
+      "type": "integer"
+    },
+    "verify_ssl": {
+      "default": true,
+      "description": "\n        **aliases** -> verify_ssl\n\n        Conda verifies SSL certificates for HTTPS requests, just like a web\n        browser. By default, SSL verification is enabled, and conda operations\n        will fail if a required url's certificate cannot be verified. Setting\n        ssl_verify to False disables certification verification. The value for\n        ssl_verify can also be (1) a path to a CA bundle file, or (2) a path\n        to a directory containing certificates of trusted CA.\n        ",
+      "title": "Verify Ssl",
+      "type": "boolean"
+    },
+    "verify_threads": {
+      "default": 1,
+      "description": "Threads to use when performing the transaction verification step.",
+      "title": "Verify Threads",
+      "type": "integer"
+    },
+    "yes": {
+      "default": false,
+      "description": "\n        **aliases** -> yes\n\n        Automatically choose the 'yes' option whenever asked to proceed with a\n        conda operation, such as when running `conda install`.\n        ",
+      "title": "Yes",
+      "type": "boolean"
+    }
+  },
+  "title": "Condarc",
+  "type": "object"
+}

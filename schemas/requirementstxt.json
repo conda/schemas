@@ -1,0 +1,56 @@
+{
+  "$defs": {
+    "SubdirStr": {
+      "enum": [
+        "linux-64",
+        "linux-32",
+        "linux-armv6l",
+        "linux-armv7l",
+        "linux-ppc64le",
+        "linux-s390x",
+        "osx-64",
+        "osx-32",
+        "osx-arm64",
+        "win-64",
+        "win-32",
+        "win-arm64",
+        "zos-z",
+        "noarch"
+      ],
+      "title": "SubdirStr",
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "A requirements.txt file as produced by conda list --export or conda list --explicit\n\n```\n# This file may be used to create an environment using:\n# $ conda create --name <env> --file <this file>\n# platform: osx-64\n@EXPLICIT\nhttps://repo.anaconda.com/pkgs/free/osx-64/mkl-11.3.3-0.tar.bz2\nhttps://repo.anaconda.com/pkgs/free/osx-64/numpy-1.11.1-py35_0.tar.bz2\nhttps://repo.anaconda.com/pkgs/free/osx-64/openssl-1.0.2h-1.tar.bz2\nhttps://repo.anaconda.com/pkgs/free/osx-64/pip-8.1.2-py35_0.tar.bz2\nhttps://repo.anaconda.com/pkgs/free/osx-64/python-3.5.2-0.tar.bz2\nhttps://repo.anaconda.com/pkgs/free/osx-64/readline-6.2-2.tar.bz2\n```",
+  "properties": {
+    "explicit": {
+      "default": false,
+      "title": "Explicit",
+      "type": "boolean"
+    },
+    "platform": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SubdirStr"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "records": {
+      "default": [],
+      "items": {
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Records",
+      "type": "array"
+    }
+  },
+  "title": "RequirementsTxt",
+  "type": "object"
+}

@@ -1,0 +1,178 @@
+{
+  "$defs": {
+    "SubdirStr": {
+      "enum": [
+        "linux-64",
+        "linux-32",
+        "linux-armv6l",
+        "linux-armv7l",
+        "linux-ppc64le",
+        "linux-s390x",
+        "osx-64",
+        "osx-32",
+        "osx-arm64",
+        "win-64",
+        "win-32",
+        "win-arm64",
+        "zos-z",
+        "noarch"
+      ],
+      "title": "SubdirStr",
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "TODO: In theory, any PackageRecord (scalar) keys should be admitted here.",
+  "properties": {
+    "build": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "pattern": "[0-9a-zA-Z\\._\\*]+",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The build string of the package (e.g. `py37_0`, `py37h6de7cb9_0`, `py*`)",
+      "title": "Build"
+    },
+    "build_number": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The build number of the package",
+      "title": "Build Number"
+    },
+    "channel": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The channel of the package",
+      "title": "Channel"
+    },
+    "file_name": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "pattern": "([0-9a-zA-Z\\._-]+)-(([0-9]!)?[0-9a-z\\._]+)-([0-9a-zA-Z\\._]+)\\.(conda|tar\\.bz2)",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Match the specific filename of the package",
+      "title": "File Name"
+    },
+    "md5": {
+      "anyOf": [
+        {
+          "maxLength": 32,
+          "minLength": 32,
+          "pattern": "[a-fA-F0-9]{32}",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The MD5 hash of the package archive",
+      "title": "Md5"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "pattern": "[0-9a-zA-Z\\._-]+",
+          "type": "string"
+        },
+        {
+          "const": "*",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The name of the package",
+      "title": "Name"
+    },
+    "namespace": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The namespace of the package (currently not used)",
+      "title": "Namespace"
+    },
+    "sha256": {
+      "anyOf": [
+        {
+          "maxLength": 64,
+          "minLength": 64,
+          "pattern": "[a-fA-F0-9]{64}",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The SHA256 hash of the package archive",
+      "title": "Sha256"
+    },
+    "subdir": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SubdirStr"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The subdir of the channel"
+    },
+    "version": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "pattern": "[0-9a-z<>=!\\.\\*]+",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The version spec of the package (e.g. `1.2.3`, `>=1.2.3`, `1.2.*`)",
+      "title": "Version"
+    }
+  },
+  "title": "MatchSpec",
+  "type": "object"
+}

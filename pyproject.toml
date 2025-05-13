@@ -1,3 +1,39 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = [
+  "hatchling >=1.12.2",
+  "hatch-vcs >=0.2.0",
+]
+
+[project]
+authors = [{name = "conda steering council", email = "steering@conda.org"}]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "License :: OSI Approved :: BSD License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "pydantic>=2",
+]
+description = "OS-agnostic, system-level binary package manager."
+license = {file = "LICENSE"}
+name = "conda-models"
+readme = "README.md"
+requires-python = ">=3.10"
+version = "2025"
+
+[project.urls]
+repository = "https://github.com/conda/schemas"
+
 [tool.ruff]
 exclude = [
   "conda/auxlib",
