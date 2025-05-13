@@ -42,6 +42,7 @@ class NoarchType(str, Enum):
 
 
 class PlatformStr(str, Enum):
+    # Value length MUST NOT exceed 32 characters
     EmscriptenWasm32 = "emscripten-wasm32"
     FreeBSD64 = "freebsd-64"
     Linux32 = "linux-32"
@@ -68,17 +69,15 @@ class PackageType(str, Enum):
     pass
 
 
-class Platform(str, Enum):
-    pass
-
-
 NonEmptyStr = Annotated[str, Field(min_length=1)]
 
-package_name_regex = r"[0-9a-zA-Z\._-]+"
+package_name_regex = r"^(([a-z0-9])|([a-z0-9_](?!_)))[._-]?([a-z0-9]+(\.|-|_|$))*$"
+virtual_package_name_regex = r"^__[a-z0-9][._-]?([a-z0-9]+(\.|-|_|$))*$"
 version_regex = r"([0-9]!)?[0-9a-z\._]+"
 version_spec_regex = r"[0-9a-z<>=!\.\*]+"
-build_string_regex = r"[0-9a-zA-Z\._]+"
-build_string_spec_regex = r"[0-9a-zA-Z\._\*]+"
+build_string_regex = r"^[a-zA-Z0-9_\.+]+$"
+build_string_spec_regex = r"^[a-zA-Z0-9_\.+*]+$"
+artifact_extension_regex = r"[a-z0-9](\.?[a-z0-9])*$"
 
 MD5Str = Annotated[str, Field(min_length=32, max_length=32, pattern=r"[a-fA-F0-9]{32}")]
 SHA1Str = Annotated[
@@ -89,13 +88,20 @@ SHA256Str = Annotated[
 ]
 MatchSpecStr = NonEmptyStr  # TODO: implement regex???
 BuildNumber = Annotated[int, Field(ge=0)]
-BuildStr = Annotated[str, Field(min_length=1, pattern=build_string_regex)]
-BuildSpecStr = Annotated[str, Field(min_length=1, pattern=build_string_spec_regex)]
-PackageNameStr = Annotated[str, Field(min_length=1, pattern=package_name_regex)]
+BuildStr = Annotated[
+    str, Field(min_length=1, max_length=64, pattern=build_string_regex)
+]
+BuildSpecStr = Annotated[
+    str, Field(min_length=1, max_length=64, pattern=build_string_spec_regex)
+]
+PackageNameStr = Annotated[
+    str, Field(min_length=1, max_length=64, pattern=package_name_regex)
+]
 PackageFileNameStr = Annotated[
     str,
     Field(
         min_length=1,
+        max_length=211,
         pattern=rf"({package_name_regex})-({version_regex})-({build_string_regex})\.(conda|tar\.bz2)",
     ),
 ]
@@ -103,6 +109,7 @@ TarBz2PackageFileNameStr = Annotated[
     str,
     Field(
         min_length=1,
+        max_length=211,
         pattern=rf"({package_name_regex})-({version_regex})-({build_string_regex})\.tar\.bz2",
     ),
 ]
@@ -110,6 +117,7 @@ CondaPackageFileNameStr = Annotated[
     str,
     Field(
         min_length=1,
+        max_length=211,
         pattern=rf"({package_name_regex})-({version_regex})-({build_string_regex})\.conda",
     ),
 ]
@@ -123,7 +131,7 @@ NameVersionBuildMatchSpecStr = Annotated[
         rf")?",
     ),
 ]
-VersionStr = Annotated[str, Field(min_length=1, pattern=version_regex)]
+VersionStr = Annotated[str, Field(min_length=1, max_length=64, pattern=version_regex)]
 VersionSpecStr = Annotated[str, Field(min_length=1, pattern=version_spec_regex)]
 
 EntryPointStr = Annotated[
