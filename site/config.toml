@@ -18,7 +18,7 @@ items = [
   {schema = "schemas/history.schema.json", draft = true},
   {schema = "schemas/matchspec.schema.json", draft = true},
   {schema = "schemas/metayaml.schema.json", draft = true},
-  {schema = "schemas/optionalrepodatarecord.schema.json", draft = true},
+  {schema = "schemas/repodatapatchinstructions.schema.json", draft = true},
   {schema = "schemas/packagerecord.schema.json", draft = true},
   {schema = "schemas/repodatapatchinstructions.schema.json", draft = true},
   {schema = "schemas/repodatarecord.schema.json", draft = true},
