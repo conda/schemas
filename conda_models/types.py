@@ -41,7 +41,7 @@ class NoarchType(str, Enum):
     "A noarch Python package"
 
 
-class PlatformStr(str, Enum):
+class SubdirStr(str, Enum):
     # Value length MUST NOT exceed 32 characters
     EmscriptenWasm32 = "emscripten-wasm32"
     FreeBSD64 = "freebsd-64"
@@ -59,9 +59,6 @@ class PlatformStr(str, Enum):
     Win64 = "win-64"
     WinArm64 = "win-arm64"
     ZosZ = "zos-z"
-
-
-class SubdirStr(PlatformStr):
     Noarch = "noarch"
 
 
