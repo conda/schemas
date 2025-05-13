@@ -22,7 +22,7 @@ from .types import (
 )
 
 
-class _RunExports(ExtrasForbiddenModel):
+class RunExports(ExtrasForbiddenModel):
     weak: Iterable[NameVersionBuildMatchSpecStr] = None
     """
     Dependencies to be exported to runtime requirements when package is added as a host
@@ -190,7 +190,7 @@ class _Build(ExtrasForbiddenModel):
     The full conda-build recipe and rendered meta.yaml file is included in the Package metadata by
     default. You can disable it here.
     """
-    run_exports: Iterable[PackageNameStr] | _RunExports = None
+    run_exports: Iterable[PackageNameStr] | RunExports = None
     """
     List of packages that will be injected as a runtime dependency in other recipes.
     Use the 'strong' key to indicate which dependencies will be injected when this package is used
@@ -395,7 +395,7 @@ class _Output(ExtrasForbiddenModel):
     "List of files to include in the package, run after 'script', if any."
     build: dict  # Is this really allowed / used ???
     requirements: Iterable[NameVersionBuildMatchSpecStr] | _Requirements = None
-    run_exports: Iterable[NameVersionBuildMatchSpecStr] | _RunExports = None
+    run_exports: Iterable[NameVersionBuildMatchSpecStr] | RunExports = None
     test: _OutputTest = None
     type_: Literal["conda", "conda_v2", "wheel"] = Field("conda", alias="type")
     about: _About = None

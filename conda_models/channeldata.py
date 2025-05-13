@@ -7,7 +7,7 @@ from collections.abc import Iterable
 from pydantic import AnyUrl, Field
 
 from ._base import ExtrasForbiddenModel
-from .run_exports import RunExports
+from .meta_yaml import RunExports
 from .types import PackageNameStr, VersionStr
 
 
