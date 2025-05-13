@@ -63,7 +63,7 @@
             {
               "items": {
                 "minLength": 1,
-                "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+                "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
                 "type": "string"
               },
               "type": "array"
@@ -92,7 +92,7 @@
             {
               "items": {
                 "minLength": 1,
-                "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+                "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
                 "type": "string"
               },
               "type": "array"
@@ -370,17 +370,20 @@
     },
     "SubdirStr": {
       "enum": [
-        "linux-64",
+        "emscripten-wasm32",
+        "freebsd-64",
         "linux-32",
+        "linux-64",
         "linux-armv6l",
         "linux-armv7l",
         "linux-ppc64le",
         "linux-s390x",
-        "osx-64",
         "osx-32",
+        "osx-64",
         "osx-arm64",
-        "win-64",
+        "wasi-wasm32",
         "win-32",
+        "win-64",
         "win-arm64",
         "zos-z",
         "noarch"
@@ -395,11 +398,12 @@
     "packages": {
       "description": "The .tar.bz2 packages in the repodata that will be patched",
       "patternProperties": {
-        "([0-9a-zA-Z\\._-]+)-(([0-9]!)?[0-9a-z\\._]+)-([0-9a-zA-Z\\._]+)\\.tar\\.bz2": {
+        "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)-(([0-9]!)?[0-9a-z\\._]+)-(^[a-zA-Z0-9_\\.+]+$)\\.tar\\.bz2": {
           "$ref": "#/$defs/OptionalRepodataRecord"
         }
       },
       "propertyNames": {
+        "maxLength": 211,
         "minLength": 1
       },
       "title": "Packages",
@@ -408,11 +412,12 @@
     "packages.conda": {
       "description": "The .conda packages in the repodata that will be patched",
       "patternProperties": {
-        "([0-9a-zA-Z\\._-]+)-(([0-9]!)?[0-9a-z\\._]+)-([0-9a-zA-Z\\._]+)\\.conda": {
+        "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)-(([0-9]!)?[0-9a-z\\._]+)-(^[a-zA-Z0-9_\\.+]+$)\\.conda": {
           "$ref": "#/$defs/OptionalRepodataRecord"
         }
       },
       "propertyNames": {
+        "maxLength": 211,
         "minLength": 1
       },
       "title": "Packages.Conda",
@@ -426,8 +431,9 @@
     "remove": {
       "description": "The packages (conda or tar.bz2) that should be removed from the index",
       "items": {
+        "maxLength": 211,
         "minLength": 1,
-        "pattern": "([0-9a-zA-Z\\._-]+)-(([0-9]!)?[0-9a-z\\._]+)-([0-9a-zA-Z\\._]+)\\.(conda|tar\\.bz2)",
+        "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)-(([0-9]!)?[0-9a-z\\._]+)-(^[a-zA-Z0-9_\\.+]+$)\\.(conda|tar\\.bz2)",
         "type": "string"
       },
       "title": "Remove",

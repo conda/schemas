@@ -121,6 +121,7 @@
             }
           },
           "propertyNames": {
+            "maxLength": 64,
             "minLength": 1
           },
           "title": "Run Exports",
@@ -186,6 +187,7 @@
         "version": {
           "anyOf": [
             {
+              "maxLength": 64,
               "minLength": 1,
               "pattern": "([0-9]!)?[0-9a-z\\._]+",
               "type": "string"
@@ -221,7 +223,7 @@
           "description": "Dependencies to be exported to runtime requirements when package is added as a build\ndependency.",
           "items": {
             "minLength": 1,
-            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
             "type": "string"
           },
           "title": "Strong",
@@ -232,7 +234,7 @@
           "description": "Dependencies to be exported to runtime constrains when package is added as a build\ndependency.",
           "items": {
             "minLength": 1,
-            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
             "type": "string"
           },
           "title": "Strong Constrains",
@@ -243,7 +245,7 @@
           "description": "Dependencies to be exported to runtime requirements when package is added as a host\ndependency.",
           "items": {
             "minLength": 1,
-            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
             "type": "string"
           },
           "title": "Weak",
@@ -254,7 +256,7 @@
           "description": "Dependencies to be exported to runtime constrains when package is added as a host\ndependency.",
           "items": {
             "minLength": 1,
-            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
             "type": "string"
           },
           "title": "Weak Constrains",
@@ -277,11 +279,12 @@
     "packages": {
       "description": "The packages available in the channel, grouped by name",
       "patternProperties": {
-        "[0-9a-zA-Z\\._-]+": {
+        "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$": {
           "$ref": "#/$defs/ChannelDataPackage"
         }
       },
       "propertyNames": {
+        "maxLength": 64,
         "minLength": 1
       },
       "title": "Packages",

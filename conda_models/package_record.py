@@ -6,7 +6,7 @@ from collections.abc import Iterable
 from enum import Enum
 from typing import Literal
 
-from pydantic import PositiveInt
+from pydantic import Field, PositiveInt
 
 from ._base import ExtrasForbiddenModel
 from .types import (
@@ -83,11 +83,11 @@ class PackageRecord(ExtrasForbiddenModel):
     """
     version: VersionStr
     "The version of the package"
-    preferred_env: str | None = None
+    preferred_env: str | None = Field(None, deprecated=True)
     "Unused"
-    date: str | None = None
+    date: str | None = Field(None, deprecated=True)
     "Unused"
-    package_type: str | None = None
+    package_type: str | None = Field(None, deprecated=True)
     "Unused"
 
 

@@ -68,7 +68,7 @@ class PackageType(str, Enum):
 
 NonEmptyStr = Annotated[str, Field(min_length=1)]
 
-package_name_regex = r"^(([a-z0-9])|([a-z0-9_](?!_)))[._-]?([a-z0-9]+(\.|-|_|$))*$"
+package_name_regex = r"^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\.|-|_|$))*$"
 virtual_package_name_regex = r"^__[a-z0-9][._-]?([a-z0-9]+(\.|-|_|$))*$"
 version_regex = r"([0-9]!)?[0-9a-z\._]+"
 version_spec_regex = r"[0-9a-z<>=!\.\*]+"

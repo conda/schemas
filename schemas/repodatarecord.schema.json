@@ -10,17 +10,20 @@
     },
     "SubdirStr": {
       "enum": [
-        "linux-64",
+        "emscripten-wasm32",
+        "freebsd-64",
         "linux-32",
+        "linux-64",
         "linux-armv6l",
         "linux-armv7l",
         "linux-ppc64le",
         "linux-s390x",
-        "osx-64",
         "osx-32",
+        "osx-64",
         "osx-arm64",
-        "win-64",
+        "wasi-wasm32",
         "win-32",
+        "win-64",
         "win-arm64",
         "zos-z",
         "noarch"
@@ -48,8 +51,9 @@
     },
     "build": {
       "description": "The build string of the package.",
+      "maxLength": 64,
       "minLength": 1,
-      "pattern": "[0-9a-zA-Z\\._]+",
+      "pattern": "^[a-zA-Z0-9_\\.+]+$",
       "title": "Build",
       "type": "string"
     },
@@ -69,7 +73,7 @@
       "description": "Additional constraints on packages. `constrains` are different from `depends` in that packages\nspecified in `depends` must be installed next to this package, whereas packages specified in\n`constrains` are not required to be installed, but if they are installed they must follow these\nconstraints.",
       "items": {
         "minLength": 1,
-        "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+        "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
         "type": "string"
       },
       "title": "Constrains",
@@ -85,6 +89,7 @@
         }
       ],
       "default": null,
+      "deprecated": true,
       "description": "Unused",
       "title": "Date"
     },
@@ -92,7 +97,7 @@
       "description": "Specification of packages this package depends on.",
       "items": {
         "minLength": 1,
-        "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+        "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
         "type": "string"
       },
       "title": "Depends",
@@ -191,8 +196,9 @@
     },
     "name": {
       "description": "The name of the package",
+      "maxLength": 64,
       "minLength": 1,
-      "pattern": "[0-9a-zA-Z\\._-]+",
+      "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
       "title": "Name",
       "type": "string"
     },
@@ -218,6 +224,7 @@
         }
       ],
       "default": null,
+      "deprecated": true,
       "description": "Unused",
       "title": "Package Type"
     },
@@ -244,6 +251,7 @@
         }
       ],
       "default": null,
+      "deprecated": true,
       "description": "Unused",
       "title": "Preferred Env"
     },
@@ -289,7 +297,7 @@
     },
     "timestamp": {
       "default": 0,
-      "description": "The date this entry was created",
+      "description": "The date this entry was created, as a Unix timestamp in milliseconds",
       "exclusiveMinimum": 0,
       "title": "Timestamp",
       "type": "integer"
@@ -324,6 +332,7 @@
     },
     "version": {
       "description": "The version of the package",
+      "maxLength": 64,
       "minLength": 1,
       "pattern": "([0-9]!)?[0-9a-z\\._]+",
       "title": "Version",

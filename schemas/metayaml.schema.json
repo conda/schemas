@@ -16,7 +16,7 @@
           "description": "Dependencies to be exported to runtime requirements when package is added as a build\ndependency.",
           "items": {
             "minLength": 1,
-            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
             "type": "string"
           },
           "title": "Strong",
@@ -27,7 +27,7 @@
           "description": "Dependencies to be exported to runtime constrains when package is added as a build\ndependency.",
           "items": {
             "minLength": 1,
-            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
             "type": "string"
           },
           "title": "Strong Constrains",
@@ -38,7 +38,7 @@
           "description": "Dependencies to be exported to runtime requirements when package is added as a host\ndependency.",
           "items": {
             "minLength": 1,
-            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
             "type": "string"
           },
           "title": "Weak",
@@ -49,7 +49,7 @@
           "description": "Dependencies to be exported to runtime constrains when package is added as a host\ndependency.",
           "items": {
             "minLength": 1,
-            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
             "type": "string"
           },
           "title": "Weak Constrains",
@@ -322,8 +322,9 @@
           "default": null,
           "description": "Ensure these packages are NOT considered for the build hash",
           "items": {
+            "maxLength": 64,
             "minLength": 1,
-            "pattern": "[0-9a-zA-Z\\._-]+",
+            "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
             "type": "string"
           },
           "title": "Force Ignore Keys",
@@ -333,8 +334,9 @@
           "default": null,
           "description": "Ensure these packages are considered for the build hash",
           "items": {
+            "maxLength": 64,
             "minLength": 1,
-            "pattern": "[0-9a-zA-Z\\._-]+",
+            "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
             "type": "string"
           },
           "title": "Force Use Keys",
@@ -366,8 +368,9 @@
           "default": null,
           "description": "Ignore these injected run exports, regardless the origin.",
           "items": {
+            "maxLength": 64,
             "minLength": 1,
-            "pattern": "[0-9a-zA-Z\\._-]+",
+            "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
             "type": "string"
           },
           "title": "Ignore Run Exports",
@@ -377,8 +380,9 @@
           "default": null,
           "description": "Ignore the injected run exports coming from these packages.",
           "items": {
+            "maxLength": 64,
             "minLength": 1,
-            "pattern": "[0-9a-zA-Z\\._-]+",
+            "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
             "type": "string"
           },
           "title": "Ignore Run Exports From",
@@ -542,8 +546,9 @@
           "anyOf": [
             {
               "items": {
+                "maxLength": 64,
                 "minLength": 1,
-                "pattern": "[0-9a-zA-Z\\._-]+",
+                "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
                 "type": "string"
               },
               "type": "array"
@@ -614,8 +619,9 @@
         "string": {
           "default": null,
           "description": "Third field in the final package filename.\nUsually automatically generated from the build number and package contents.",
+          "maxLength": 64,
           "minLength": 1,
-          "pattern": "[0-9a-zA-Z\\._]+",
+          "pattern": "^[a-zA-Z0-9_\\.+]+$",
           "title": "String",
           "type": "string"
         },
@@ -686,8 +692,9 @@
           "type": "array"
         },
         "name": {
+          "maxLength": 64,
           "minLength": 1,
-          "pattern": "[0-9a-zA-Z\\._-]+",
+          "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
           "title": "Name",
           "type": "string"
         },
@@ -701,7 +708,7 @@
             {
               "items": {
                 "minLength": 1,
-                "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+                "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
                 "type": "string"
               },
               "type": "array"
@@ -718,7 +725,7 @@
             {
               "items": {
                 "minLength": 1,
-                "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+                "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
                 "type": "string"
               },
               "type": "array"
@@ -766,6 +773,7 @@
           "type": "string"
         },
         "version": {
+          "maxLength": 64,
           "minLength": 1,
           "pattern": "([0-9]!)?[0-9a-z\\._]+",
           "title": "Version",
@@ -798,12 +806,14 @@
       "additionalProperties": false,
       "properties": {
         "name": {
+          "maxLength": 64,
           "minLength": 1,
-          "pattern": "[0-9a-zA-Z\\._-]+",
+          "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
           "title": "Name",
           "type": "string"
         },
         "version": {
+          "maxLength": 64,
           "minLength": 1,
           "pattern": "([0-9]!)?[0-9a-z\\._]+",
           "title": "Version",
@@ -826,7 +836,7 @@
           "description": "Tools required to build the package. These packages are run on the build system and include\nthings such as revision control systems (Git, SVN) make tools (GNU make, Autotool, CMake) and\ncompilers (real cross, pseudo-cross, or native when not cross-compiling), and any source\npre-processors.\n\nPackages which provide \"sysroot\" files, like the CDT packages (see below) also belong in the\nbuild section.",
           "items": {
             "minLength": 1,
-            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
             "type": "string"
           },
           "title": "Build",
@@ -837,7 +847,7 @@
           "description": "UNDOCUMENTED.",
           "items": {
             "minLength": 1,
-            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
             "type": "string"
           },
           "title": "Conflicts",
@@ -848,7 +858,7 @@
           "description": "Packages that need to be specific to the target platform when the target platform is not\nnecessarily the same as the native build platform.\n\nFor example, in order for a recipe to be \"cross-capable\", shared libraries requirements must be\nlisted in the host section, rather than the build section, so that the shared libraries that\nget linked are ones for the target platform, rather than the native build platform.\n\nYou should also include the base interpreter for packages that need one. In other words, a\nPython package would list 'python' here and an R package would list 'mro-base' or 'r-base'.",
           "items": {
             "minLength": 1,
-            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
             "type": "string"
           },
           "title": "Host",
@@ -859,7 +869,7 @@
           "description": "Packages required to run the package. These are the dependencies that are installed\nautomatically whenever the package is installed.",
           "items": {
             "minLength": 1,
-            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
             "type": "string"
           },
           "title": "Run",
@@ -870,7 +880,7 @@
           "description": "Packages that are optional at runtime but must obey the supplied additional constraint if they\nare installed.",
           "items": {
             "minLength": 1,
-            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
             "type": "string"
           },
           "title": "Run Constrained",
@@ -1056,8 +1066,9 @@
           "default": null,
           "description": "Run the bundled test suite of the listed packages ensuring the package being built is used as\na dependency.",
           "items": {
+            "maxLength": 64,
             "minLength": 1,
-            "pattern": "[0-9a-zA-Z\\._-]+",
+            "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
             "type": "string"
           },
           "title": "Downstreams",
@@ -1088,7 +1099,7 @@
           "description": "In addition to the runtime requirements, you can specify requirements needed during testing.\nThe runtime requirements that you specified in the \"run\" section described above are\nautomatically included during testing.",
           "items": {
             "minLength": 1,
-            "pattern": "([0-9a-zA-Z\\._-]+)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+([0-9a-zA-Z\\._\\*]+))?",
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
             "type": "string"
           },
           "title": "Requires",

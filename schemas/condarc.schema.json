@@ -19,8 +19,9 @@
       ],
       "description": "A list of packages that, if installed, are always updated to the\nlatest possible version.",
       "items": {
+        "maxLength": 64,
         "minLength": 1,
-        "pattern": "[0-9a-zA-Z\\._-]+",
+        "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
         "type": "string"
       },
       "title": "Aggressive Update Packages",
