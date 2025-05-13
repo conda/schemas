@@ -3,6 +3,8 @@ Definitions for the repodata.json files served in conda channels.
 """
 
 from collections.abc import Iterable
+from enum import Enum
+from typing import Literal
 
 from pydantic import PositiveInt
 
@@ -61,7 +63,7 @@ class PackageRecord(ExtrasForbiddenModel):
     "The md5 hash of the package archive"
     name: PackageNameStr
     "The name of the package"
-    noarch: NoarchStr
+    noarch: NoarchStr | None = None
     "Whether the package is architecture independent, and in which way."
     platform: str | None = None
     "The platform the package supports"
@@ -71,7 +73,7 @@ class PackageRecord(ExtrasForbiddenModel):
     "The size of the package archive, in bytes"
     subdir: SubdirStr
     "The subdirectory of the channel this package is in"
-    timestamp: PositiveInt | None = None
+    timestamp: PositiveInt = 0
     "The date this entry was created"
     track_features: NonEmptyStr | Iterable[NonEmptyStr] | None = None
     """
@@ -87,3 +89,64 @@ class PackageRecord(ExtrasForbiddenModel):
     "Unused"
     package_type: str | None = None
     "Unused"
+
+
+class LinkType(Enum):
+    hardlink = 1
+    softlink = 2
+    copy = 3
+    directory = 4
+
+
+class PathType(Enum):
+    hardlink = "hardlink"
+    softlink = "softlink"
+    directory = "directory"
+
+
+class PathDataV1(ExtrasForbiddenModel):
+    _path: NonEmptyStr = ...
+    file_mode: Literal["text", "binary"] | None = None
+    inode_paths: list[NonEmptyStr] | None = None
+    no_link: bool | None = None
+    path_type: PathType | None = None
+    prefix_placeholder: NonEmptyStr | None = None
+    sha256_in_prefix: SHA256Str | None = None
+    sha256: SHA256Str | None = None
+    size_in_bytes: PositiveInt | None = None
+
+
+class PathsDataV1(ExtrasForbiddenModel):
+    paths_version: Literal[1] = 1
+    paths: list[PathDataV1] = []
+
+
+class Link(ExtrasForbiddenModel):
+    source: NonEmptyStr = ...
+    type: LinkType = ...
+
+
+class PrefixRecord(PackageRecord):
+    """
+    A package installed in an environment.
+
+    Extends `PackageRecord` with additional details about how the package was installed
+    in the target environment.
+    """
+    extracted_package_dir: str = ...
+    "Full path to the local extracted package"
+
+    package_tarball_full_path: str = ...
+    "Full path to the local package file"
+
+    files: list[NonEmptyStr] = []
+    "The list of all files comprising the package as relative paths from the prefix root"
+
+    paths_data: PathsDataV1 = PathsDataV1()
+    "List with additional information about the files, e.g. checksums and link type"
+
+    link: Link = ...
+    "Information about how the package was linked into the prefix"
+
+    requested_spec: NonEmptyStr | None = None
+    "The `MatchSpec` requested for this package by the user, if any."
