@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://schemas.conda.io/repodata-1.schema.json",
+  "$id": "https://schemas.conda.org/repodata-1.schema.json",
   "type": "object",
   "title": "repodata.json",
   "$comment": "TODO add back to required: repodata_version",
@@ -10,7 +10,7 @@
   "properties": {
     "$schema": {
       "type": "string",
-      "const": "https://schemas.conda.io/repodata-1.schema.json",
+      "const": "https://schemas.conda.org/repodata-1.schema.json",
       "format": "uri"
     },
     "repodata_version": {
@@ -25,14 +25,18 @@
           "$ref": "common-1.schema.json#/definitions/subdir"
         }
       },
-      "required": ["subdir"]
+      "required": [
+        "subdir"
+      ]
     },
     "packages": {
       "type": "object",
       "title": "Metadata for 'v1' .tar.bz2 Conda packages.",
       "description": "Filename key of each package should be validated against {name}-{version}-{build}{ext} metadata for the package.",
       "patternProperties": {
-        "^.+\\.tar\\.bz2$": {"$ref": "repodata-record-1.schema.json"}
+        "^.+\\.tar\\.bz2$": {
+          "$ref": "repodata-record-1.schema.json"
+        }
       },
       "additionalProperties": false
     },
@@ -41,7 +45,9 @@
       "title": "Metadata for 'v2' .conda Conda packages.",
       "description": "Filename key of each package should be validated against {name}-{version}-{build}{ext} metadata for the package.",
       "patternProperties": {
-        "^.+\\.conda$": {"$ref": "repodata-record-1.schema.json"}
+        "^.+\\.conda$": {
+          "$ref": "repodata-record-1.schema.json"
+        }
       },
       "additionalProperties": false
     },
@@ -60,7 +66,9 @@
     "signatures": {
       "type": "object",
       "patternProperties": {
-        "^.+(\\.tar\\.bz2)|(\\.conda)$": {"$ref": "#/definitions/signature"}
+        "^.+(\\.tar\\.bz2)|(\\.conda)$": {
+          "$ref": "#/definitions/signature"
+        }
       },
       "additionalProperties": false
     }

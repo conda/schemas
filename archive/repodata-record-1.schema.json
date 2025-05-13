@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://schemas.conda.io/repodata-record-1.schema.json",
+  "$id": "https://schemas.conda.org/repodata-record-1.schema.json",
   "type": "object",
   "title": "Conda Package Metadata Record Schema",
   "description": "The schema for each package file's block of metadata in repodata.",
@@ -23,13 +23,27 @@
       "const": 1,
       "patchable": true
     },
-    "origin_channel_name": {"$ref": "common-1.schema.json#/definitions/origin_channel_name"},
-    "subdir": {"$ref": "common-1.schema.json#/definitions/subdir"},
-    "namespace": {"$ref": "common-1.schema.json#/definitions/namespace"},
-    "name": {"$ref": "common-1.schema.json#/definitions/name"},
-    "version": {"$ref": "common-1.schema.json#/definitions/package_version"},
-    "build_number": {"$ref": "common-1.schema.json#/definitions/build_number"},
-    "build": {"$ref": "common-1.schema.json#/definitions/build"},
+    "origin_channel_name": {
+      "$ref": "common-1.schema.json#/definitions/origin_channel_name"
+    },
+    "subdir": {
+      "$ref": "common-1.schema.json#/definitions/subdir"
+    },
+    "namespace": {
+      "$ref": "common-1.schema.json#/definitions/namespace"
+    },
+    "name": {
+      "$ref": "common-1.schema.json#/definitions/name"
+    },
+    "version": {
+      "$ref": "common-1.schema.json#/definitions/package_version"
+    },
+    "build_number": {
+      "$ref": "common-1.schema.json#/definitions/build_number"
+    },
+    "build": {
+      "$ref": "common-1.schema.json#/definitions/build"
+    },
     "fn": {
       "type": "string",
       "description": "The file name should be generated based on other fields in the package's metadata, i.e. {name}-{version}-{build}{ext}. It should be validated against those fields.",
@@ -65,7 +79,9 @@
         "9ceda9e08e97868b6ff7c0961a40544f"
       ]
     },
-    "timestamp": {"$ref": "common-1.schema.json#/definitions/timestamp"},
+    "timestamp": {
+      "$ref": "common-1.schema.json#/definitions/timestamp"
+    },
     "patch_version": {
       "type": "integer",
       "minimum": 0,
@@ -129,7 +145,10 @@
     },
     "license": {
       "$comment": "TODO don't allow null",
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "title": "The package's license.",
       "description": "A free-form text field describing the packages license.",
       "patchable": true,
@@ -137,31 +156,43 @@
         "MIT"
       ]
     },
-    "license_family": {"$ref": "common-1.schema.json#/definitions/license_family"},
-    "spdx_license": {"$ref": "common-1.schema.json#/definitions/spdx_license"},
+    "license_family": {
+      "$ref": "common-1.schema.json#/definitions/license_family"
+    },
+    "spdx_license": {
+      "$ref": "common-1.schema.json#/definitions/spdx_license"
+    },
     "vulns_active": {
       "type": "array",
       "description": "Vulnerabilities that have been identified for the package that are potentially active and exploitable.",
       "patchable": true,
-      "items": {"$ref": "common-1.schema.json#/definitions/vuln_id"}
+      "items": {
+        "$ref": "common-1.schema.json#/definitions/vuln_id"
+      }
     },
     "vulns_mitigated": {
       "type": "array",
       "description": "Vulnerabilities that have been identified for the package but have proactively been mitigated in this package build through a code patch.",
       "patchable": true,
-      "items": {"$ref": "common-1.schema.json#/definitions/vuln_id"}
+      "items": {
+        "$ref": "common-1.schema.json#/definitions/vuln_id"
+      }
     },
     "vulns_cleared": {
       "type": "array",
       "description": "Vulnerabilities associated with the package that have been analyzed and determined to not be applicable.",
       "patchable": true,
-      "items": {"$ref": "common-1.schema.json#/definitions/vuln_id"}
+      "items": {
+        "$ref": "common-1.schema.json#/definitions/vuln_id"
+      }
     },
     "vulns_disputed": {
       "type": "array",
       "description": "Vulnerabilities where legitimacy as an actual vulnerability is disputed by upstream project maintainers or other community members.",
       "patchable": true,
-      "items": {"$ref": "common-1.schema.json#/definitions/vuln_id"}
+      "items": {
+        "$ref": "common-1.schema.json#/definitions/vuln_id"
+      }
     },
     "post_solve_message": {
       "type": "string",

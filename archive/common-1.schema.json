@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://schemas.conda.io/common-1.schema.json",
+  "$id": "https://schemas.conda.org/common-1.schema.json",
   "definitions": {
     "origin_channel_name": {
       "type": "string",

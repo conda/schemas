@@ -1,21 +1,19 @@
 # edit this in https://github.com/conda/infrastructure
 
-name: Bug Report
-description: Create a bug report.
+name: Documentation
+description: Create a documentation related issue.
 labels:
-  - type::bug
+  - type::documentation
 body:
   - type: markdown
     attributes:
       value: |
-        Because processing new bug reports is time-consuming, we would like to ask you to fill out the following form to the best of your ability and as completely as possible.
-
         > [!NOTE]
-        > Bug reports that are incomplete or missing information may be closed as inactionable.
+        > Documentation requests that are incomplete or missing information may be closed as inactionable.
 
         Since there are already a lot of open issues, please also take a moment to search existing ones to see if your bug has already been reported. If you find something related, please upvote that issue and provide additional details as necessary.
 
-        💐 Thank you for helping to make `conda/schemas` better. We would be unable to improve `conda/schemas` without our community!
+        💐 Thank you for helping to make conda better. We would be unable to improve conda without our community!
   - type: checkboxes
     id: checks
     attributes:
@@ -30,10 +28,9 @@ body:
     id: what
     attributes:
       label: What happened?
-      description: What should have happened instead? Please provide as many details as possible. The more information provided, the more likely we are able to replicate your problem and offer a solution.
+      description: Mention here any typos, broken links, or missing, incomplete, or outdated information, etc. that you have noticed in the conda docs or CLI help.
     validations:
       required: true
-
   - type: textarea
     id: context
     attributes:

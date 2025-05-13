@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://schemas.conda.io/info-security-1.schema.json",
+  "$id": "https://schemas.conda.org/info-security-1.schema.json",
   "type": "object",
   "title": "info/security.json",
   "description": "Security-related information for the package.",
@@ -10,7 +10,7 @@
   "properties": {
     "$schema": {
       "type": "string",
-      "const": "https://schemas.conda.io/info-security-1.schema.json",
+      "const": "https://schemas.conda.org/info-security-1.schema.json",
       "format": "uri"
     },
     "schema_version": {
@@ -23,7 +23,9 @@
       "type": "array",
       "items": {
         "allOf": [
-          {"$ref": "#/definitions/vuln_description_item"},
+          {
+            "$ref": "#/definitions/vuln_description_item"
+          },
           {
             "properties": {
               "patch_fn": {
@@ -43,24 +45,32 @@
     "vulns_disputed": {
       "description": "Vulnerabilities where one party, particularly the project maintainers, disagrees with another party's assertion that a particular issue in software is a vulnerability",
       "type": "array",
-      "items": {"$ref": "#/definitions/vuln_description_item"}
+      "items": {
+        "$ref": "#/definitions/vuln_description_item"
+      }
     },
     "vulns_cleared": {
       "description": "Vulnerabilities associated with the package that have been analyzed and determined to not be applicable.",
       "type": "array",
-      "items": {"$ref": "#/definitions/vuln_description_item"}
+      "items": {
+        "$ref": "#/definitions/vuln_description_item"
+      }
     },
     "vulns_active": {
       "description": "Vulnerabilities that have been identified for the package that are potentially active and exploitable.",
       "type": "array",
-      "items": {"$ref": "#/definitions/vuln_description_item"}
+      "items": {
+        "$ref": "#/definitions/vuln_description_item"
+      }
     }
   },
   "definitions": {
     "vuln_description_item": {
       "$id": "#/definitions/vuln_description_item",
       "type": "object",
-      "required": ["id"],
+      "required": [
+        "id"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -79,7 +89,9 @@
         "references": {
           "description": "References determined to be relevant by the recipe author.",
           "type": "array",
-          "items": {"$ref": "#/definitions/vuln_description_item_reference"}
+          "items": {
+            "$ref": "#/definitions/vuln_description_item_reference"
+          }
         }
       }
     },
