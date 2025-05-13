@@ -41,7 +41,7 @@ class NoarchType(str, Enum):
     "A noarch Python package"
 
 
-class SubdirStr(str, Enum):
+class PlatformStr(str, Enum):
     EmscriptenWasm32 = "emscripten-wasm32"
     FreeBSD64 = "freebsd-64"
     Linux32 = "linux-32"
@@ -50,7 +50,6 @@ class SubdirStr(str, Enum):
     LinuxArmV7l = "linux-armv7l"
     LinuxPPC64le = "linux-ppc64le"
     LinuxS390x = "linux-s390x"
-    Noarch = "noarch"
     OSX32 = "osx-32"
     OSX64 = "osx-64"
     OSXArm64 = "osx-arm64"
@@ -59,6 +58,10 @@ class SubdirStr(str, Enum):
     Win64 = "win-64"
     WinArm64 = "win-arm64"
     ZosZ = "zos-z"
+
+
+class SubdirStr(PlatformStr):
+    Noarch = "noarch"
 
 
 class PackageType(str, Enum):
