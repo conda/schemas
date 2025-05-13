@@ -1,6 +1,6 @@
 title = "conda schemas"
 description = """
-This site contains schemas for the conda ecosystem, including schemas for the conda package manager, constructor, and menuinst.
+This site contains schemas for the conda ecosystem.
 
 ## Links
 
