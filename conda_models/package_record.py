@@ -74,7 +74,7 @@ class PackageRecord(ExtrasForbiddenModel):
     subdir: SubdirStr
     "The subdirectory of the channel this package is in"
     timestamp: PositiveInt = 0
-    "The date this entry was created"
+    "The date this entry was created, as a Unix timestamp in milliseconds"
     track_features: NonEmptyStr | Iterable[NonEmptyStr] | None = None
     """
     Nowadays only used to downweight package variants (ie. give a variant less priority). To that
