@@ -15,13 +15,13 @@ repos:
         args: [--autofix, --no-sort-keys]
   - repo: https://github.com/astral-sh/ruff-pre-commit
     # Ruff version.
-    rev: v0.11.2
+    rev: v0.11.9
     hooks:
       - id: ruff  # linter
         args: [ --fix ]
       - id: ruff-format
   - repo: https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.32.1
+    rev: 0.33.0
     hooks:
       - id: check-github-workflows
   - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
