@@ -18,7 +18,7 @@ def main():
         data = Model.model_json_schema()
         data["$schema"] = "https://json-schema.org/draft/2020-12/schema"
         text = json.dumps(data, indent=2, sort_keys=True) + "\n"
-        (schemas_dir / f"{Model.__name__.lower()}.json").write_text(text)
+        (schemas_dir / f"{Model.__name__.lower()}.schema.json").write_text(text)
 
 
 if __name__ == "__main__":
