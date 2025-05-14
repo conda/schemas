@@ -3,8 +3,6 @@ Definitions for the repodata.json files served in conda channels.
 """
 
 from collections.abc import Iterable
-from enum import Enum
-from typing import Literal
 
 from pydantic import Field, PositiveInt
 
@@ -12,11 +10,13 @@ from ._base import ExtrasForbiddenModel
 from .types import (
     BuildNumber,
     BuildStr,
+    Link,
     MD5Str,
     NameVersionBuildMatchSpecStr,
     NoarchStr,
     NonEmptyStr,
     PackageNameStr,
+    PathsDataV1,
     SHA256Str,
     SubdirStr,
     VersionStr,
@@ -89,41 +89,6 @@ class PackageRecord(ExtrasForbiddenModel):
     "Unused"
     package_type: str | None = Field(None, deprecated=True)
     "Unused"
-
-
-class LinkType(Enum):
-    hardlink = 1
-    softlink = 2
-    copy = 3
-    directory = 4
-
-
-class PathType(Enum):
-    hardlink = "hardlink"
-    softlink = "softlink"
-    directory = "directory"
-
-
-class PathDataV1(ExtrasForbiddenModel):
-    _path: NonEmptyStr = ...
-    file_mode: Literal["text", "binary"] | None = None
-    inode_paths: list[NonEmptyStr] | None = None
-    no_link: bool | None = None
-    path_type: PathType | None = None
-    prefix_placeholder: NonEmptyStr | None = None
-    sha256_in_prefix: SHA256Str | None = None
-    sha256: SHA256Str | None = None
-    size_in_bytes: PositiveInt | None = None
-
-
-class PathsDataV1(ExtrasForbiddenModel):
-    paths_version: Literal[1] = 1
-    paths: list[PathDataV1] = []
-
-
-class Link(ExtrasForbiddenModel):
-    source: NonEmptyStr = ...
-    type: LinkType = ...
 
 
 class PrefixRecord(PackageRecord):

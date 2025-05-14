@@ -16,33 +16,11 @@ from .types import (
     NoarchStr,
     NonEmptyStr,
     PackageNameStr,
+    RunExports,
     SHA1Str,
     SHA256Str,
     VersionStr,
 )
-
-
-class RunExports(ExtrasForbiddenModel):
-    weak: Iterable[NameVersionBuildMatchSpecStr] = None
-    """
-    Dependencies to be exported to runtime requirements when package is added as a host
-    dependency.
-    """
-    strong: Iterable[NameVersionBuildMatchSpecStr] = None
-    """
-    Dependencies to be exported to runtime requirements when package is added as a build
-    dependency.
-    """
-    weak_constrains: Iterable[NameVersionBuildMatchSpecStr] = None
-    """
-    Dependencies to be exported to runtime constrains when package is added as a host
-    dependency.
-    """
-    strong_constrains: Iterable[NameVersionBuildMatchSpecStr] = None
-    """
-    Dependencies to be exported to runtime constrains when package is added as a build
-    dependency.
-    """
 
 
 class _Package(ExtrasForbiddenModel):
@@ -192,7 +170,7 @@ class _Build(ExtrasForbiddenModel):
     The full conda-build recipe and rendered meta.yaml file is included in the Package metadata by
     default. You can disable it here.
     """
-    run_exports: Iterable[PackageNameStr] | RunExports = None
+    run_exports: RunExports = None
     """
     List of packages that will be injected as a runtime dependency in other recipes.
     Use the 'strong' key to indicate which dependencies will be injected when this package is used

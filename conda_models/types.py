@@ -2,10 +2,13 @@
 conda-specific constrains for scalar types.
 """
 
+from collections.abc import Iterable
 from enum import Enum, auto
-from typing import Annotated
+from typing import Annotated, Literal
 
-from pydantic import AnyUrl, Field
+from pydantic import AnyUrl, Field, PositiveInt
+
+from ._base import ExtrasForbiddenModel
 
 
 class NoarchStr(str, Enum):
@@ -118,6 +121,14 @@ CondaPackageFileNameStr = Annotated[
         pattern=rf"({package_name_regex})-({version_regex})-({build_string_regex})\.conda",
     ),
 ]
+ResolvedNameVersionBuildStr = Annotated[
+    str,
+    Field(
+        min_length=1,
+        max_length=194,
+        pattern=rf"({package_name_regex})\s+({version_regex})\s+({build_string_regex})",
+    ),
+]
 NameVersionBuildMatchSpecStr = Annotated[
     str,
     Field(
@@ -136,3 +147,63 @@ EntryPointStr = Annotated[
 ]
 
 ChannelNameOrUrl = NonEmptyStr | AnyUrl
+
+
+class LinkType(Enum):
+    hardlink = 1
+    softlink = 2
+    copy = 3
+    directory = 4
+
+
+class PathType(Enum):
+    hardlink = "hardlink"
+    softlink = "softlink"
+    directory = "directory"
+
+
+class PathDataV1(ExtrasForbiddenModel):
+    _path: NonEmptyStr = ...
+    file_mode: Literal["text", "binary"] | None = None
+    inode_paths: list[NonEmptyStr] | None = None
+    no_link: bool | None = None
+    path_type: PathType | None = None
+    prefix_placeholder: NonEmptyStr | None = None
+    sha256_in_prefix: SHA256Str | None = None
+    sha256: SHA256Str | None = None
+    size_in_bytes: PositiveInt | None = None
+
+
+class PathsDataV1(ExtrasForbiddenModel):
+    paths_version: Literal[1] = 1
+    paths: list[PathDataV1] = []
+
+
+class Link(ExtrasForbiddenModel):
+    source: NonEmptyStr = ...
+    type: LinkType = ...
+
+
+class RunExportsDict(ExtrasForbiddenModel):
+    weak: Iterable[NameVersionBuildMatchSpecStr] = None
+    """
+    Dependencies to be exported to runtime requirements when package is added as a host
+    dependency.
+    """
+    strong: Iterable[NameVersionBuildMatchSpecStr] = None
+    """
+    Dependencies to be exported to runtime requirements when package is added as a build
+    dependency.
+    """
+    weak_constrains: Iterable[NameVersionBuildMatchSpecStr] = None
+    """
+    Dependencies to be exported to runtime constrains when package is added as a host
+    dependency.
+    """
+    strong_constrains: Iterable[NameVersionBuildMatchSpecStr] = None
+    """
+    Dependencies to be exported to runtime constrains when package is added as a build
+    dependency.
+    """
+
+RunExports = Iterable[NameVersionBuildMatchSpecStr] | RunExportsDict
