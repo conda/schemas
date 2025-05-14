@@ -8,7 +8,7 @@
       "title": "NoarchStr",
       "type": "string"
     },
-    "RunExports": {
+    "RunExportsDict": {
       "additionalProperties": false,
       "properties": {
         "strong": {
@@ -56,7 +56,7 @@
           "type": "array"
         }
       },
-      "title": "RunExports",
+      "title": "RunExportsDict",
       "type": "object"
     },
     "_About": {
@@ -546,15 +546,14 @@
           "anyOf": [
             {
               "items": {
-                "maxLength": 64,
                 "minLength": 1,
-                "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
+                "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
                 "type": "string"
               },
               "type": "array"
             },
             {
-              "$ref": "#/$defs/RunExports"
+              "$ref": "#/$defs/RunExportsDict"
             }
           ],
           "default": null,
@@ -731,7 +730,7 @@
               "type": "array"
             },
             {
-              "$ref": "#/$defs/RunExports"
+              "$ref": "#/$defs/RunExportsDict"
             }
           ],
           "default": null,

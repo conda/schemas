@@ -117,7 +117,19 @@
           "description": "The run exports of the package, per package version (not build!)",
           "patternProperties": {
             "([0-9]!)?[0-9a-z\\._]+": {
-              "$ref": "#/$defs/RunExports"
+              "anyOf": [
+                {
+                  "items": {
+                    "minLength": 1,
+                    "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                {
+                  "$ref": "#/$defs/RunExportsDict"
+                }
+              ]
             }
           },
           "propertyNames": {
@@ -215,7 +227,7 @@
       "title": "ChannelDataPackage",
       "type": "object"
     },
-    "RunExports": {
+    "RunExportsDict": {
       "additionalProperties": false,
       "properties": {
         "strong": {
@@ -263,7 +275,7 @@
           "type": "array"
         }
       },
-      "title": "RunExports",
+      "title": "RunExportsDict",
       "type": "object"
     }
   },

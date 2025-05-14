@@ -1,0 +1,151 @@
+{
+  "$defs": {
+    "PathDataV1": {
+      "additionalProperties": false,
+      "properties": {
+        "file_mode": {
+          "anyOf": [
+            {
+              "enum": [
+                "text",
+                "binary"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "File Mode"
+        },
+        "inode_paths": {
+          "anyOf": [
+            {
+              "items": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Inode Paths"
+        },
+        "no_link": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "No Link"
+        },
+        "path_type": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PathType"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "prefix_placeholder": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Prefix Placeholder"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "minLength": 64,
+              "pattern": "[a-fA-F0-9]{64}",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "sha256_in_prefix": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "minLength": 64,
+              "pattern": "[a-fA-F0-9]{64}",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256 In Prefix"
+        },
+        "size_in_bytes": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Size In Bytes"
+        }
+      },
+      "title": "PathDataV1",
+      "type": "object"
+    },
+    "PathType": {
+      "enum": [
+        "hardlink",
+        "softlink",
+        "directory"
+      ],
+      "title": "PathType",
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "paths": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/PathDataV1"
+      },
+      "title": "Paths",
+      "type": "array"
+    },
+    "paths_version": {
+      "const": 1,
+      "default": 1,
+      "title": "Paths Version",
+      "type": "integer"
+    }
+  },
+  "title": "PathsDataV1",
+  "type": "object"
+}

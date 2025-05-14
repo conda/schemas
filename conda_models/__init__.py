@@ -4,6 +4,7 @@ from .environment_file import EnvironmentYaml
 from .history import History
 from .match_spec import MatchSpec
 from .meta_yaml import MetaYaml
+from .package_info import InfoAbout, InfoIndex, InfoPaths, InfoRepodataRecord
 from .package_record import PackageRecord
 from .repodata import RepodataRecord
 from .repodata_patch_instructions import RepodataPatchInstructions
@@ -14,6 +15,10 @@ __all__ = [
     Condarc,
     EnvironmentYaml,
     History,
+    InfoAbout,
+    InfoIndex,
+    InfoRepodataRecord,
+    InfoPaths,
     MatchSpec,
     MetaYaml,
     PackageRecord,

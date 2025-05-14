@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "channels": {
+      "default": [],
+      "items": {
+        "format": "uri",
+        "minLength": 1,
+        "type": "string"
+      },
+      "title": "Channels",
+      "type": "array"
+    },
+    "conda_build_version": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Conda Build Version"
+    },
+    "conda_version": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Conda Version"
+    },
+    "description": {
+      "default": "",
+      "title": "Description",
+      "type": "string"
+    },
+    "dev_url": {
+      "anyOf": [
+        {
+          "format": "uri",
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Dev Url"
+    },
+    "doc_url": {
+      "anyOf": [
+        {
+          "format": "uri",
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Doc Url"
+    },
+    "env_vars": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "default": {},
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Env Vars",
+      "type": "object"
+    },
+    "extra": {
+      "additionalProperties": true,
+      "default": {},
+      "propertyNames": {
+        "minLength": 1
+      },
+      "title": "Extra",
+      "type": "object"
+    },
+    "home": {
+      "anyOf": [
+        {
+          "format": "uri",
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Home"
+    },
+    "identifiers": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Identifiers",
+      "type": "array"
+    },
+    "keywords": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Keywords",
+      "type": "array"
+    },
+    "license": {
+      "minLength": 1,
+      "title": "License",
+      "type": "string"
+    },
+    "license_file": {
+      "minLength": 1,
+      "title": "License File",
+      "type": "string"
+    },
+    "root_pkgs": {
+      "items": {
+        "maxLength": 194,
+        "minLength": 1,
+        "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9]!)?[0-9a-z\\._]+)\\s+(^[a-zA-Z0-9_\\.+]+$)",
+        "type": "string"
+      },
+      "title": "Root Pkgs",
+      "type": "array"
+    },
+    "summary": {
+      "default": "",
+      "title": "Summary",
+      "type": "string"
+    },
+    "tags": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+    }
+  },
+  "required": [
+    "license",
+    "license_file",
+    "root_pkgs"
+  ],
+  "title": "InfoAbout",
+  "type": "object"
+}

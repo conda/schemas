@@ -1,0 +1,157 @@
+{
+  "$defs": {
+    "SubdirStr": {
+      "enum": [
+        "emscripten-wasm32",
+        "freebsd-64",
+        "linux-32",
+        "linux-64",
+        "linux-armv6l",
+        "linux-armv7l",
+        "linux-ppc64le",
+        "linux-s390x",
+        "osx-32",
+        "osx-64",
+        "osx-arm64",
+        "wasi-wasm32",
+        "win-32",
+        "win-64",
+        "win-arm64",
+        "zos-z",
+        "noarch"
+      ],
+      "title": "SubdirStr",
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "arch": {
+      "minLength": 1,
+      "title": "Arch",
+      "type": "string"
+    },
+    "build": {
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9_\\.+]+$",
+      "title": "Build",
+      "type": "string"
+    },
+    "build_number": {
+      "minimum": 0,
+      "title": "Build Number",
+      "type": "integer"
+    },
+    "channel": {
+      "format": "uri",
+      "minLength": 1,
+      "title": "Channel",
+      "type": "string"
+    },
+    "constrains": {
+      "default": [],
+      "items": {
+        "minLength": 1,
+        "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+        "type": "string"
+      },
+      "title": "Constrains",
+      "type": "array"
+    },
+    "depends": {
+      "default": [],
+      "items": {
+        "minLength": 1,
+        "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+        "type": "string"
+      },
+      "title": "Depends",
+      "type": "array"
+    },
+    "fn": {
+      "maxLength": 211,
+      "minLength": 1,
+      "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)-(([0-9]!)?[0-9a-z\\._]+)-(^[a-zA-Z0-9_\\.+]+$)\\.(conda|tar\\.bz2)",
+      "title": "Fn",
+      "type": "string"
+    },
+    "license": {
+      "minLength": 1,
+      "title": "License",
+      "type": "string"
+    },
+    "md5": {
+      "maxLength": 32,
+      "minLength": 32,
+      "pattern": "[a-fA-F0-9]{32}",
+      "title": "Md5",
+      "type": "string"
+    },
+    "name": {
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
+      "title": "Name",
+      "type": "string"
+    },
+    "platform": {
+      "minLength": 1,
+      "title": "Platform",
+      "type": "string"
+    },
+    "sha256": {
+      "maxLength": 64,
+      "minLength": 64,
+      "pattern": "[a-fA-F0-9]{64}",
+      "title": "Sha256",
+      "type": "string"
+    },
+    "size": {
+      "exclusiveMinimum": 0,
+      "title": "Size",
+      "type": "integer"
+    },
+    "subdir": {
+      "$ref": "#/$defs/SubdirStr"
+    },
+    "timestamp": {
+      "default": 0,
+      "exclusiveMinimum": 0,
+      "title": "Timestamp",
+      "type": "integer"
+    },
+    "url": {
+      "format": "uri",
+      "minLength": 1,
+      "title": "Url",
+      "type": "string"
+    },
+    "version": {
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "([0-9]!)?[0-9a-z\\._]+",
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "arch",
+    "build",
+    "build_number",
+    "license",
+    "name",
+    "platform",
+    "subdir",
+    "version",
+    "channel",
+    "fn",
+    "md5",
+    "sha256",
+    "size",
+    "url"
+  ],
+  "title": "InfoRepodataRecord",
+  "type": "object"
+}
