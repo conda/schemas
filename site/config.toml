@@ -14,11 +14,22 @@ site_url = "https://schemas.conda.org"
 name = "General"
 description = "Foundational schemas for the conda ecosystem"
 items = [
-  {schema = "channeldata-1.schema.json", draft = true},
-  {schema = "common-1.schema.json", draft = true},
-  {schema = "info-security-1.schema.json", draft = true},
-  {schema = "repodata-1.schema.json", draft = true},
-  {schema = "repodata-record-1.schema.json", draft = true},
+  {schema = "archive/channeldata-1.schema.json", draft = true},
+  {schema = "archive/common-1.schema.json", draft = true},
+  {schema = "archive/info-security-1.schema.json", draft = true},
+  {schema = "archive/repodata-1.schema.json", draft = true},
+  {schema = "archive/repodata-record-1.schema.json", draft = true},
+  {schema = "schemas/channeldata.schema.json", draft = true},
+  {schema = "schemas/condarc.schema.json", draft = true},
+  {schema = "schemas/environmentyaml.schema.json", draft = true},
+  {schema = "schemas/history.schema.json", draft = true},
+  {schema = "schemas/matchspec.schema.json", draft = true},
+  {schema = "schemas/metayaml.schema.json", draft = true},
+  {schema = "schemas/repodatapatchinstructions.schema.json", draft = true},
+  {schema = "schemas/packagerecord.schema.json", draft = true},
+  {schema = "schemas/repodatapatchinstructions.schema.json", draft = true},
+  {schema = "schemas/repodatarecord.schema.json", draft = true},
+  {schema = "schemas/requirementstxt.schema.json", draft = true},
 ]
 
 [[sections]]
