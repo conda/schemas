@@ -1,0 +1,24 @@
+{
+  "$id": "https://schemas.conda.org/attestations-publish-1.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "JSON Schema for the predicate field of conda publish attestations. This schema defines the structure and validation rules for the predicate portion of an in-toto statement used in conda package publish attestations, as specified in CEP 27.",
+  "properties": {
+    "targetChannel": {
+      "description": "The channel where the package is being uploaded to. This must be a valid URL with no trailing slashes.",
+      "examples": [
+        "https://prefix.dev/conda-forge",
+        "https://conda.anaconda.org/conda-forge"
+      ],
+      "format": "uri",
+      "maxLength": 2083,
+      "minLength": 1,
+      "title": "Targetchannel",
+      "type": "string"
+    }
+  },
+  "required": [
+    "targetChannel"
+  ],
+  "title": "Conda Publish Attestation Predicate",
+  "type": "object"
+}
