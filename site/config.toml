@@ -19,6 +19,7 @@ items = [
   {schema = "info-security-1.schema.json", draft = true},
   {schema = "repodata-1.schema.json", draft = true},
   {schema = "repodata-record-1.schema.json", draft = true},
+  {schema = "attestations-publish-1.schema.json", draft = true},
 ]
 
 [[sections]]
