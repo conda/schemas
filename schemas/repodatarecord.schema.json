@@ -1,0 +1,356 @@
+{
+  "$defs": {
+    "NoarchStr": {
+      "enum": [
+        "python",
+        "generic"
+      ],
+      "title": "NoarchStr",
+      "type": "string"
+    },
+    "SubdirStr": {
+      "enum": [
+        "emscripten-wasm32",
+        "freebsd-64",
+        "linux-32",
+        "linux-64",
+        "linux-armv6l",
+        "linux-armv7l",
+        "linux-ppc64le",
+        "linux-s390x",
+        "osx-32",
+        "osx-64",
+        "osx-arm64",
+        "wasi-wasm32",
+        "win-32",
+        "win-64",
+        "win-arm64",
+        "zos-z",
+        "noarch"
+      ],
+      "title": "SubdirStr",
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "A single record in the conda repodata.\n\nA single record refers to a single binary distribution of a package on a conda channel.",
+  "properties": {
+    "arch": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Optionally the architecture the package supports",
+      "title": "Arch"
+    },
+    "build": {
+      "description": "The build string of the package.",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9_\\.+]+$",
+      "title": "Build",
+      "type": "string"
+    },
+    "build_number": {
+      "description": "The build number of the package.",
+      "minimum": 0,
+      "title": "Build Number",
+      "type": "integer"
+    },
+    "channel": {
+      "description": "String representation of the channel where the package comes from.\nIt can be a URL (preferred) or a channel name.",
+      "minLength": 1,
+      "title": "Channel",
+      "type": "string"
+    },
+    "constrains": {
+      "description": "Additional constraints on packages. `constrains` are different from `depends` in that packages\nspecified in `depends` must be installed next to this package, whereas packages specified in\n`constrains` are not required to be installed, but if they are installed they must follow these\nconstraints.",
+      "items": {
+        "minLength": 1,
+        "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+        "type": "string"
+      },
+      "title": "Constrains",
+      "type": "array"
+    },
+    "date": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "deprecated": true,
+      "description": "Unused",
+      "title": "Date"
+    },
+    "depends": {
+      "description": "Specification of packages this package depends on.",
+      "items": {
+        "minLength": 1,
+        "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+        "type": "string"
+      },
+      "title": "Depends",
+      "type": "array"
+    },
+    "features": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Features are a deprecated way to specify different feature sets for the conda solver. This is\nnot supported anymore and should not be used. Instead, `mutex` packages should be used to\nspecify mutually exclusive features.",
+      "title": "Features"
+    },
+    "fn": {
+      "description": "The filename of the package archive",
+      "title": "Fn",
+      "type": "string"
+    },
+    "legacy_bz2_md5": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "A deprecated md5 hash",
+      "title": "Legacy Bz2 Md5"
+    },
+    "legacy_bz2_size": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "A deprecated package archive size",
+      "title": "Legacy Bz2 Size"
+    },
+    "license": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The specific license of the package",
+      "title": "License"
+    },
+    "license_family": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The specific license of the package",
+      "title": "License Family"
+    },
+    "md5": {
+      "anyOf": [
+        {
+          "maxLength": 32,
+          "minLength": 32,
+          "pattern": "[a-fA-F0-9]{32}",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The md5 hash of the package archive",
+      "title": "Md5"
+    },
+    "name": {
+      "description": "The name of the package",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
+      "title": "Name",
+      "type": "string"
+    },
+    "noarch": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/NoarchStr"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Whether the package is architecture independent, and in which way."
+    },
+    "package_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "deprecated": true,
+      "description": "Unused",
+      "title": "Package Type"
+    },
+    "platform": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The platform the package supports",
+      "title": "Platform"
+    },
+    "preferred_env": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "deprecated": true,
+      "description": "Unused",
+      "title": "Preferred Env"
+    },
+    "revoked": {
+      "default": null,
+      "description": "DEPRECATED.",
+      "title": "Revoked",
+      "type": "boolean"
+    },
+    "sha256": {
+      "anyOf": [
+        {
+          "maxLength": 64,
+          "minLength": 64,
+          "pattern": "[a-fA-F0-9]{64}",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The sha256 hash of the package archive",
+      "title": "Sha256"
+    },
+    "size": {
+      "anyOf": [
+        {
+          "exclusiveMinimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The size of the package archive, in bytes",
+      "title": "Size"
+    },
+    "subdir": {
+      "$ref": "#/$defs/SubdirStr",
+      "description": "The subdirectory of the channel this package is in"
+    },
+    "timestamp": {
+      "default": 0,
+      "description": "The date this entry was created, as a Unix timestamp in milliseconds",
+      "exclusiveMinimum": 0,
+      "title": "Timestamp",
+      "type": "integer"
+    },
+    "track_features": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Nowadays only used to downweight package variants (ie. give a variant less priority). To that\neffect, the number of track features is counted (number of commas) and the package is\ndownweighted by the number of track_features.",
+      "title": "Track Features"
+    },
+    "url": {
+      "description": "The canonical URL from where to get this package",
+      "format": "uri",
+      "minLength": 1,
+      "title": "Url",
+      "type": "string"
+    },
+    "version": {
+      "description": "The version of the package",
+      "maxLength": 64,
+      "minLength": 1,
+      "pattern": "([0-9]!)?[0-9a-z\\._]+",
+      "title": "Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "build",
+    "build_number",
+    "constrains",
+    "depends",
+    "name",
+    "subdir",
+    "version",
+    "fn",
+    "url",
+    "channel"
+  ],
+  "title": "RepodataRecord",
+  "type": "object"
+}

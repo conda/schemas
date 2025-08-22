@@ -1,0 +1,1183 @@
+{
+  "$defs": {
+    "NoarchStr": {
+      "enum": [
+        "python",
+        "generic"
+      ],
+      "title": "NoarchStr",
+      "type": "string"
+    },
+    "RunExportsDict": {
+      "additionalProperties": false,
+      "properties": {
+        "strong": {
+          "default": null,
+          "description": "Dependencies to be exported to runtime requirements when package is added as a build\ndependency.",
+          "items": {
+            "minLength": 1,
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+            "type": "string"
+          },
+          "title": "Strong",
+          "type": "array"
+        },
+        "strong_constrains": {
+          "default": null,
+          "description": "Dependencies to be exported to runtime constrains when package is added as a build\ndependency.",
+          "items": {
+            "minLength": 1,
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+            "type": "string"
+          },
+          "title": "Strong Constrains",
+          "type": "array"
+        },
+        "weak": {
+          "default": null,
+          "description": "Dependencies to be exported to runtime requirements when package is added as a host\ndependency.",
+          "items": {
+            "minLength": 1,
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+            "type": "string"
+          },
+          "title": "Weak",
+          "type": "array"
+        },
+        "weak_constrains": {
+          "default": null,
+          "description": "Dependencies to be exported to runtime constrains when package is added as a host\ndependency.",
+          "items": {
+            "minLength": 1,
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+            "type": "string"
+          },
+          "title": "Weak Constrains",
+          "type": "array"
+        }
+      },
+      "title": "RunExportsDict",
+      "type": "object"
+    },
+    "_About": {
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "default": null,
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "dev_url": {
+          "default": null,
+          "format": "uri",
+          "minLength": 1,
+          "title": "Dev Url",
+          "type": "string"
+        },
+        "doc_source_url": {
+          "default": null,
+          "format": "uri",
+          "minLength": 1,
+          "title": "Doc Source Url",
+          "type": "string"
+        },
+        "doc_url": {
+          "default": null,
+          "format": "uri",
+          "minLength": 1,
+          "title": "Doc Url",
+          "type": "string"
+        },
+        "home": {
+          "default": null,
+          "minLength": 1,
+          "title": "Home",
+          "type": "string"
+        },
+        "identifiers": {
+          "default": null,
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Identifiers",
+          "type": "array"
+        },
+        "keywords": {
+          "default": null,
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Keywords",
+          "type": "array"
+        },
+        "license": {
+          "default": null,
+          "minLength": 1,
+          "title": "License",
+          "type": "string"
+        },
+        "license_family": {
+          "default": null,
+          "minLength": 1,
+          "title": "License Family",
+          "type": "string"
+        },
+        "license_file": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "items": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "default": null,
+          "title": "License File"
+        },
+        "license_url": {
+          "default": null,
+          "format": "uri",
+          "minLength": 1,
+          "title": "License Url",
+          "type": "string"
+        },
+        "prelink_message": {
+          "default": null,
+          "minLength": 1,
+          "title": "Prelink Message",
+          "type": "string"
+        },
+        "readme": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "items": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "default": null,
+          "title": "Readme"
+        },
+        "summary": {
+          "default": null,
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        },
+        "tags": {
+          "default": null,
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Tags",
+          "type": "array"
+        }
+      },
+      "title": "_About",
+      "type": "object"
+    },
+    "_App": {
+      "additionalProperties": false,
+      "description": "If the app section is present, the package is an app, meaning that it appears in Anaconda\nNavigator.",
+      "properties": {
+        "cli_opts": {
+          "default": null,
+          "description": "UNDOCUMENTED.",
+          "minLength": 1,
+          "title": "Cli Opts",
+          "type": "string"
+        },
+        "entry": {
+          "default": null,
+          "description": "The command that is called to launch the app in Navigator.",
+          "minLength": 1,
+          "title": "Entry",
+          "type": "string"
+        },
+        "icon": {
+          "default": null,
+          "description": "The icon file contained in the recipe.",
+          "minLength": 1,
+          "title": "Icon",
+          "type": "string"
+        },
+        "own_environment": {
+          "default": false,
+          "description": "Whether to install the app through Navigator into its own environment.",
+          "title": "Own Environment",
+          "type": "boolean"
+        },
+        "summary": {
+          "default": null,
+          "description": "Summary of the package used in Navigator.",
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        },
+        "type": {
+          "default": null,
+          "description": "UNDOCUMENTED.",
+          "minLength": 1,
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "title": "_App",
+      "type": "object"
+    },
+    "_Build": {
+      "additionalProperties": false,
+      "properties": {
+        "activate_in_script": {
+          "default": true,
+          "description": "UNDOCUMENTED. Whether the environments should be activated before the build script runs.",
+          "title": "Activate In Script",
+          "type": "boolean"
+        },
+        "always_include_files": {
+          "default": null,
+          "description": "Force files to always be included, even if they are already in the environment from the build\ndependencies. This may be needed, for example, to create a recipe for conda itself.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Always Include Files",
+          "type": "array"
+        },
+        "binary_has_prefix_files": {
+          "default": null,
+          "description": "By default, conda-build tries to detect prefixes in all files. You may also elect to specify\nfiles with binary prefixes individually. This allows you to specify the type of file as binary,\nwhen it may be incorrectly detected as text for some reason. Binary files are those containing\nNULL bytes",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Binary Has Prefix Files",
+          "type": "array"
+        },
+        "binary_relocation": {
+          "default": true,
+          "description": "Whether binary files should be made relocatable using install_name_tool on macOS or patchelf on\nLinux. The default is True. It also accepts False, which indicates no relocation for any files,\nor a list of files, which indicates relocation only for listed files.",
+          "title": "Binary Relocation",
+          "type": "boolean"
+        },
+        "detect_binary_files_with_prefix": {
+          "default": true,
+          "description": "Binary files may contain the build prefix and need it replaced with the install prefix at\ninstallation time. Conda can automatically identify and register such files.",
+          "title": "Detect Binary Files With Prefix",
+          "type": "boolean"
+        },
+        "disable_pip": {
+          "default": false,
+          "description": "UNDOCUMENTED.",
+          "title": "Disable Pip",
+          "type": "boolean"
+        },
+        "entry_points": {
+          "default": null,
+          "description": "List of Python entry points to be generated when the package is installed.",
+          "items": {
+            "minLength": 5,
+            "pattern": "\\S+\\s*=\\s*[A-z0-9_\\.]:[A-z0-9_]",
+            "type": "string"
+          },
+          "title": "Entry Points",
+          "type": "array"
+        },
+        "error_overdepending": {
+          "description": "UNDOCUMENTED.",
+          "title": "Error Overdepending",
+          "type": "null"
+        },
+        "error_overlinking": {
+          "description": "UNDOCUMENTED.",
+          "title": "Error Overlinking",
+          "type": "null"
+        },
+        "features": {
+          "default": null,
+          "description": "DEPRECATED.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Features",
+          "type": "array"
+        },
+        "force_ignore_keys": {
+          "default": null,
+          "description": "Ensure these packages are NOT considered for the build hash",
+          "items": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
+            "type": "string"
+          },
+          "title": "Force Ignore Keys",
+          "type": "array"
+        },
+        "force_use_keys": {
+          "default": null,
+          "description": "Ensure these packages are considered for the build hash",
+          "items": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
+            "type": "string"
+          },
+          "title": "Force Use Keys",
+          "type": "array"
+        },
+        "has_prefix_files": {
+          "description": "Text files (files containing no NULL bytes) may contain the build prefix and need it replaced\nwith the install prefix at installation time. Conda will automatically register such files.\nBinary files that contain the build prefix are generally handled differently (see\n'binary_has_prefix_files') but there may be cases where such a binary file needs to be treated\nas an ordinary text file, in which case they need to be identified.",
+          "title": "Has Prefix Files",
+          "type": "null"
+        },
+        "ignore_prefix_files": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "items": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "default": null,
+          "description": "Used to exclude some or all of the files in the build recipe from the list of files that have\nthe build prefix replaced with the install prefix. Use 'True' to ignore all files, or a list of\npaths to specify individual filenames. This setting is independent of RPATH replacement. Use\nthe 'detect_binary_files_with_prefix' setting to control that behavior.",
+          "title": "Ignore Prefix Files"
+        },
+        "ignore_run_exports": {
+          "default": null,
+          "description": "Ignore these injected run exports, regardless the origin.",
+          "items": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
+            "type": "string"
+          },
+          "title": "Ignore Run Exports",
+          "type": "array"
+        },
+        "ignore_run_exports_from": {
+          "default": null,
+          "description": "Ignore the injected run exports coming from these packages.",
+          "items": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
+            "type": "string"
+          },
+          "title": "Ignore Run Exports From",
+          "type": "array"
+        },
+        "include_recipe": {
+          "default": true,
+          "description": "The full conda-build recipe and rendered meta.yaml file is included in the Package metadata by\ndefault. You can disable it here.",
+          "title": "Include Recipe",
+          "type": "boolean"
+        },
+        "merge_build_host": {
+          "default": false,
+          "description": "Whether to merge the build and host dependencies into a single environment.",
+          "title": "Merge Build Host",
+          "type": "boolean"
+        },
+        "missing_dso_whitelist": {
+          "default": null,
+          "description": "List of globs for dynamic shared object (DSO) files that should be ignored when examining\nlinkage information.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Missing Dso Whitelist",
+          "type": "array"
+        },
+        "msvc_compiler": {
+          "description": "UNDOCUMENTED.",
+          "title": "Msvc Compiler",
+          "type": "string"
+        },
+        "no_link": {
+          "default": null,
+          "description": "A list of globs for files that should always be copied and never soft linked or hard linked.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "No Link",
+          "type": "array"
+        },
+        "no_move_top_level_workdir_loops": {
+          "default": null,
+          "description": "UNDOCUMENTED.",
+          "title": "No Move Top Level Workdir Loops",
+          "type": "boolean"
+        },
+        "noarch": {
+          "$ref": "#/$defs/NoarchStr",
+          "default": null,
+          "description": "Make this package noarch (architecture independent)."
+        },
+        "noarch_python": {
+          "default": false,
+          "description": "DEPRECATED. Use 'noarch: python' instead.",
+          "title": "Noarch Python",
+          "type": "boolean"
+        },
+        "noarch_python_build_age": {
+          "default": null,
+          "description": "UNDOCUMENTED.",
+          "title": "Noarch Python Build Age",
+          "type": "integer"
+        },
+        "number": {
+          "default": 0,
+          "description": "Identifier for subsequent builds of the same version.",
+          "exclusiveMinimum": 0,
+          "title": "Number",
+          "type": "integer"
+        },
+        "osx_is_app": {
+          "default": false,
+          "description": "Make entry points use python.app instead of Python in macOS",
+          "title": "Osx Is App",
+          "type": "boolean"
+        },
+        "overlinking_ignore_patterns": {
+          "default": null,
+          "description": "Used to ignore patterns of files for the overlinking and overdepending checks. This is\nsometimes useful to speed up builds that have many files (large repackage jobs) or builds where\nyou know only a small fraction of the files should be checked.\n\nGlob patterns are allowed here, but mind your quoting, especially with leading wildcards.\n\nUse this sparingly, as the overlinking checks generally do prevent you from making mistakes.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Overlinking Ignore Patterns",
+          "type": "array"
+        },
+        "pin_depends": {
+          "default": null,
+          "description": "EXPERIMENTAL. Enforce pinning behaviour on the output recipe or built package.\n\nWith a value of record, conda-build will record all requirements exactly as they would be\ninstalled in a file called info/requires. These pins will not show up in the output of conda\nrender and they will not affect the actual run dependencies of the output package. It is only\nadding in this new file.\n\nWith a value of strict, conda-build applies the pins to the actual metadata. This does affect\nthe output of conda render and also affects the end result of the build. The package\ndependencies will be strictly pinned down to the build string level. This will supersede any\ndynamic or compatible pinning that conda-build may otherwise be doing.",
+          "enum": [
+            "record",
+            "strict"
+          ],
+          "title": "Pin Depends",
+          "type": "string"
+        },
+        "postlink": {
+          "description": "UNDOCUMENTED.",
+          "title": "Postlink",
+          "type": "string"
+        },
+        "preferred_env": {
+          "description": "UNDOCUMENTED.",
+          "title": "Preferred Env",
+          "type": "string"
+        },
+        "preferred_env_executable_paths": {
+          "description": "UNDOCUMENTED.",
+          "items": {},
+          "title": "Preferred Env Executable Paths",
+          "type": "array"
+        },
+        "prelink": {
+          "description": "UNDOCUMENTED.",
+          "title": "Prelink",
+          "type": "string"
+        },
+        "preserve_egg_dir": {
+          "default": false,
+          "description": "Needed for some packages that use features specific to setuptools.",
+          "title": "Preserve Egg Dir",
+          "type": "boolean"
+        },
+        "preunlink": {
+          "description": "UNDOCUMENTED.",
+          "title": "Preunlink",
+          "type": "string"
+        },
+        "provides_features": {
+          "additionalProperties": true,
+          "description": "UNDOCUMENTED.",
+          "title": "Provides Features",
+          "type": "object"
+        },
+        "requires_features": {
+          "additionalProperties": true,
+          "description": "UNDOCUMENTED.",
+          "title": "Requires Features",
+          "type": "object"
+        },
+        "rpaths": {
+          "default": [
+            "lib/"
+          ],
+          "description": "Set which RPATHs are used when making executables relocatable on Linux. This is a Linux feature\nthat is ignored on other systems. The default is lib/.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Rpaths",
+          "type": "array"
+        },
+        "rpaths_patcher": {
+          "description": "UNDOCUMENTED.",
+          "title": "Rpaths Patcher",
+          "type": "null"
+        },
+        "run_exports": {
+          "anyOf": [
+            {
+              "items": {
+                "minLength": 1,
+                "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/$defs/RunExportsDict"
+            }
+          ],
+          "default": null,
+          "description": "List of packages that will be injected as a runtime dependency in other recipes.\nUse the 'strong' key to indicate which dependencies will be injected when this package is used\nas a build dependency. Use 'weak' for dependencies that will be injected when this package is\nused as a host dependency. If you do not specify a category and just write a list of packages,\n'weak' is assumed.",
+          "title": "Run Exports"
+        },
+        "runpath_whitelist": {
+          "default": null,
+          "description": "List of globs for paths which are allowed to appear as runpaths in the package's shared\nlibraries. All other runpaths will cause a warning message to be printed during the build.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Runpath Whitelist",
+          "type": "array"
+        },
+        "script": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "items": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "default": null,
+          "description": "Used instead of build.sh or bld.bat. For short build scripts, this can be more convenient. You\nmay need to use selectors to use different scripts for different platforms.",
+          "title": "Script"
+        },
+        "script_env": {
+          "default": null,
+          "description": "Allow these environment variables to be seen by the build process. You can also (re)define\ntheir values with the `NAME=VAR` syntax.",
+          "items": {
+            "minLength": 3,
+            "pattern": "[A-z0-9_]+(=.+)?",
+            "type": "string"
+          },
+          "title": "Script Env",
+          "type": "array"
+        },
+        "skip": {
+          "default": false,
+          "description": "Specifies whether conda-build should skip the build of this recipe. Particularly useful for\ndefining recipes that are platform specific, thanks to selectors.",
+          "title": "Skip",
+          "type": "boolean"
+        },
+        "skip_compile_pyc": {
+          "default": null,
+          "description": "List of globs that will not be compiled to bytecode.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Skip Compile Pyc",
+          "type": "array"
+        },
+        "string": {
+          "default": null,
+          "description": "Third field in the final package filename.\nUsually automatically generated from the build number and package contents.",
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9_\\.+]+$",
+          "title": "String",
+          "type": "string"
+        },
+        "track_features": {
+          "default": null,
+          "description": "Adding track_features to one or more of the package variants will cause conda to de-prioritize\nit or \"weigh it down\". The lowest priority package is the one that would cause the most\ntrack_features to be activated in the environment. The default package among many variants is\nthe one that would cause the least track_features to be activated.\n\nNo two packages in a given subdir should ever have the same track_feature.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Track Features",
+          "type": "array"
+        }
+      },
+      "required": [
+        "has_prefix_files",
+        "error_overdepending",
+        "error_overlinking",
+        "msvc_compiler",
+        "postlink",
+        "preferred_env_executable_paths",
+        "preferred_env",
+        "prelink",
+        "preunlink",
+        "provides_features",
+        "requires_features",
+        "rpaths_patcher"
+      ],
+      "title": "_Build",
+      "type": "object"
+    },
+    "_Output": {
+      "additionalProperties": false,
+      "properties": {
+        "about": {
+          "$ref": "#/$defs/_About",
+          "default": null
+        },
+        "build": {
+          "additionalProperties": true,
+          "title": "Build",
+          "type": "object"
+        },
+        "entry_points": {
+          "default": null,
+          "items": {
+            "minLength": 5,
+            "pattern": "\\S+\\s*=\\s*[A-z0-9_\\.]:[A-z0-9_]",
+            "type": "string"
+          },
+          "title": "Entry Points",
+          "type": "array"
+        },
+        "extra": {
+          "additionalProperties": true,
+          "default": null,
+          "title": "Extra",
+          "type": "object"
+        },
+        "files": {
+          "default": null,
+          "description": "List of files to include in the package, run after 'script', if any.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Files",
+          "type": "array"
+        },
+        "name": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
+          "title": "Name",
+          "type": "string"
+        },
+        "number": {
+          "exclusiveMinimum": 0,
+          "title": "Number",
+          "type": "integer"
+        },
+        "requirements": {
+          "anyOf": [
+            {
+              "items": {
+                "minLength": 1,
+                "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/$defs/_Requirements"
+            }
+          ],
+          "default": null,
+          "title": "Requirements"
+        },
+        "run_exports": {
+          "anyOf": [
+            {
+              "items": {
+                "minLength": 1,
+                "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "$ref": "#/$defs/RunExportsDict"
+            }
+          ],
+          "default": null,
+          "title": "Run Exports"
+        },
+        "script": {
+          "default": null,
+          "description": "Script that will be run to prepare or distribute the files being packaged.",
+          "minLength": 1,
+          "title": "Script",
+          "type": "string"
+        },
+        "script_interpreter": {
+          "default": null,
+          "description": "Interpreter to use to run the script.",
+          "minLength": 1,
+          "title": "Script Interpreter",
+          "type": "string"
+        },
+        "target": {
+          "default": null,
+          "description": "UNDOCUMENTED.",
+          "minLength": 1,
+          "title": "Target",
+          "type": "string"
+        },
+        "test": {
+          "$ref": "#/$defs/_OutputTest",
+          "default": null
+        },
+        "type": {
+          "default": "conda",
+          "enum": [
+            "conda",
+            "conda_v2",
+            "wheel"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "([0-9]!)?[0-9a-z\\._]+",
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "number",
+        "build"
+      ],
+      "title": "_Output",
+      "type": "object"
+    },
+    "_OutputTest": {
+      "additionalProperties": false,
+      "properties": {
+        "script": {
+          "default": null,
+          "minLength": 1,
+          "title": "Script",
+          "type": "string"
+        }
+      },
+      "title": "_OutputTest",
+      "type": "object"
+    },
+    "_Package": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "([0-9]!)?[0-9a-z\\._]+",
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "title": "_Package",
+      "type": "object"
+    },
+    "_Requirements": {
+      "additionalProperties": false,
+      "description": "Specifies the build and runtime requirements. Dependencies of these requirements are included\nautomatically.",
+      "properties": {
+        "build": {
+          "default": null,
+          "description": "Tools required to build the package. These packages are run on the build system and include\nthings such as revision control systems (Git, SVN) make tools (GNU make, Autotool, CMake) and\ncompilers (real cross, pseudo-cross, or native when not cross-compiling), and any source\npre-processors.\n\nPackages which provide \"sysroot\" files, like the CDT packages (see below) also belong in the\nbuild section.",
+          "items": {
+            "minLength": 1,
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+            "type": "string"
+          },
+          "title": "Build",
+          "type": "array"
+        },
+        "conflicts": {
+          "default": null,
+          "description": "UNDOCUMENTED.",
+          "items": {
+            "minLength": 1,
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+            "type": "string"
+          },
+          "title": "Conflicts",
+          "type": "array"
+        },
+        "host": {
+          "default": null,
+          "description": "Packages that need to be specific to the target platform when the target platform is not\nnecessarily the same as the native build platform.\n\nFor example, in order for a recipe to be \"cross-capable\", shared libraries requirements must be\nlisted in the host section, rather than the build section, so that the shared libraries that\nget linked are ones for the target platform, rather than the native build platform.\n\nYou should also include the base interpreter for packages that need one. In other words, a\nPython package would list 'python' here and an R package would list 'mro-base' or 'r-base'.",
+          "items": {
+            "minLength": 1,
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+            "type": "string"
+          },
+          "title": "Host",
+          "type": "array"
+        },
+        "run": {
+          "default": null,
+          "description": "Packages required to run the package. These are the dependencies that are installed\nautomatically whenever the package is installed.",
+          "items": {
+            "minLength": 1,
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+            "type": "string"
+          },
+          "title": "Run",
+          "type": "array"
+        },
+        "run_constrained": {
+          "default": null,
+          "description": "Packages that are optional at runtime but must obey the supplied additional constraint if they\nare installed.",
+          "items": {
+            "minLength": 1,
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+            "type": "string"
+          },
+          "title": "Run Constrained",
+          "type": "array"
+        }
+      },
+      "title": "_Requirements",
+      "type": "object"
+    },
+    "_Source": {
+      "additionalProperties": false,
+      "properties": {
+        "fn": {
+          "default": null,
+          "title": "Fn",
+          "type": "string"
+        },
+        "folder": {
+          "default": null,
+          "minLength": 1,
+          "title": "Folder",
+          "type": "string"
+        },
+        "git_branch": {
+          "default": null,
+          "minLength": 1,
+          "title": "Git Branch",
+          "type": "string"
+        },
+        "git_depth": {
+          "default": -1,
+          "title": "Git Depth",
+          "type": "integer"
+        },
+        "git_rev": {
+          "default": null,
+          "minLength": 1,
+          "title": "Git Rev",
+          "type": "string"
+        },
+        "git_tag": {
+          "default": null,
+          "minLength": 1,
+          "title": "Git Tag",
+          "type": "string"
+        },
+        "git_url": {
+          "default": null,
+          "description": "URL or (relative) path to git repository",
+          "minLength": 1,
+          "title": "Git Url",
+          "type": "string"
+        },
+        "hg_tag": {
+          "default": null,
+          "minLength": 1,
+          "title": "Hg Tag",
+          "type": "string"
+        },
+        "hg_url": {
+          "default": null,
+          "minLength": 1,
+          "title": "Hg Url",
+          "type": "string"
+        },
+        "md5": {
+          "default": null,
+          "maxLength": 32,
+          "minLength": 32,
+          "pattern": "[a-fA-F0-9]{32}",
+          "title": "Md5",
+          "type": "string"
+        },
+        "no_hoist": {
+          "default": null,
+          "description": "UNDOCUMENTED",
+          "title": "No Hoist",
+          "type": "boolean"
+        },
+        "patches": {
+          "default": null,
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Patches",
+          "type": "array"
+        },
+        "path": {
+          "default": null,
+          "minLength": 1,
+          "title": "Path",
+          "type": "string"
+        },
+        "path_via_symlink": {
+          "default": null,
+          "description": "UNDOCUMENTED",
+          "title": "Path Via Symlink",
+          "type": "string"
+        },
+        "sha1": {
+          "default": null,
+          "maxLength": 40,
+          "minLength": 40,
+          "pattern": "[a-fA-F0-9]{40}",
+          "title": "Sha1",
+          "type": "string"
+        },
+        "sha256": {
+          "default": null,
+          "maxLength": 64,
+          "minLength": 64,
+          "pattern": "[a-fA-F0-9]{64}",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "svn_ignore_externals": {
+          "default": false,
+          "title": "Svn Ignore Externals",
+          "type": "boolean"
+        },
+        "svn_password": {
+          "default": null,
+          "minLength": 1,
+          "title": "Svn Password",
+          "type": "string"
+        },
+        "svn_rev": {
+          "default": null,
+          "minLength": 1,
+          "title": "Svn Rev",
+          "type": "string"
+        },
+        "svn_url": {
+          "default": null,
+          "minLength": 1,
+          "title": "Svn Url",
+          "type": "string"
+        },
+        "svn_username": {
+          "default": null,
+          "minLength": 1,
+          "title": "Svn Username",
+          "type": "string"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "format": "uri",
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "items": {
+                "format": "uri",
+                "minLength": 1,
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "title": "_Source",
+      "type": "object"
+    },
+    "_Test": {
+      "additionalProperties": false,
+      "properties": {
+        "commands": {
+          "default": null,
+          "description": "Shell commands that are run as part of the test.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Commands",
+          "type": "array"
+        },
+        "downstreams": {
+          "default": null,
+          "description": "Run the bundled test suite of the listed packages ensuring the package being built is used as\na dependency.",
+          "items": {
+            "maxLength": 64,
+            "minLength": 1,
+            "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
+            "type": "string"
+          },
+          "title": "Downstreams",
+          "type": "array"
+        },
+        "files": {
+          "default": null,
+          "description": "Test files that are copied from the recipe into the temporary test directory and are needed\nduring testing. If providing a path, forward slashes must be used. Allows globs.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Files",
+          "type": "array"
+        },
+        "imports": {
+          "default": null,
+          "description": "Python modules that will be imported as part of the test checks.",
+          "items": {
+            "pattern": "[A-z0-9\\._]+",
+            "type": "string"
+          },
+          "title": "Imports",
+          "type": "array"
+        },
+        "requires": {
+          "default": null,
+          "description": "In addition to the runtime requirements, you can specify requirements needed during testing.\nThe runtime requirements that you specified in the \"run\" section described above are\nautomatically included during testing.",
+          "items": {
+            "minLength": 1,
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+            "type": "string"
+          },
+          "title": "Requires",
+          "type": "array"
+        },
+        "source_files": {
+          "default": null,
+          "description": "Test files that are copied from the source work directory into the temporary test directory and\nare needed during testing. Allows globs.",
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Source Files",
+          "type": "array"
+        }
+      },
+      "title": "_Test",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "about": {
+      "$ref": "#/$defs/_About",
+      "default": null
+    },
+    "app": {
+      "$ref": "#/$defs/_App",
+      "default": null
+    },
+    "build": {
+      "$ref": "#/$defs/_Build"
+    },
+    "extra": {
+      "additionalProperties": true,
+      "default": null,
+      "title": "Extra",
+      "type": "object"
+    },
+    "outputs": {
+      "default": null,
+      "items": {
+        "$ref": "#/$defs/_Output"
+      },
+      "title": "Outputs",
+      "type": "array"
+    },
+    "package": {
+      "$ref": "#/$defs/_Package"
+    },
+    "requirements": {
+      "$ref": "#/$defs/_Requirements"
+    },
+    "source": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/_Source"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/_Source"
+          },
+          "type": "array"
+        }
+      ],
+      "title": "Source"
+    },
+    "test": {
+      "$ref": "#/$defs/_Test"
+    }
+  },
+  "required": [
+    "package",
+    "source",
+    "build",
+    "requirements",
+    "test"
+  ],
+  "title": "MetaYaml",
+  "type": "object"
+}
