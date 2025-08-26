@@ -1,0 +1,462 @@
+{
+  "$defs": {
+    "NoarchStr": {
+      "enum": [
+        "python",
+        "generic"
+      ],
+      "title": "NoarchStr",
+      "type": "string"
+    },
+    "OptionalRepodataRecord": {
+      "properties": {
+        "arch": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Arch"
+        },
+        "build": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Build"
+        },
+        "build_number": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Build Number"
+        },
+        "channel": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Channel"
+        },
+        "constrains": {
+          "anyOf": [
+            {
+              "items": {
+                "minLength": 1,
+                "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Constrains"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Date"
+        },
+        "depends": {
+          "anyOf": [
+            {
+              "items": {
+                "minLength": 1,
+                "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Depends"
+        },
+        "features": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Features"
+        },
+        "filename": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Filename"
+        },
+        "legacy_bz2_md5": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Legacy Bz2 Md5"
+        },
+        "legacy_bz2_size": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Legacy Bz2 Size"
+        },
+        "license": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "License"
+        },
+        "license_family": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "License Family"
+        },
+        "md5": {
+          "anyOf": [
+            {
+              "maxLength": 32,
+              "minLength": 32,
+              "pattern": "[a-fA-F0-9]{32}",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Md5"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        },
+        "noarch": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NoarchStr"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "package_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Package Type"
+        },
+        "platform": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Platform"
+        },
+        "preferred_env": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Preferred Env"
+        },
+        "revoked": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Revoked"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "minLength": 64,
+              "pattern": "[a-fA-F0-9]{64}",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Size"
+        },
+        "subdir": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SubdirStr"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "timestamp": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Timestamp"
+        },
+        "track_features": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "items": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Track Features"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "format": "uri",
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Version"
+        }
+      },
+      "title": "OptionalRepodataRecord",
+      "type": "object"
+    },
+    "SubdirStr": {
+      "enum": [
+        "emscripten-wasm32",
+        "freebsd-64",
+        "linux-32",
+        "linux-64",
+        "linux-armv6l",
+        "linux-armv7l",
+        "linux-ppc64le",
+        "linux-s390x",
+        "osx-32",
+        "osx-64",
+        "osx-arm64",
+        "wasi-wasm32",
+        "win-32",
+        "win-64",
+        "win-arm64",
+        "zos-z",
+        "noarch"
+      ],
+      "title": "SubdirStr",
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "packages": {
+      "description": "The .tar.bz2 packages in the repodata that will be patched",
+      "patternProperties": {
+        "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)-(([0-9]!)?[0-9a-z\\._]+)-(^[a-zA-Z0-9_\\.+]+$)\\.tar\\.bz2": {
+          "$ref": "#/$defs/OptionalRepodataRecord"
+        }
+      },
+      "propertyNames": {
+        "maxLength": 211,
+        "minLength": 1
+      },
+      "title": "Packages",
+      "type": "object"
+    },
+    "packages.conda": {
+      "description": "The .conda packages in the repodata that will be patched",
+      "patternProperties": {
+        "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)-(([0-9]!)?[0-9a-z\\._]+)-(^[a-zA-Z0-9_\\.+]+$)\\.conda": {
+          "$ref": "#/$defs/OptionalRepodataRecord"
+        }
+      },
+      "propertyNames": {
+        "maxLength": 211,
+        "minLength": 1
+      },
+      "title": "Packages.Conda",
+      "type": "object"
+    },
+    "patch_instructions_version": {
+      "description": "Version of the patch instructions schema",
+      "title": "Patch Instructions Version",
+      "type": "integer"
+    },
+    "remove": {
+      "description": "The packages (conda or tar.bz2) that should be removed from the index",
+      "items": {
+        "maxLength": 211,
+        "minLength": 1,
+        "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)-(([0-9]!)?[0-9a-z\\._]+)-(^[a-zA-Z0-9_\\.+]+$)\\.(conda|tar\\.bz2)",
+        "type": "string"
+      },
+      "title": "Remove",
+      "type": "array",
+      "uniqueItems": true
+    },
+    "revoke": {
+      "description": "DEPRECATED.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Revoke",
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "packages",
+    "packages.conda",
+    "remove",
+    "revoke",
+    "patch_instructions_version"
+  ],
+  "title": "RepodataPatchInstructions",
+  "type": "object"
+}

@@ -1,0 +1,570 @@
+{
+  "$defs": {
+    "HistoryRecord": {
+      "additionalProperties": false,
+      "description": "A single record in the conda history.",
+      "properties": {
+        "added": {
+          "default": [],
+          "description": "The packages that were added to the environment as a result of the transaction",
+          "items": {
+            "$ref": "#/$defs/PackageRecord"
+          },
+          "title": "Added",
+          "type": "array"
+        },
+        "command": {
+          "description": "The command that was run",
+          "title": "Command",
+          "type": "string"
+        },
+        "info": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Arbitrary metadata to be stored with the history record, like the conda client version",
+          "title": "Info",
+          "type": "object"
+        },
+        "removed": {
+          "default": [],
+          "description": "The packages that were removed from the environment as a result of the transaction",
+          "items": {
+            "$ref": "#/$defs/PackageRecord"
+          },
+          "title": "Removed",
+          "type": "array"
+        },
+        "specs": {
+          "description": "The specs that the user asked for explicitly",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/MatchSpec"
+              },
+              {
+                "minLength": 1,
+                "type": "string"
+              }
+            ]
+          },
+          "title": "Specs",
+          "type": "array"
+        },
+        "timestamp": {
+          "description": "Date when the action was recorded",
+          "title": "Timestamp",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "timestamp",
+        "command",
+        "specs"
+      ],
+      "title": "HistoryRecord",
+      "type": "object"
+    },
+    "MatchSpec": {
+      "additionalProperties": false,
+      "description": "TODO: In theory, any PackageRecord (scalar) keys should be admitted here.",
+      "properties": {
+        "build": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9_\\.+*]+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The build string of the package (e.g. `py37_0`, `py37h6de7cb9_0`, `py*`)",
+          "title": "Build"
+        },
+        "build_number": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The build number of the package",
+          "title": "Build Number"
+        },
+        "channel": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The channel of the package",
+          "title": "Channel"
+        },
+        "file_name": {
+          "anyOf": [
+            {
+              "maxLength": 211,
+              "minLength": 1,
+              "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)-(([0-9]!)?[0-9a-z\\._]+)-(^[a-zA-Z0-9_\\.+]+$)\\.(conda|tar\\.bz2)",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Match the specific filename of the package",
+          "title": "File Name"
+        },
+        "md5": {
+          "anyOf": [
+            {
+              "maxLength": 32,
+              "minLength": 32,
+              "pattern": "[a-fA-F0-9]{32}",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The MD5 hash of the package archive",
+          "title": "Md5"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
+              "type": "string"
+            },
+            {
+              "const": "*",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The name of the package",
+          "title": "Name"
+        },
+        "namespace": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The namespace of the package (currently not used)",
+          "title": "Namespace"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "minLength": 64,
+              "pattern": "[a-fA-F0-9]{64}",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The SHA256 hash of the package archive",
+          "title": "Sha256"
+        },
+        "subdir": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SubdirStr"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The subdir of the channel"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "[0-9a-z<>=!\\.\\*]+",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The version spec of the package (e.g. `1.2.3`, `>=1.2.3`, `1.2.*`)",
+          "title": "Version"
+        }
+      },
+      "title": "MatchSpec",
+      "type": "object"
+    },
+    "NoarchStr": {
+      "enum": [
+        "python",
+        "generic"
+      ],
+      "title": "NoarchStr",
+      "type": "string"
+    },
+    "PackageRecord": {
+      "additionalProperties": false,
+      "description": "A single record in the conda repodata.\n\nA single record refers to a single binary distribution of a package on a conda channel.",
+      "properties": {
+        "arch": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Optionally the architecture the package supports",
+          "title": "Arch"
+        },
+        "build": {
+          "description": "The build string of the package.",
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9_\\.+]+$",
+          "title": "Build",
+          "type": "string"
+        },
+        "build_number": {
+          "description": "The build number of the package.",
+          "minimum": 0,
+          "title": "Build Number",
+          "type": "integer"
+        },
+        "constrains": {
+          "description": "Additional constraints on packages. `constrains` are different from `depends` in that packages\nspecified in `depends` must be installed next to this package, whereas packages specified in\n`constrains` are not required to be installed, but if they are installed they must follow these\nconstraints.",
+          "items": {
+            "minLength": 1,
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+            "type": "string"
+          },
+          "title": "Constrains",
+          "type": "array"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "deprecated": true,
+          "description": "Unused",
+          "title": "Date"
+        },
+        "depends": {
+          "description": "Specification of packages this package depends on.",
+          "items": {
+            "minLength": 1,
+            "pattern": "(^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$)\\s+(([0-9a-z<>=!\\.\\*]+)|([0-9a-z<>=!\\.\\*]+)?\\s+(^[a-zA-Z0-9_\\.+*]+$))?",
+            "type": "string"
+          },
+          "title": "Depends",
+          "type": "array"
+        },
+        "features": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Features are a deprecated way to specify different feature sets for the conda solver. This is\nnot supported anymore and should not be used. Instead, `mutex` packages should be used to\nspecify mutually exclusive features.",
+          "title": "Features"
+        },
+        "legacy_bz2_md5": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "A deprecated md5 hash",
+          "title": "Legacy Bz2 Md5"
+        },
+        "legacy_bz2_size": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "A deprecated package archive size",
+          "title": "Legacy Bz2 Size"
+        },
+        "license": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The specific license of the package",
+          "title": "License"
+        },
+        "license_family": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The specific license of the package",
+          "title": "License Family"
+        },
+        "md5": {
+          "anyOf": [
+            {
+              "maxLength": 32,
+              "minLength": 32,
+              "pattern": "[a-fA-F0-9]{32}",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The md5 hash of the package archive",
+          "title": "Md5"
+        },
+        "name": {
+          "description": "The name of the package",
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^([a-z0-9]+|(_[a-z0-9]+))[._-]?([a-z0-9]+(\\.|-|_|$))*$",
+          "title": "Name",
+          "type": "string"
+        },
+        "noarch": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/NoarchStr"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Whether the package is architecture independent, and in which way."
+        },
+        "package_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "deprecated": true,
+          "description": "Unused",
+          "title": "Package Type"
+        },
+        "platform": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The platform the package supports",
+          "title": "Platform"
+        },
+        "preferred_env": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "deprecated": true,
+          "description": "Unused",
+          "title": "Preferred Env"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "minLength": 64,
+              "pattern": "[a-fA-F0-9]{64}",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The sha256 hash of the package archive",
+          "title": "Sha256"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The size of the package archive, in bytes",
+          "title": "Size"
+        },
+        "subdir": {
+          "$ref": "#/$defs/SubdirStr",
+          "description": "The subdirectory of the channel this package is in"
+        },
+        "timestamp": {
+          "default": 0,
+          "description": "The date this entry was created, as a Unix timestamp in milliseconds",
+          "exclusiveMinimum": 0,
+          "title": "Timestamp",
+          "type": "integer"
+        },
+        "track_features": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "items": {
+                "minLength": 1,
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Nowadays only used to downweight package variants (ie. give a variant less priority). To that\neffect, the number of track features is counted (number of commas) and the package is\ndownweighted by the number of track_features.",
+          "title": "Track Features"
+        },
+        "version": {
+          "description": "The version of the package",
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "([0-9]!)?[0-9a-z\\._]+",
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "build",
+        "build_number",
+        "constrains",
+        "depends",
+        "name",
+        "subdir",
+        "version"
+      ],
+      "title": "PackageRecord",
+      "type": "object"
+    },
+    "SubdirStr": {
+      "enum": [
+        "emscripten-wasm32",
+        "freebsd-64",
+        "linux-32",
+        "linux-64",
+        "linux-armv6l",
+        "linux-armv7l",
+        "linux-ppc64le",
+        "linux-s390x",
+        "osx-32",
+        "osx-64",
+        "osx-arm64",
+        "wasi-wasm32",
+        "win-32",
+        "win-64",
+        "win-arm64",
+        "zos-z",
+        "noarch"
+      ],
+      "title": "SubdirStr",
+      "type": "string"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Placed in conda-meta/history, holds a series of actions formatted like:\n\n```\n==> 2019-01-29 21:16:11 <==\n# cmd: /abs/path/to/bin/conda install -c conda-forge numpy\n# conda version: 4.6.1\n-conda-forge::certifi-2018.11.29-py36_1000\n-defaults::blas-1.0-mkl\n-defaults::chardet-3.0.4-py36h0f667ec_1\n-defaults::numpy-1.12.1-py36he24570b_1\n+conda-forge::blas-1.1-openblas\n+conda-forge::wheel-0.32.3-py37_0\n+defaults::python-3.7.2-h0371630_0\n# update specs: ['numpy']\n```",
+  "properties": {
+    "records": {
+      "items": {
+        "$ref": "#/$defs/HistoryRecord"
+      },
+      "title": "Records",
+      "type": "array"
+    }
+  },
+  "required": [
+    "records"
+  ],
+  "title": "History",
+  "type": "object"
+}

@@ -1,10 +1,14 @@
+"""
+Renders schemas.conda.org website from the configuration and template files.
+"""
+
 import shutil
-import tomllib
 from pathlib import Path
 
 import requests
-from jinja2 import Template
+import tomllib
 from commonmark import commonmark
+from jinja2 import Template
 
 HERE = Path(__file__).parent
 BUILD = HERE / ".." / "_build"
